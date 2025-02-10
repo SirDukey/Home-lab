@@ -18,6 +18,6 @@
     method: "POST"
     headers:
       Content-Type: "application/json-rpc"
-      Authorization: "Bearer {{ zabbix__api_token }}"
+      Authorization: "Bearer {{ zabbix__api_token__enc }}"
     body: "{{ json_file_content['content'] | b64decode }}"
     body_format: json

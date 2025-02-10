@@ -15,7 +15,7 @@ cd {{ zabbix__server_home_dir }}
 # Backup the Zabbix MySQL database tables and data to a directory container sql files of the table structure and txt files with the data
 # The --single-transaction option is used to ensure that the database is backed up in a consistent state
 # The --tab option is used to specify the directory where the backup files will be stored
-mysqldump --single-transaction -u'{{ secret__zabbix__mysql_user_name }}' -p'{{ secret__zabbix__mysql_user_password }}' --tab '{{ zabbix__server_mysql_backup_destination }}' '{{ secret__zabbix__mysql_db }}'
+mysqldump --single-transaction -u'{{ zabbix__mysql_user_name__enc }}' -p'{{ zabbix__mysql_user_password__enc }}' --tab '{{ zabbix__server_mysql_backup_destination }}' '{{ zabbix__mysql_db__enc }}'
 
 # Create a tarball with the current date in the filename
 # The file contains the MySQL database backup and the Zabbix configuration files

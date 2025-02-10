@@ -22,7 +22,7 @@
   ansible.builtin.lineinfile:
     path: '{{ zabbix__server_config_file }}'
     regexp: '^DBPassword='
-    line: 'DBPassword={{ secret__zabbix__mysql_user_password }}'
+    line: 'DBPassword={{ zabbix__mysql_user_password__enc }}'
     state: present
   tags: db_conf
 
