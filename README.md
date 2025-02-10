@@ -57,7 +57,13 @@ Now that the keys are created and `.sops.yaml` config is in place you can encryp
 - To decrypt a file:  `sops decrypt secrets.enc.yaml > secrets.yaml`
 
 That method is useful when testing out the encryption but you can also encrypt/decrypt a file in place by passing in the `-i` option: 
-`sops -e -i secrets.enc.yaml` and `sops -d -i secrets.enc.yaml`
+    
+    # In-place encrypt
+    sops -e -i secrets.enc.yaml
+    
+    # In-place decrypt
+    sops -d -i secrets.enc.yaml
 
-**Terraform:** the file extenstion needs to be either *.yaml* or *.json* for it to automatically encrypt/decrypt with the provider.\
-**Ansible:** the file to be encrypted needs to have an extension *.sops.yml* or *.sops.yaml* for it to be automatically decrypted by the sops community plugin.
+**Terraform**: the file extenstion needs to be either `.yaml` or `.json` for it to automatically encrypt/decrypt with the provider.
+
+**Ansible:** the file to be encrypted needs to have an extension `.sops.yml` or `.sops.yaml` for it to be automatically decrypted by the sops community plugin.

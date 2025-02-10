@@ -41,3 +41,5 @@ To decrypt or encrypt:
 
     # In-place encrypt
     sops -e -i group_vars/zabbix.sops.yaml
+
+Back to [main](../README.md) page
