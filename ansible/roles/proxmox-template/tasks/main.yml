@@ -1,0 +1,17 @@
+---
+- name: PROXMOX | Ensure snippets directory exists
+  ansible.builtin.file:
+    path: "{{ proxmox_template__snippets_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: PROXMOX | Ensure provision-template script exists
+  ansible.builtin.template:
+    src: provision-template.sh.j2
+    dest: "{{ proxmox_template__snippets_directory }}/provision-template.sh"
+    backup: true
+    owner: root
+    group: root
+    mode: "0750"

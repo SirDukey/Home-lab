@@ -1,0 +1,18 @@
+---
+- name: APT | Ensure qemu-guest-agent is installed
+  ansible.builtin.include_tasks: qemu-guest-agent.yml
+  when: ansible_os_family == "Debian" and ansible_virtualization_type == "kvm" and ansible_virtualization_role == "guest"
+
+- name: APT | Install default packages
+  ansible.builtin.package:
+    name: "{{ packages__default_packages }}"
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: APT | Install custom packages
+  ansible.builtin.package:
+    name: "{{ packages__custom_packages }}"
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"

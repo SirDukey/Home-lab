@@ -1,0 +1,8 @@
+---
+zabbix_agent2__server: "{{ zabbix__server_hostname }}"
+zabbix_agent2__server_active: "{{ zabbix__server_hostname }}"
+zabbix_agent2__hostname: "{{ ansible_hostname }}"
+zabbix_agent2__config_file: "/etc/zabbix/zabbix_agent2.conf"
+zabbix__api_token: "1cb1d2a457632eeebd6c921e0433a158ea622bce1623be7cefef7ca03db70081"
+zabbix__linux_by_zabbix_agent_template_id: "10001"
+zabbix__linux_servers_group_id: "2"

@@ -1,0 +1,9 @@
+---
+- name: REPOSITORIES | Add Zabbix repository
+  ansible.builtin.include_tasks:
+    file: zabbix.yml
+
+# - name: REPOSITORIES | Add Gitlab repository
+#   hosts: gitlab
+#   ansible.builtin.include_tasks:
+#     file: gitlab.yml

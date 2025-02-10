@@ -1,0 +1,6 @@
+[Unit]
+Description=Zabbix Backup Script
+
+[Service]
+User=zabbix
+ExecStart=/opt/zabbix_backup_scripts/zabbix_backup.sh

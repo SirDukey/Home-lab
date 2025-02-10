@@ -1,0 +1,37 @@
+{{ ansible_managed_banner }}
+
+# Prevents DNS queries without a domain name (e.g., "localhost") from being forwarded to upstream servers.
+domain-needed
+
+# locks private IP ranges from being returned by upstream servers
+bogus-priv
+
+# Ensures DNS queries are sent to upstream servers in the order they are listed.
+strict-order
+
+# Defines a local domain and associates it with a specific local network.
+local=/{{ dnsmasq__domain }}/{{ dnsmasq__local_network }}
+
+# Specifies the upstream DNS servers to use for resolving queries.
+server={{ dnsmasq__upstream_dns1 }}
+
+# Binds dnsmasq to a specific network interface.
+interface={{ dnsmasq__interface }}
+
+# Ensures dnsmasq only listens on the interfaces specified.
+bind-interfaces
+
+# Expands hostnames in the /etc/hosts file to include the local domain.
+expand-hosts
+
+# Sets the local domain name.
+domain={{ dnsmasq__domain }}
+
+# Specifies the IP address dnsmasq should listen on.
+listen-address={{ dnsmasq__listen_address }}
+
+# Set the cache size to 1000 entries.
+cache-size=1000
+
+# Overide the resolv.conf file to use the local dnsmasq server.
+resolv-file=/etc/dnsmasq-resolv.conf

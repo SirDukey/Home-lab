@@ -1,0 +1,25 @@
+---
+- name: LOCALE | Ensure locale is present
+  community.general.locale_gen:
+    name: "en_US.UTF-8"
+    state: present
+
+- name: LOCALE | Ensure /etc/default/locale has correct permissions
+  ansible.builtin.file:
+    path: /etc/default/locale
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: LOCALE | Set system locale
+  ansible.builtin.lineinfile:
+    path: /etc/default/locale
+    regexp: '^LANG='
+    line: 'LANG=en_US.UTF-8'
+    mode: '0644'
+    create: true
+
+- name: LOCALE | Update locale
+  ansible.builtin.command:
+    cmd: update-locale LANG=en_US.UTF-8
+    creates: /etc/default/locale

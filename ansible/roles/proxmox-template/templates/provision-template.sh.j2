@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+echo "** Checking for cloud image file **"
+FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
+
+MAX_VMID=$(qm list | awk 'NR>1 {print $1}' | tail -n1)
+lvs | grep {{ proxmox_template__id }}
+
+if [ $? -eq 0 ]; then
+    echo "** Template already exists **"
+    if [ -n "$MAX_VMID" ]; then
+        NEXT_VMID=$(echo "$MAX_VMID + 1" | bc)
+        echo "The next available VMID is $NEXT_VMID"
+    fi
+    exit 1
+fi
+
+echo "** Creating the base {{ proxmox_template__name }} **"
+qm create {{ proxmox_template__id }} --name {{ proxmox_template__name }} --memory 1024 --net0 virtio,bridge=vmbr0
+
+echo "** Importing the cloud image disk **"
+qm importdisk {{ proxmox_template__id }} $FILE {{ proxmox_template__datastore }}
+
+echo "** Seting options **"
+qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-{{ proxmox_template__id }}-disk-0
+qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
+qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
+qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
+
+echo "** Converting the VM ID {{ proxmox_template__id }} to template {{ proxmox_template__name }} **"
+qm template {{ proxmox_template__id }}
+
+echo "** Template {{ proxmox_template__name }} created and ready for Terraform provisioning **"

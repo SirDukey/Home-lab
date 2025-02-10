@@ -1,0 +1,17 @@
+---
+- name: MYSQL | Install MySQL
+  ansible.builtin.apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-mysqldb
+    state: present
+    update_cache: true
+  tags: mysql
+
+- name: MYSQL | Start MySQL
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: true
+  tags: mysql

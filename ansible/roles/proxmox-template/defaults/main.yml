@@ -1,0 +1,3 @@
+---
+proxmox_template__snippets_directory: "/var/lib/vz/snippets"
+proxmox_template__iso_directory: "/var/lib/vz/template/iso"

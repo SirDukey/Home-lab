@@ -1,0 +1,13 @@
+---
+- name: APT | Ensure qemu-guest-agent is installed
+  ansible.builtin.package:
+    name: "qemu-guest-agent"
+    state: present
+    update_cache: true
+  notify: Start qemu-guest-agent
+
+- name: APT | Start qemu-guest-agent
+  ansible.builtin.systemd:
+    name: qemu-guest-agent
+    state: restarted
+  notify: Start qemu-guest-agent

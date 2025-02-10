@@ -1,0 +1,11 @@
+---
+- name: TIMEZONE | Set timezone
+  community.general.timezone:
+    name: Europe/Amsterdam
+
+- name: TIMEZONE | Ensure Chrony is running and enabled
+  ansible.builtin.service:
+    name: chrony
+    state: started
+    enabled: true
+  notify: Restart chrony

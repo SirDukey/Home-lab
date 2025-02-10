@@ -1,0 +1,66 @@
+---
+- name: ZABBIX-SERVER | Ensure zabbix user home directory exists
+  ansible.builtin.file:
+    path: "{{ zabbix__server_home_dir }}"
+    state: directory
+    owner: zabbix
+    group: zabbix
+    mode: '0750'
+  tags: scripts
+
+- name: ZABBIX-SERVER | Ensure scripts directory exists
+  ansible.builtin.file:
+    path: "{{ zabbix__server_backup_scripts_dir }}"
+    state: directory
+    owner: root
+    group: zabbix
+    mode: '0770'
+  tags: scripts
+
+- name: ZABBIX-SERVER | Ensure zabbix user group membership for mysql
+  ansible.builtin.user:
+    name: zabbix
+    groups: mysql
+    append: true
+  tags: scripts
+
+- name: ZABBIX-SERVER | Ensure zabbix user has RW permission on mysql backup destination
+  ansible.posix.acl:
+    path: "{{ zabbix__server_mysql_backup_destination }}"
+    entity: zabbix
+    etype: group
+    permissions: rwx
+    default: true
+  tags: scripts
+
+- name: ZABBIX-SERVER | Copy backup and restore scripts
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ zabbix__server_backup_scripts_dir }}{{ item.dest }}"
+    owner: root
+    group: zabbix
+    mode: '750'
+  loop:
+    - { src: "zabbix_backup.sh.j2", dest: "zabbix_backup.sh" }
+    - { src: "zabbix_restore.sh.j2", dest: "zabbix_restore.sh" }
+  tags: scripts
+
+- name: ZABBIX-SERVER | Copy systemd files for backup script and timer
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: '644'
+  loop:
+    - { src: "zabbix_backup.service", dest: "/etc/systemd/system/zabbix_backup.service" }
+    - { src: "zabbix_backup.timer", dest: "/etc/systemd/system/zabbix_backup.timer" }
+  notify:
+    - Reload systemd daemon
+  tags: scripts
+
+- name: ZABBIX-SERVER | Enable zabbix_backup.timer
+  ansible.builtin.systemd:
+    name: zabbix_backup.timer
+    enabled: true
+  tags: scripts

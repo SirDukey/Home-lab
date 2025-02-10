@@ -1,0 +1,14 @@
+---
+- name: ZABBIX-SERVER | Configure nginx listen port
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix__server_nginx_config_file }}'
+    regexp: '^#        listen          8080;'
+    line: 'listen          {{ zabbix__frontend_port }};'
+    state: present
+
+- name: ZABBIX-SERVER | Configure nginx listen port
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix__server_nginx_config_file }}'
+    regexp: '^#        server_name     example.com;'
+    line: 'server_name     {{ global_dns_domain }};'
+    state: present

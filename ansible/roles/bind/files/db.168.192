@@ -1,0 +1,18 @@
+$TTL    604800
+@       IN      SOA     duke.lan. admin.duke.lan. (
+                              3         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+; name servers
+      IN      NS        nameserver.duke.lan.
+
+
+; PTR Records
+1.1     IN      PTR     gateway.duke.lan.       ; 192.168.1.1
+1.40    IN      PTR     pve-M910q-01.duke.lan.  ; 192.168.1.40
+1.50    IN      PTR     pve.duke.lan.           ; 192.168.1.50
+1.51    IN      PTR     zabbix.duke.lan.        ; 192.168.1.51
+1.52    IN      PTR     docker.duke.lan.        ; 192.168.1.52
+1.53    IN      PTR     nameserver.duke.lan.    ; 192.168.1.53

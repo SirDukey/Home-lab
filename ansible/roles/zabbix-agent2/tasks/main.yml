@@ -1,0 +1,39 @@
+---
+- name: ZABBIX-AGENT2 | Ensure Zabbix Agent 2 is installed
+  ansible.builtin.apt:
+    name:
+      - zabbix-agent2
+    state: present
+    update_cache: true
+
+- name: ZABBIX-AGENT2 | Set Zabbix agent Server parameter
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix_agent2__config_file }}'
+    regexp: '^Server='
+    line: 'Server={{ zabbix_agent2__server }}'
+    state: present
+
+- name: ZABBIX-AGENT2 | Set Zabbix agent ServerActive parameter
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix_agent2__config_file }}'
+    regexp: '^ServerActive='
+    line: 'ServerActive={{ zabbix_agent2__server_active }}'
+    state: present
+
+- name: ZABBIX-AGENT2 | Set Zabbix agent Hostname parameter
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix_agent2__config_file }}'
+    regexp: '^Hostname='
+    line: 'Hostname={{ zabbix_agent2__hostname }}'
+    state: present
+
+- name: ZABBIX-AGENT2 | Ensure Zabbix agent is running and enabled
+  ansible.builtin.service:
+    name: zabbix-agent2
+    state: restarted
+    enabled: true
+  notify: Restart zabbix-agent2
+
+- name: ZABBIX-AGENT2 | Auto create host on Zabbix server
+  ansible.builtin.include_tasks: create_host.yml
+  when: zabbix_agent2__disable_auto_create_host is not defined

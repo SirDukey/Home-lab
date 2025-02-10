@@ -1,0 +1,11 @@
+---
+- name: REPOSITORIES | Download Gitlab repository package
+  ansible.builtin.get_url:
+    url: '{{ gitlab__debian_repo_download_url }}'
+    dest: '{{ gitlab__debian_repo_download_file }}'
+    mode: "0750"
+  when: ansible_os_family == "Debian"
+
+- name: REPOSITORIES | Install Gitlab repository package
+  ansible.builtin.command::
+    cmd: './{{ gitlab__debian_repo_download_file }}'

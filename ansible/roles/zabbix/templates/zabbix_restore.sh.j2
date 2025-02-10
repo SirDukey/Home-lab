@@ -1,0 +1,44 @@
+#!/bin/bash
+
+{{ ansible_managed_banner }}
+
+# Zabbix restore script
+# This script will restore the Zabbix database and configuration files
+# from a tarball.
+# Usage: ./zabbix_restore.sh <backup_file.tar.gz>
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Define variables
+BACKUP_FILE=$1
+RESTORE_DIR={{ zabbix__server_temp_restore_dir }}_$(date +%Y-%m-%d)
+
+# Create a temporary directory for the restore process
+mkdir -p $RESTORE_DIR
+
+# Extract the tarball to the temporary directory
+tar -xzf $BACKUP_FILE -C $RESTORE_DIR
+
+# Restore the Zabbix MySQL database
+for sql_file in $RESTORE_DIR{{ zabbix__server_mysql_backup_destination }}*.sql; do
+  mysql -u'{{ secret__zabbix__mysql_user_name }}' -p'{{ secret__zabbix__mysql_user_password }}' '{{ secret__zabbix__mysql_db }}' < $sql_file
+done
+
+for txt_file in $RESTORE_DIR{{ zabbix__server_mysql_backup_destination }}*.txt; do
+  table_name=$(basename $txt_file .txt)
+  mysqlimport --local -u'{{ secret__zabbix__mysql_user_name }}' -p'{{ secret__zabbix__mysql_user_password }}' '{{ secret__zabbix__mysql_db }}' $txt_file
+done
+
+# Restore the Zabbix configuration files
+# cp -r $RESTORE_DIR{{ zabbix__server_config_dir }}* {{ zabbix__server_config_dir }} NOT WORKING DUE TO PERMISSIONS
+cp -r $RESTORE_DIR{{ zabbix__server_custom_scripts_dir }}* {{ zabbix__server_custom_scripts_dir }}
+
+# Restore specific configuration files
+# cp $RESTORE_DIR{{ zabbix__server_config_file }} {{ zabbix__server_config_file }} NOT WORKING DUE TO PERMISSIONS
+# cp $RESTORE_DIR{{ zabbix__server_nginx_config_file }} {{ zabbix__server_nginx_config_file }} NOT WORKING DUE TO PERMISSIONS
+
+# Clean up the temporary directory
+rm -rf $RESTORE_DIR
+
+echo "Zabbix restore completed successfully."

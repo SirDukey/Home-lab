@@ -1,0 +1,13 @@
+---
+ansible_managed_banner: '## This file is managed by Ansible ##'
+global_dns_domain: duke.lan
+default_geo_location_lat: "51.7997426198218"
+default_geo_location_lon: "4.48049039126418"
+packages__default_packages:
+    - vim
+    - chrony
+
+zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu24.04_all.deb
+zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
+# TODO: fix the dns server, should be zabbix.duke.lan
+zabbix__server_hostname: 192.168.1.51

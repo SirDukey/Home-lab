@@ -1,0 +1,65 @@
+---
+- name: BIND | Ensure /etc/default/named is set to tcpip v4
+  ansible.builtin.lineinfile:
+    path: '/etc/default/named'
+    regexp: '^OPTIONS="-u bind"'
+    line: 'OPTIONS="-u bind -4"'
+    state: present
+
+- name: BIND | Restart bind service
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+  notify: Restart bind
+
+- name: BIND | Copy custom options file
+  ansible.builtin.copy:
+    src: named.conf.options
+    dest: /etc/bind/named.conf.options
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+
+- name: BIND | Copy custom local file
+  ansible.builtin.copy:
+    src: named.conf.local
+    dest: /etc/bind/named.conf.local
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+
+- name: BIND | Make the zones
+  ansible.builtin.file:
+    path: /etc/bind/zones
+    owner: root
+    group: root
+    state: directory
+    mode: '0755'
+
+- name: Copy forward zone file
+  ansible.builtin.copy:
+    src: db.duke.lan
+    dest: /etc/bind/zones/db.duke.lan
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: BIND | Copy reverse zone file
+  ansible.builtin.copy:
+    src: db.168.192
+    dest: /etc/bind/zones/db.168.192
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: BIND | BIND | Restart bind service
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+  notify: Restart bind
+
+#    Forward zone file: Add an A record for the new host, increment the value of Serial
+#    Reverse zone file: Add a PTR record for the new host, increment the value of Serial
+#    Add your new host’s private IP address to the trusted ACL (named.conf.options)

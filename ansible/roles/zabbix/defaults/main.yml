@@ -1,0 +1,11 @@
+---
+zabbix__server_config_file: "/etc/zabbix/zabbix_server.conf"
+zabbix__server_nginx_config_file: "/etc/zabbix/nginx.conf"
+zabbix__server_home_dir: "/var/lib/zabbix/"
+zabbix__server_custom_scripts_dir: "/usr/lib/zabbix/"
+zabbix__server_config_dir: "/etc/zabbix/"
+
+zabbix__server_mysql_backup_destination: "/var/lib/mysql-files/"
+zabbix__server_backup_filename: "zabbix_backup"
+zabbix__server_temp_restore_dir: "/tmp/zabbix_restore"
+zabbix__server_backup_scripts_dir: "/opt/zabbix_backup_scripts/"

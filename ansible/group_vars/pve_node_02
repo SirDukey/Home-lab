@@ -1,0 +1,5 @@
+---
+proxmox_template__cloudimg: "noble-server-cloudimg-amd64.img"
+proxmox_template__name: "template-ubuntu-20-04-cloud"
+proxmox_template__id: 9001
+proxmox_template__datastore: "local-lvm"

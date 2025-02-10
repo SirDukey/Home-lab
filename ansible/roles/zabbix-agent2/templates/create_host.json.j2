@@ -1,0 +1,33 @@
+{
+    "jsonrpc": "2.0",
+    "method": "host.create",
+    "params": {
+        "host": "{{ ansible_hostname }}",
+        "interfaces": [
+            {
+                "type": 1,
+                "main": 1,
+                "useip": 1,
+                "ip": "{{ ansible_default_ipv4.address }}",
+                "dns": "{{ ansible_hostname }}.{{ global_dns_domain }}",
+                "port": "10050"
+            }
+        ],
+        "groups": [
+            {
+                "groupid": "{{ zabbix__linux_servers_group_id }}"
+            }
+        ],
+        "templates": [
+            {
+                "templateid": "{{ zabbix__linux_by_zabbix_agent_template_id }}"
+            }
+        ],
+        "inventory_mode": 1,
+        "inventory": {
+            "location_lat": "{{ default_geo_location_lat }}",
+            "location_lon": "{{ default_geo_location_lon }}"
+        }
+    },
+    "id": 1
+}

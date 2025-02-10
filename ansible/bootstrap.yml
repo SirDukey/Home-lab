@@ -1,0 +1,12 @@
+---
+- name: PLAYBOOK | Bootstrap hosts
+  hosts: all:!hypervisor
+  gather_facts: true
+  become: true
+
+  roles:
+    - { role: repositories, tags: repositories }
+    - { role: packages, tags: packages }
+    - { role: locale, tags: locale }
+    - { role: timezone, tags: timezone }
+    - { role: zabbix-agent2, tags: zabbix_agent }

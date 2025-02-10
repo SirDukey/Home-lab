@@ -1,0 +1,30 @@
+#!/bin/bash
+
+{{ ansible_managed_banner }}
+
+# Zabbix backup script
+# This script will backup the Zabbix database and configuration files
+# and store them in a tarball.
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Move to the zabbix user home directory
+cd {{ zabbix__server_home_dir }}
+
+# Backup the Zabbix MySQL database tables and data to a directory container sql files of the table structure and txt files with the data
+# The --single-transaction option is used to ensure that the database is backed up in a consistent state
+# The --tab option is used to specify the directory where the backup files will be stored
+mysqldump --single-transaction -u'{{ secret__zabbix__mysql_user_name }}' -p'{{ secret__zabbix__mysql_user_password }}' --tab '{{ zabbix__server_mysql_backup_destination }}' '{{ secret__zabbix__mysql_db }}'
+
+# Create a tarball with the current date in the filename
+# The file contains the MySQL database backup and the Zabbix configuration files
+tar -czf {{ zabbix__server_backup_filename }}_$(date +%Y-%m-%d).tar.gz -C / \
+    '{{ zabbix__server_mysql_backup_destination }}' \
+    '{{ zabbix__server_custom_scripts_dir}}'
+
+# Remove the original MySQL database files after backup
+rm -rf {{ zabbix__server_mysql_backup_destination }}*
+
+# Delete old backup files
+find /var/lib/zabbix -name "{{ zabbix__server_backup_filename }}_*.tar.gz" -type f -mtime +7 -exec rm {} \;

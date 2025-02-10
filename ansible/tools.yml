@@ -1,0 +1,23 @@
+---
+- name: TOOLS | Ping hosts
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ping all hosts
+      ansible.builtin.ping:
+  tags: ping
+
+- name: TOOLS | Gather facts
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Show ansible gather_facts
+      ansible.builtin.debug:
+        var: ansible_facts
+  tags: facts
+
+- name: TOOLS | Ensure provision template script is on each PVE
+  hosts: hypervisor
+  become: true
+  roles:
+    - {role: proxmox-template, tags: provision_template_script}

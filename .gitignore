@@ -1,0 +1,4 @@
+.vscode
+**/.gpg_keys/*.asc
+*.tfstate
+*.tfstate.*

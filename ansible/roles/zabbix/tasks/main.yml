@@ -1,0 +1,55 @@
+---
+- name: ZABBIX-SERVER | Ensure server, frontend and agent is installed
+  ansible.builtin.apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-nginx-conf
+      - zabbix-sql-scripts
+    state: present
+    update_cache: true
+
+- name: ZABBIX-SERVER | Include MySQL role to install MySQL
+  ansible.builtin.include_role:
+    name: mysql
+  tags: mysql
+
+- name: ZABBIX-SERVER | Set Zabbix Server database configuration
+  ansible.builtin.include_tasks: database.yml
+  tags: db
+
+- name: ZABBIX-SERVER | Set Zabbix Server database configuration
+  ansible.builtin.lineinfile:
+    path: '{{ zabbix__server_config_file }}'
+    regexp: '^DBPassword='
+    line: 'DBPassword={{ secret__zabbix__mysql_user_password }}'
+    state: present
+  tags: db_conf
+
+- name: ZABBIX-SERVER | Set Zabbix Server nginx configuration
+  ansible.builtin.include_tasks: nginx.yml
+  tags: nginx_conf
+
+- name: ZABBIX-SERVER | Copy backup zabbix-sql-scripts
+  ansible.builtin.include_tasks: scripts.yml
+  tags: scripts
+
+- name: ZABBIX-SERVER | Restart services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - zabbix-server
+    - nginx
+    - php8.3-fpm
+  notify: Restart Zabbix services
+  tags: services
+
+- name: ZABBIX-SERVER | Enable services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+  loop:
+    - zabbix-server
+    - nginx
+    - php8.3-fpm

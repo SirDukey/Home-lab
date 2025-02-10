@@ -1,0 +1,23 @@
+---
+- name: ZABBIX-AGENT2 | Create the JSON file on the remote host
+  ansible.builtin.template:
+    src: "create_host.json.j2"
+    dest: "/tmp/create_host.json"
+    owner: "root"
+    group: "root"
+    mode: "0640"
+
+- name: ZABBIX-AGENT2 | Read the JSON file from the remote server
+  ansible.builtin.slurp:
+    src: "/tmp/create_host.json"
+  register: json_file_content
+
+- name: ZABBIX-AGENT2 | Call Zabbix API to create host
+  ansible.builtin.uri:
+    url: "http://{{ zabbix__server_hostname }}:8080/api_jsonrpc.php"
+    method: "POST"
+    headers:
+      Content-Type: "application/json-rpc"
+      Authorization: "Bearer {{ zabbix__api_token }}"
+    body: "{{ json_file_content['content'] | b64decode }}"
+    body_format: json

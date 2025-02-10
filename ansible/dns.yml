@@ -1,0 +1,7 @@
+---
+- name: PLAYBOOK | Setup DNS server
+  hosts: dns
+  become: true
+
+  roles:
+    - { role: bind, tags: bind }

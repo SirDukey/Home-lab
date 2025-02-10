@@ -1,0 +1,100 @@
+---
+- name: ZABBIX-SERVER | Create Zabbix database
+  community.mysql.mysql_db:
+    name: "{{ secret__zabbix__mysql_db }}"
+    encoding: utf8mb4
+    collation: utf8mb4_bin
+    state: present
+    login_user: root
+    login_password: "{{ secret__proxmox_lxc_containers__root_password }}"
+  tags: db
+
+- name: ZABBIX-SERVER | Create Zabbix user
+  community.mysql.mysql_user:
+    name: "{{ secret__zabbix__mysql_user_name }}"
+    host: localhost
+    password: "{{ secret__zabbix__mysql_user_password }}"
+    priv: "{{ secret__zabbix__mysql_db }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ secret__proxmox_lxc_containers__root_password }}"
+  tags: db
+
+- name: ZABBIX-SERVER | Grant PROCESS and FILE privileges to the user for backup and restore scripts
+  community.mysql.mysql_user:
+    name: "{{ secret__zabbix__mysql_user_name }}"
+    host: localhost
+    priv: "*.*:PROCESS,FILE"
+    append_privs: true
+    state: present
+    login_user: root
+    login_password: "{{ secret__proxmox_lxc_containers__root_password }}"
+  tags: db
+
+- name: ZABBIX-SERVER | Check if config.ibd exists before importing the Zabbix database schema
+  ansible.builtin.stat:
+    path: /var/lib/mysql/zabbix/config.ibd
+  register: zabbix_config_ibd
+  tags: db
+
+- name: ZABBIX-SERVER | Set global log_bin_trust_function_creators as ENABLED
+  community.mysql.mysql_variables:
+    variable: log_bin_trust_function_creators
+    value: 1
+    login_user: root
+    login_password: "{{ secret__proxmox_lxc_containers__root_password }}"
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Copy the Zabbix SQL schema file from the Zabbix package share
+  ansible.builtin.command: cp /usr/share/zabbix/sql-scripts/mysql/server.sql.gz .
+  args:
+    creates: server.sql.gz
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Unzip the Zabbix SQL schema file
+  ansible.builtin.command: gunzip server.sql.gz
+  args:
+    creates: server.sql
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Set character set to utf8mb4
+  community.mysql.mysql_query:
+    login_user: "{{ secret__zabbix__mysql_user_name }}"
+    login_password: "{{ secret__zabbix__mysql_user_password }}"
+    query: "SET NAMES utf8mb4;"
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Perform import operations
+  ansible.builtin.debug:
+    msg: "Importing the Zabbix database schema. This might take a while..."
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Import Zabbix database schema
+  community.mysql.mysql_db:
+    name: "{{ secret__zabbix__mysql_db }}"
+    login_user: "{{ secret__zabbix__mysql_user_name }}"
+    login_password: "{{ secret__zabbix__mysql_user_password }}"
+    state: import
+    target: server.sql
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Set global log_bin_trust_function_creators as DISABLED
+  community.mysql.mysql_variables:
+    variable: log_bin_trust_function_creators
+    value: 0
+    login_user: root
+    login_password: "{{ secret__proxmox_lxc_containers__root_password }}"
+  when: not zabbix_config_ibd.stat.exists
+  tags: db
+
+- name: ZABBIX-SERVER | Remove the Zabbix SQL schema files
+  ansible.builtin.file:
+    path: server.sql
+    state: absent
+  tags: db

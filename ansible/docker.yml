@@ -1,0 +1,8 @@
+---
+- name: PLAYBOOK | Configure docker engine
+  hosts: docker
+  gather_facts: true
+  become: true
+
+  roles:
+    - { role: docker, tags: docker }
