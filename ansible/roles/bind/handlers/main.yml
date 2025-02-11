@@ -3,3 +3,6 @@
   ansible.builtin.service:
     name: bind9
     state: restarted
+
+- name: BIND | Reload AppArmor profiles
+  ansible.builtin.command: apparmor_parser -r /etc/apparmor.d/usr.sbin.named

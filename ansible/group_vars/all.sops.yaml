@@ -1,5 +1,8 @@
 ansible_managed_banner: '## This file is managed by Ansible ##'
 global_dns_domain: duke.lan
+global_default_gateway: 192.168.1.1
+global_primary_nameserver: 192.168.1.53
+bind__tsig_key__enc: ENC[AES256_GCM,data:bTt8tPbb7lPQQEkXwaQL5Wb8wDAECAJ9LlFL4rq0Yhy1ssFVtuWFt5Qs4DGHJikHvgn9iN2U/t7MOJgOhhlk7OjGFdu8Wor85klSPwFCBE9OKEIdE74dyQ==,iv:+ZAiP6rW84Cztben+ehjdLZXuzVf+GAPK56JjuHQRg0=,tag:ENAX6TwPjcAiAu2Wwu7tkA==,type:str]
 default_geo_location_lat: "51.7997426198218"
 default_geo_location_lon: "4.48049039126418"
 packages__default_packages:
@@ -9,32 +12,32 @@ zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubu
 zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 # TODO: fix the dns server, should be zabbix.duke.lan
 zabbix__server_hostname: 192.168.1.51
-zabbix__api_token__enc: ENC[AES256_GCM,data:VmXZlFSdGtj5963zsc/gx/HPr2RyZ2kYPmf5Px4yGKhIaibzy6XmZor9xmYM4U2xQaV7HSZLCPhu/p2P0kJcOw==,iv:appVWop+KAaa5bG8GsyMPJPTEgpADUngXP5eY8NexzM=,tag:HDkoD15Iyl53PLwJcAIGGQ==,type:str]
+zabbix__api_token__enc: ENC[AES256_GCM,data:bfJMtQv+c9MuJ/EhZvs8nIlaZ+ecwx96T7BWwEtkh1oF+sZKlixv/wHhG/GrSf5QnbhNQ9+UjlbP4PAYRcnK/g==,iv:u+xetyOdmIH2inJMfvdCkKCtVAtME5Pntagh6uxvypQ=,tag:n/rOgGS1yJ4+SpSKTtg84w==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-10T21:12:02Z"
-    mac: ENC[AES256_GCM,data:hVDYCysFikgjUswOi22mlWBkr1dLuqnY6MesAlZ/xUY/C8Qt9Ww3wS9ZYWShtjvkt8K3SwOLZbEUdDaJboG3UbTmECqubeLLhfJEIzpBYvavK/PGCaKYUfaVZy1gYsUaAuo5MC9+H2Fn2sQXh24JY/SzzugW1ItQ0QhKZf3/hCY=,iv:EtnRYpZ5tXkzVukw15Hf1jFmy8hGl4gyzPJZ7joKtt4=,tag:pBjxJM5seEUVolUydBRtMw==,type:str]
+    lastmodified: "2025-02-11T16:21:40Z"
+    mac: ENC[AES256_GCM,data:OkEIuxuWkfP2RFnuoyeBC5kzVkX9WmefOSQlh7e574UMPXYAEeNqkgb9SI6r7XtqwTNBKk1q6MNxPnkUxJD+17pw3cRC9v4g0bwrYA24x0uw6sYMpvKOva6vwTBXIwPEhsdONLnuQY/u0ZF0fkGHiVDE5icvvpIyBsGizFza+wE=,iv:b6K4CYBmKG6eUHuuhfAMyBsTfbyntlunJdKCETFbTls=,tag:fo4Q21aTIuGXgU2GA5aBUA==,type:str]
     pgp:
-        - created_at: "2025-02-10T21:12:02Z"
+        - created_at: "2025-02-11T16:21:40Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQv/ZYUM8A44tVPMOimdXTg2y4KVDu5otZGvu408AUcjnVKS
-            IGBb/Z/Te5uC3eT16RtmfWWdqdC1XLI0Tr9FZboP0wevM6kll3SpNgHRBgvucZwA
-            8ZRxcCTLzD1r43eGMyGJ1Bq3/e+6Qz0zknQUd++JguRmvv3XuFXlCdwgKOBrIiSd
-            Kt7pNavSOfPVsJrqN8Z6tlqwqyUJ74Yx21Igh3L7uN8nUoJ6cYXnY3VqwFFvhHkA
-            ITpIP8jBL6bCHWWg3pzpbx55KGo2vwakXbiAwl/LHG2fHE4m5Z2mbS/mcy/eUuUK
-            SyrAd5h2ad/wBIu8Me7xbPK4ykhJNP07uslIWuwXih3NM7rYA6Z27JeLB+I7VWDT
-            qOiwk5TWfsmRU1FAoI3INsFZ8gMYhsB39EUrNC0Hq4Fd5GJm6aBAgbLXs6O5xvZd
-            +ZCRe4JB1M4+uVbSS1lPxrto0IATkKzBA0HwdCQ73K5B+aG8c1ARooHkNmjE4P0p
-            pvpl4IXD44xhoAY3+9xs1GYBCQIQvt8LgEnPphxqkXMC3uuzl25XeQM7NAr27Fnw
-            xsan7adYStDFmuuEjQ9m3PjlNh1oH8zSnJocTEjvQ3is49Fv3ctKJae0ebrSHulr
-            de23W8DKv+PJRYUNE6swEa5wV5YDT0M=
-            =3JeK
+            hQGMA5xFaLh+EJKkAQv+IOdticy5jAFtRfvolvVJ6e9YC6/pp7crx3uipaO1JSKn
+            cT+M5GpEzsbIquXOxSUP0PEGC5LIXEJc1LXxEJZDi6+m4/VyUuUgH11VAx94e+mE
+            8oDrHiRwnkmCJdm2trxADcND7mMwyC46r0kmHJrRYQtAnW1sJcXbLpbhe+LZx7MT
+            ryOyCMciGwokUVtAAUSxpuP9u7EM/w/F/4FcpXyUBi1xSvPOx8PykZ184GvnhSQd
+            lTF38VQWIjbA6ADfSHAouq5436/mB9TL3FUX7LgRkeovL9qM8va3nhipYqu3ZzOM
+            D0jHpA3JdCYDBVEbYTggCR3HN4X3NB0OIaCtCFRMOTz6DHn3qVUxy8H24jkEMQnd
+            Wp6vufCPEJ6FqUs5hRDzylsTNu/MstZFhgln0GBsyJBjFXKcIcwvUd7YG+KeI+Gu
+            v4TFc9itlF2Ot8Vgx0nxB4qgML5T5mpfws1eR44/2nPW8iS6ZhVaL68WJJTBV+XW
+            +4iYOFzFuCF6qhN7h+6o1GgBCQIQGeA8Zh2NY9JWcE9Vws//40DbJ+4mt/pFmVwZ
+            3TvLl5hIEVlD49faIQQu/1mWl610wzZFMcCjgT0jhIY+3tVITC3SPivz0BoYwsqc
+            kxnq+wfHXwpe4D4EytHkTdS+9zc3apIqlw==
+            =CSFh
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc

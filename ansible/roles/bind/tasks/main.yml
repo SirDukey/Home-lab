@@ -13,53 +13,59 @@
   notify: Restart bind
 
 - name: BIND | Copy custom options file
-  ansible.builtin.copy:
-    src: named.conf.options
+  ansible.builtin.template:
+    src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
     owner: root
-    group: root
+    group: bind
     mode: "0644"
     backup: true
 
 - name: BIND | Copy custom local file
-  ansible.builtin.copy:
-    src: named.conf.local
+  ansible.builtin.template:
+    src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
     owner: root
-    group: root
+    group: bind
     mode: "0644"
     backup: true
 
 - name: BIND | Make the zones
   ansible.builtin.file:
     path: /etc/bind/zones
-    owner: root
-    group: root
+    owner: bind
+    group: bind
     state: directory
-    mode: '0755'
+    mode: '0770'
 
 - name: Copy forward zone file
-  ansible.builtin.copy:
-    src: db.duke.lan
-    dest: /etc/bind/zones/db.duke.lan
-    owner: root
-    group: root
-    mode: "0644"
+  ansible.builtin.template:
+    src: db.forward.j2
+    dest: /etc/bind/zones/db.{{ global_dns_domain }}
+    owner: bind
+    group: bind
+    mode: "0770"
 
 - name: BIND | Copy reverse zone file
-  ansible.builtin.copy:
-    src: db.168.192
-    dest: /etc/bind/zones/db.168.192
+  ansible.builtin.template:
+    src: db.reverse.j2
+    dest: /etc/bind/zones/db.1.168.192
+    owner: bind
+    group: bind
+    mode: "0770"
+
+- name: BIND | Add entry to AppArmor profile for BIND9
+  ansible.builtin.lineinfile:
+    path: /etc/apparmor.d/local/usr.sbin.named
+    line: '/etc/bind/zones/** rw,'
     owner: root
     group: root
     mode: "0644"
+    create: true
+  notify: Reload AppArmor profiles
 
 - name: BIND | BIND | Restart bind service
   ansible.builtin.service:
     name: bind9
     state: restarted
   notify: Restart bind
-
-#    Forward zone file: Add an A record for the new host, increment the value of Serial
-#    Reverse zone file: Add a PTR record for the new host, increment the value of Serial
-#    Add your new host’s private IP address to the trusted ACL (named.conf.options)

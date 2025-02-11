@@ -11,7 +11,7 @@
   hosts: all
   gather_facts: true
   tasks:
-    - name: Show ansible gather_facts
+    - name: Show ansible gather_facts, use with --limit option
       ansible.builtin.debug:
         var: ansible_facts
   tags: facts
@@ -21,3 +21,24 @@
   become: true
   roles:
     - {role: proxmox-template, tags: provision_template_script}
+
+- name: TOOLS | Display all instances
+  hosts: hypervisor
+  become: true
+  tasks:
+    - name: Run pct list
+      ansible.builtin.command: pct list
+      register: pct_output
+
+    - name: Show pct list output
+      ansible.builtin.debug:
+        var: pct_output.stdout_lines
+
+    - name: Run qm list
+      ansible.builtin.command: qm list
+      register: qm_output
+
+    - name: Show qm list output
+      ansible.builtin.debug:
+        var: qm_output.stdout_lines
+  tags: show_instances
