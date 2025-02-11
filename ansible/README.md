@@ -1,3 +1,5 @@
+![Ansible](https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white)
+
 # Ansible Automation Environment
 
 This repository is used to configure and maintain my home lab.
