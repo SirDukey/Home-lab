@@ -1,0 +1,16 @@
+key "{{ ansible_hostname }}." {
+    algorithm hmac-sha512;
+    secret "{{ bind__tsig_key__enc }}";
+};
+
+zone "{{ global_dns_domain }}" {
+    type primary;
+    file "/etc/bind/zones/db.{{ global_dns_domain }}"; # zone file path
+    allow-update { key "{{ ansible_hostname }}."; };
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type primary;
+    file "/etc/bind/zones/db.1.168.192";  # 192.168.1.0/24 subnet
+    allow-update { key "{{ ansible_hostname }}."; };
+};

@@ -1,0 +1,24 @@
+acl "trusted" {
+    192.168.1.0/24;
+};
+
+options {
+        directory "/var/cache/bind";
+
+        listen-on { {{ ansible_default_ipv4.address }}; };   # ns1 private IP address - listen on private network only
+        recursion yes;                 # enables recursive queries
+
+        allow-recursion { trusted; };  # allows recursive queries from "trusted" clients
+        allow-transfer { none; };      # disable zone transfers by default
+        allow-query { trusted; };      # Specifies which clients are allowed to query the DNS server for information
+        allow-update { trusted; };     # Specifies which clients are allowed to perform dynamic updates to the DNS zones
+
+        forwarders {
+                {{ global_default_gateway }};
+                {{ bind__dns_forwarder }};
+        };
+
+        dnssec-validation auto;
+
+        listen-on-v6 { any; };
+};

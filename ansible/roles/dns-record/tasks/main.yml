@@ -1,0 +1,22 @@
+---
+- name: DNS-RECORD| Copy DNS TSIG key and DNS record update script
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode }}"
+  loop:
+    - { src: "nameserver.key.j2", dest: "/tmp/nameserver.key", mode: "0600" }
+    - { src: "dns-record_update.sh.j2", dest: "/tmp/dns-record_update.sh", mode: "0750" }
+  when: dns_record__skip is not defined
+
+- name: DNS-RECORD | Run nsupdate to modify DNS records
+  ansible.builtin.shell: "/tmp/dns-record_update.sh"
+  when: dns_record__skip is not defined
+
+- name: DNS-RECORD | Delete key after update
+  ansible.builtin.file:
+    path: "/tmp/nameserver.key"
+    state: absent
+  when: dns_record__skip is not defined

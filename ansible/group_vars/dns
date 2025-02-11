@@ -1,18 +1,8 @@
 ---
-dnsmasq__hosts_entries:
-    - 192.168.1.1 gateway.duke.lan gateway
-    - 192.168.1.40 pve-M910q-01.duke.lan pve-M910q-01
-    - 192.168.1.50 pve.duke.lan pve
-    - 192.168.1.51 zabbix.duke.lan zabbix
-    - 192.168.1.52 gitlab.duke.lan gitlab
-    - 192.168.1.53 nameserver.duke.lan nameserver
-    - 192.168.1.54 docker.duke.lan docker
-    
-dnsmasq__etc_default_dnsmasq_entries:
-    - IGNORE_RESOLVCONF=yes
-    - DNSMASQ_EXCEPT="lo"
-
 packages__custom_packages:
     - bind9
     - bind9utils
     - bind9-doc
+
+bind__dns_forwarder: 1.1.1.1
+dns-record__skip: true
