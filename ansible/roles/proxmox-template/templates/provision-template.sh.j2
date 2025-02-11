@@ -18,7 +18,7 @@ if [ $? -eq 0 ]; then
     echo "${RED}Template already exists${NC}"
     if [ -n "$MAX_VMID" ]; then
         NEXT_VMID=$(echo "$MAX_VMID + 1" | bc)
-        echo "${RED}The next available VMID is ${NC}${YELLOW}$NEXT_VMID${NC}"
+        echo "${RED}The next available VMID is ${YELLOW}$NEXT_VMID${NC}"
     fi
     exit 1
 fi
@@ -35,7 +35,7 @@ qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
 qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
 qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
 
-echo "${GREEN}Converting the VM ID ${NC}${WHITE}{{ proxmox_template__id }}${NC} ${GREEN}to template {{ proxmox_template__name }}${NC}"
+echo "${GREEN}Converting the VM ID ${WHITE}{{ proxmox_template__id }} ${GREEN}to template {{ proxmox_template__name }}${NC}"
 qm template {{ proxmox_template__id }}
 
-echo "${GREEN}Template ${NC}${WHITE}{{ proxmox_template__name }}${NC} ${GREEN}created and ready for Terraform provisioning${NC}"
+echo "${GREEN}Template ${WHITE}{{ proxmox_template__name }} ${GREEN}created and ready for Terraform provisioning${NC}"
