@@ -25,12 +25,12 @@
   tags: scripts
 
 - name: ZABBIX-SERVER | Ensure zabbix user has RW permission on mysql backup destination
-  ansible.posix.acl:
+  ansible.builtin.file:
     path: "{{ zabbix__server_mysql_backup_destination }}"
-    entity: zabbix
-    etype: group
-    permissions: rwx
-    default: true
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: "0770"
   tags: scripts
 
 - name: ZABBIX-SERVER | Copy backup and restore scripts
