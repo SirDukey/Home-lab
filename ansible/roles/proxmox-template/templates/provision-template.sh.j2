@@ -1,33 +1,41 @@
 #!/bin/bash
 
-echo "** Checking for cloud image file **"
+# Color palette
+YELLOW="\033[33m"
+GREEN="\033[32m"
+RED="\033[31m"
+NC="\033[0m"
+WHITE="\033[1;37m"
+BLUE='\033[0;34m'
+
+echo "${GREEN}Checking for cloud image file${NC}"
 FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
 
 MAX_VMID=$(qm list | awk 'NR>1 {print $1}' | tail -n1)
 lvs | grep {{ proxmox_template__id }}
 
 if [ $? -eq 0 ]; then
-    echo "** Template already exists **"
+    echo "${RED}Template already exists${NC}"
     if [ -n "$MAX_VMID" ]; then
         NEXT_VMID=$(echo "$MAX_VMID + 1" | bc)
-        echo "The next available VMID is $NEXT_VMID"
+        echo "${RED}The next available VMID is ${NC}${YELLOW}$NEXT_VMID${NC}"
     fi
     exit 1
 fi
 
-echo "** Creating the base {{ proxmox_template__name }} **"
+echo "${GREEN}Creating the base {{ proxmox_template__name }}${NC}"
 qm create {{ proxmox_template__id }} --name {{ proxmox_template__name }} --memory 1024 --net0 virtio,bridge=vmbr0
 
-echo "** Importing the cloud image disk **"
+echo "${GREEN}Importing the cloud image disk${NC}"
 qm importdisk {{ proxmox_template__id }} $FILE {{ proxmox_template__datastore }}
 
-echo "** Seting options **"
+echo "${GREEN}Seting options${NC}"
 qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-{{ proxmox_template__id }}-disk-0
 qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
 qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
 qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
 
-echo "** Converting the VM ID {{ proxmox_template__id }} to template {{ proxmox_template__name }} **"
+echo "${GREEN}Converting the VM ID ${NC}${WHITE}{{ proxmox_template__id }}${NC} ${GREEN}to template {{ proxmox_template__name }}${NC}"
 qm template {{ proxmox_template__id }}
 
-echo "** Template {{ proxmox_template__name }} created and ready for Terraform provisioning **"
+echo "${GREEN}Template ${NC}${WHITE}{{ proxmox_template__name }}${NC} ${GREEN}created and ready for Terraform provisioning${NC}"
