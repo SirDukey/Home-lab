@@ -14,14 +14,17 @@ if [ -z "$1" ] || [ -z "$2" ]; then
     exit 1
 fi
 
-DNS_TSIG_KEY=$(sops -d group_vars/all.sops.yaml | grep bind__tsig_key__enc | awk '{print $2}')
+VARIABLE_FILE=group_vars/all.sops.yaml
+DNS_TSIG_KEY=$(sops -d $VARIABLE_FILE | grep bind__tsig_key__enc | awk '{print $2}')
+SERVER=$(grep global_primary_nameserver $VARIABLE_FILE | awk '{print $2}')
+DOMAIN=$(grep global_dns_domain $VARIABLE_FILE | awk '{print $2}')
 
 cat << EOF | nsupdate -y hmac-sha512:nameserver:$DNS_TSIG_KEY
-server 192.168.1.53
-update delete $1.duke.lan A
-update add $1.duke.lan 86400 A $2
+server $SERVER
+update delete $1.$DOMAIN A
+update add $1.$DOMAIN 86400 A $2
 send
 EOF
 
-dig $1.duke.lan @192.168.1.53
+dig $1.$DOMAIN @$SERVER
 echo -e "${GREEN}Record has been added/udpdated${NC}"
