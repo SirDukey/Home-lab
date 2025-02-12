@@ -8,34 +8,34 @@ NC="\033[0m"
 WHITE="\033[1;37m"
 BLUE='\033[0;34m'
 
-echo "${GREEN}Checking for cloud image file${NC}"
+echo -e "${GREEN}Checking for cloud image file${NC}"
 FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
 
 MAX_VMID=$(qm list | awk 'NR>1 {print $1}' | tail -n1)
 lvs | grep {{ proxmox_template__id }}
 
 if [ $? -eq 0 ]; then
-    echo "${RED}Template already exists${NC}"
+    echo -e "${RED}Template already exists${NC}"
     if [ -n "$MAX_VMID" ]; then
         NEXT_VMID=$(echo "$MAX_VMID + 1" | bc)
-        echo "${RED}The next available VMID is ${YELLOW}$NEXT_VMID${NC}"
+        echo -e "${RED}The next available VMID is${NC} ${YELLOW}$NEXT_VMID${NC}"
     fi
     exit 1
 fi
 
-echo "${GREEN}Creating the base {{ proxmox_template__name }}${NC}"
+echo -e "${GREEN}Creating the base {{ proxmox_template__name }}${NC}"
 qm create {{ proxmox_template__id }} --name {{ proxmox_template__name }} --memory 1024 --net0 virtio,bridge=vmbr0
 
-echo "${GREEN}Importing the cloud image disk${NC}"
+echo -e "${GREEN}Importing the cloud image disk${NC}"
 qm importdisk {{ proxmox_template__id }} $FILE {{ proxmox_template__datastore }}
 
-echo "${GREEN}Seting options${NC}"
+echo -e "${GREEN}Seting options${NC}"
 qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-{{ proxmox_template__id }}-disk-0
 qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
 qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
 qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
 
-echo "${GREEN}Converting the VM ID ${WHITE}{{ proxmox_template__id }} ${GREEN}to template {{ proxmox_template__name }}${NC}"
+echo -e "${GREEN}Converting the${NC} ${YELLOW}VM ID${NC} ${WHITE}{{ proxmox_template__id }}${NC} ${GREEN}to template {{ proxmox_template__name }}${NC}"
 qm template {{ proxmox_template__id }}
 
-echo "${GREEN}Template ${WHITE}{{ proxmox_template__name }} ${GREEN}created and ready for Terraform provisioning${NC}"
+echo -e "${GREEN}Template${NC} ${WHITE}{{ proxmox_template__name }}${NC} ${GREEN}created and ready for Terraform provisioning${NC}"
