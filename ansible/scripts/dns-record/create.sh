@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Use this script to create a dns record
+
 set -e
 
 GREEN="\033[32m"
