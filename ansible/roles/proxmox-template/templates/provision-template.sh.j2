@@ -11,6 +11,11 @@ BLUE='\033[0;34m'
 echo -e "${GREEN}Checking for cloud image file${NC}"
 FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
 
+if [ ! -e $FILE ]; then
+    echo -e "${BLUE}Cloud image file does not exist, downloading the image...${NC}"
+    curl -s -o {{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }} {{ proxmox_template__cloudimg_download_url }}
+    echo -e "${BLUE}Cloud image file has been downloaded${NC}"
+
 MAX_VMID=$(qm list | awk 'NR>1 {print $1}' | tail -n1)
 lvs | grep {{ proxmox_template__id }}
 
@@ -18,7 +23,9 @@ if [ $? -eq 0 ]; then
     echo -e "${RED}Template already exists${NC}"
     if [ -n "$MAX_VMID" ]; then
         NEXT_VMID=$(echo "$MAX_VMID + 1" | bc)
-        echo -e "${RED}The next available VMID is${NC} ${YELLOW}$NEXT_VMID${NC}"
+        echo -e "${GREEN}The next available VMID is${NC} ${WHITE}$NEXT_VMID${NC}"
+        echo -e "${BLUE}Update the VMID in the ansible variable file and reprovision this script${NC}"
+        echo -e "${YELLOW}Exiting${NC}"
     fi
     exit 1
 fi
