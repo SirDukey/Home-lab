@@ -1,0 +1,5 @@
+---
+record_name: '{{ ansible_hostname }}'
+record_ipv4: '{{ ansible_default_ipv4.address }}'
+record_type: "A"
+record_ttl: 86400

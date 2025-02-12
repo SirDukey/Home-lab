@@ -12,9 +12,10 @@ echo -e "${GREEN}Checking for cloud image file${NC}"
 FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
 
 if [ ! -e $FILE ]; then
-    echo -e "${BLUE}Cloud image file does not exist, downloading the image...${NC}"
+    echo -e "${YELLOW}Cloud image file does not exist, downloading the image from the web...${NC}"
     curl -s -o {{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }} {{ proxmox_template__cloudimg_download_url }}
-    echo -e "${BLUE}Cloud image file has been downloaded${NC}"
+    echo -e "${YELLOW}Cloud image file has been downloaded${NC}"
+fi
 
 MAX_VMID=$(qm list | awk 'NR>1 {print $1}' | tail -n1)
 lvs | grep {{ proxmox_template__id }}
@@ -30,19 +31,19 @@ if [ $? -eq 0 ]; then
     exit 1
 fi
 
-echo -e "${GREEN}Creating the base {{ proxmox_template__name }}${NC}"
+echo -e "${GREEN}Creating the base vm ${NC}${BLUE}{{ proxmox_template__name }}${NC}"
 qm create {{ proxmox_template__id }} --name {{ proxmox_template__name }} --memory 1024 --net0 virtio,bridge=vmbr0
 
 echo -e "${GREEN}Importing the cloud image disk${NC}"
 qm importdisk {{ proxmox_template__id }} $FILE {{ proxmox_template__datastore }}
 
-echo -e "${GREEN}Seting options${NC}"
+echo -e "${GREEN}Setting options${NC}"
 qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-{{ proxmox_template__id }}-disk-0
 qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
 qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
 qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
 
-echo -e "${GREEN}Converting the${NC} ${YELLOW}VM ID${NC} ${WHITE}{{ proxmox_template__id }}${NC} ${GREEN}to template {{ proxmox_template__name }}${NC}"
+echo -e "${GREEN}Converting the${NC} ${YELLOW}VM ID${NC} ${WHITE}{{ proxmox_template__id }}${NC} ${GREEN}to template ${NC}${BLUE}{{ proxmox_template__name }}${NC}"
 qm template {{ proxmox_template__id }}
 
-echo -e "${GREEN}Template${NC} ${WHITE}{{ proxmox_template__name }}${NC} ${GREEN}created and ready for Terraform provisioning${NC}"
+echo -e "${WHITE}Template${NC} ${BLUE}{{ proxmox_template__name }}${NC} ${GREEN}created and ready${NC} ${WHITE}for Terraform provisioning${NC}"

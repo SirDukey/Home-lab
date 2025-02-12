@@ -24,7 +24,7 @@ variable "vms" {
       size        = "20G"
       onboot      = false
       state       = "started"
-      template    = "template-ubuntu-20-04-cloud"
+      template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
     }
   }

@@ -2,7 +2,7 @@
 
 cat << EOF | nsupdate -k /tmp/nameserver.key
 server {{ global_primary_nameserver }}
-update delete {{ ansible_hostname }}.{{ global_dns_domain }} A
-update add {{ ansible_hostname }}.{{ global_dns_domain }} 86400 A {{ ansible_default_ipv4.address }}
+update delete {{ record_name }}.{{ global_dns_domain }} {{ record_type }}
+update add {{ record_name }}.{{ global_dns_domain }} {{ record_ttl }} {{ record_type }} {{ record_ipv4 }}
 send
 EOF
