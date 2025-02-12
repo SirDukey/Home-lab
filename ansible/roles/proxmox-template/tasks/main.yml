@@ -14,3 +14,7 @@
     owner: root
     group: root
     mode: "0750"
+
+- name: TOOLS | Run template script to create new provision_template_script
+  ansible.builtin.command: /var/lib/vz/snippets/provision-template.sh
+  when: run_provision_template_script is defined

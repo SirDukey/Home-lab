@@ -10,9 +10,9 @@ $TTL    604800
 
 
 ; PTR Records
-1     IN    PTR   gateway.{{ global_dns_domain }}.          ; {{ global_default_gateway }}
-40    IN    PTR     pve-M910q-01.{{ global_dns_domain }}.  ; 192.168.1.40
-50    IN    PTR     pve.{{ global_dns_domain }}.           ; 192.168.1.50
-51    IN    PTR     zabbix.{{ global_dns_domain }}.        ; 192.168.1.51
-52    IN    PTR     docker.{{ global_dns_domain }}.        ; 192.168.1.52
-53    IN    PTR     {{ ansible_hostname }}.{{ global_dns_domain }}.    ; {{ ansible_default_ipv4.address }}
+1     IN    PTR   gateway.{{ global_dns_domain }}.                      ; {{ global_default_gateway }}
+40    IN    PTR     pve-node-01-01.{{ global_dns_domain }}.             ; 192.168.1.40
+41    IN    PTR     pve-node-01.{{ global_dns_domain }}.                ; 192.168.1.41
+51    IN    PTR     zabbix.{{ global_dns_domain }}.                     ; 192.168.1.51
+52    IN    PTR     docker.{{ global_dns_domain }}.                     ; 192.168.1.52
+53    IN    PTR     {{ ansible_hostname }}.{{ global_dns_domain }}.     ; {{ ansible_default_ipv4.address }}

@@ -70,3 +70,35 @@ That method is useful when testing out the encryption but you can also encrypt/d
 **Terraform**: the file extenstion needs to be either `.yaml` or `.json` for it to automatically encrypt/decrypt with the provider.
 
 **Ansible:** the file to be encrypted needs to have an extension `.sops.yml` or `.sops.yaml` for it to be automatically decrypted by the sops community plugin.
+
+## Steps to rebuild entire home lab ##
+
+1. install proxmox hypervisor on each node
+2. login to each pve node and set repository from `enterprise-subscription` to `pve-no-subscription`
+3. create cluster `pve-cluster` and join secondary node
+4. create `terraform-prov` user, role and api key, copy and paste the code from into a shell on a node from [here](./terraform/README.md#proxmox-api)
+5. update terraform proxmox api connection details in terraform `terraform/secrets.enc.yaml` (remember to lock after)
+6. download ct templates from the proxmox templates repo and cloud image files from ubuntu cloud image site to match terraform spec on both nodes
+7. install **vim** and **sudo** via the shell on each node: `apt install -y vim sudo`
+8. create your user account on each node: `useradd michael; passwd michael; usermod -aG sudo michael`
+9. allow ssh key authentication on `/etc/ssh/sshd_config`
+10. setup ssh key access to each node (your account and root with same pub key): `ssh-copy-id 192.168.1.50`
+11. disable password authentication in `sshd_config`
+12. run playbook to install provision template script: `ansible-playbook -K tool.yml --tags provision_template_script`
+13. run the script on each node bash `/var/lib/vz/snippets/provision-template.sh`
+14. run **terraform plan** & **apply**
+15. run bootstrap playbook on all hosts with `--skip-tags zabbix_agent,dns_record`
+16. run **dns, docker, zabbix** playbooks, expect the zabbix playbook to take some time during the db schema import
+17. visit zabbix url http://192.168.1.51:8080 and complete the installation
+    - Zabbix db password from `ansible/group_vars/zabbix.sops.yaml`
+    - Server name `Zabbix server`
+    - Timezone as `Europe/Amsterdam`
+18. create the zabbix api token and update it in `ansible/group_vars/all.sop.yaml`
+19. re-run boostrap playbook `--tags zabbix_agent,dns_record`
+20. Install the zabbix agent manually on each hypervisor node
+21. Finally push the repository changes to github
+
+Notes:
+    - improve the process so as it does not take +- 20 steps to rebuild the infra
+    - currently the process can take a few hours
+    - consolodate the hypervisor shell tasks into a single script

@@ -16,7 +16,7 @@
         var: ansible_facts
   tags: facts
 
-- name: TOOLS | Ensure provision template script is on each PVE
+- name: TOOLS | Ensure provision template script is on PVE
   hosts: hypervisor
   become: true
   roles:

@@ -44,4 +44,17 @@ To decrypt or encrypt:
     # In-place encrypt
     sops -e -i group_vars/zabbix.sops.yaml
 
+## Tools
+
+A collection of tools used to help manage the PVE infrastructure,  call these by using the --tags option and/or use the --limit option.
+List of available tags:
+
+- `ping`:  standard ping and response to check host is online
+- `facts`:  show the facts of a host
+- `provision_template_script`:  copies the provion-template.sh script to the PVE host
+    -   to auto run the script combine with `--extra-vars="run_provision_template_script=true"`
+- `show_instances`: shows the containers and virtual machine instances running on the PVE host
+
+---
+
 Back to [main](../README.md) page

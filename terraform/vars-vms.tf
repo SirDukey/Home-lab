@@ -15,16 +15,16 @@ variable "vms" {
   }))
   default = {
     docker = {
-      target_node = "pve"
+      target_node = "pve-node-01"
       vmid        = 300
       name        = "docker"
       ip          = "192.168.1.52/24"
       cores       = 4
-      memory      = 2048
+      memory      = 4096
       size        = "20G"
       onboot      = false
       state       = "started"
-      template    = "template-ubuntu-20-04-cloud"
+      template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
     }
   }
