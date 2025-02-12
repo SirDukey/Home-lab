@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+
+GREEN="\033[32m"
 YELLOW="\033[33m"
 WHITE="\033[1;37m"
 BLUE='\033[0;34m'
@@ -20,3 +23,5 @@ update add $1.duke.lan 86400 A $2
 send
 EOF
 
+dig $1.duke.lan @192.168.1.53
+echo -e "${GREEN}Record has been added/udpdated${NC}"
