@@ -16,7 +16,7 @@ variable "containers" {
   
   default = {
     zabbix = {
-      target_node = "pve-M910q-01"
+      target_node = "pve-node-02"
       vmid        = 200
       hostname    = "zabbix"
       template    = "ubuntu_24_04"
@@ -29,7 +29,7 @@ variable "containers" {
       start       = true
     }
     nameserver = {
-      target_node = "pve-M910q-01"
+      target_node = "pve-node-02"
       vmid        = 201
       hostname    = "nameserver"
       template    = "ubuntu_24_04"
