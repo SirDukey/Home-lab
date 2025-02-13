@@ -2,7 +2,7 @@ ansible_managed_banner: '## This file is managed by Ansible ##'
 global_dns_domain: duke.lan
 global_default_gateway: 192.168.1.1
 global_primary_nameserver: 192.168.1.53
-bind__tsig_key__enc: ENC[AES256_GCM,data:jpCC9b+qdYPWddsZ/WooB/x8eyZRxsZh3u/K7HWq66IIjZ9IUL0DL54fhCBdWSNFf8+ZbdRY4kNkWMg/fcQRwxzcdhDBc19D++TwpvF3POp7xsywsO5nhQ==,iv:Dj6md1AgTANHzW51qJigcIrYF5KMBK+LezlsEGoWzQU=,tag:yvGITgtwQcSkfy+SVWXEAg==,type:str]
+bind__tsig_key__enc: ENC[AES256_GCM,data:m6giEN3DKZSbkaNL2vxJS86vVOm1odASgl0Y16DQEmxMCUzdAtkBq+RepUnEQ9N6EQ/Crk9zDjVCvweu2iOIfYi0HlWn/WVchTybXsag97DPkFo942KIXA==,iv:jkP7UHceuK3OJ42lfXmD1Tz7uuna24+K7y17XDAxcOo=,tag:t0M89bhWXCuAbknJXJdTMA==,type:str]
 default_geo_location_lat: "51.7997426198218"
 default_geo_location_lon: "4.48049039126418"
 packages__default_packages:
@@ -12,32 +12,32 @@ zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubu
 zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 # TODO: fix the dns server, should be zabbix.duke.lan
 zabbix__server_hostname: 192.168.1.51
-zabbix__api_token__enc: ENC[AES256_GCM,data:atIaDCwdjUxtZWRb6K246Wd0so3yIu+geB/H1VxhLPHpGvX4VVkg69uIAjJx73iGB9FqDhjBOMiLRiQBZ60lxQ==,iv:AL7a1OY9pawRvaACgrFQ4mJ5Fw29fH8beQ8yREv7gbo=,tag:oWegYZe8ZLJrsm4K2ucv7w==,type:str]
+zabbix__api_token__enc: ENC[AES256_GCM,data:NY8326SvNktlr/96xi2u1fZu1BZZ3XZgF+Rb/VjcTuGWbUf2R6nudE6DsBbXg2cn3KRgqkViAjAGi8LO9liPmg==,iv:HpM1gXC+qSMbdxLzKBvq+NhrhEDewpK9kDmEmWSKGuQ=,tag:4Kf1Dm2l4v86ifl6ZxyKWQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-12T16:33:40Z"
-    mac: ENC[AES256_GCM,data:Fm1ox9SAgSrWI4Aps2zKZhwiMe6FqAOwD60ktC09RQZcR0DdhmFB6ysFBcs7zlJcDEVA90Y/4ede/ss/2tr0m+wRAuumGEpdjQNNZhhWATSWHXHMwxju6eEdo8rrTJn4w/R6Zq/edd5Syu5QNEnVdwATN9Ep2HL1ftLZ+4B15Tg=,iv:p/1oGdCYeXkxcbNHcTZPinNz6SqPNllHuodcXKMJ97w=,tag:WKnAY41gjLuMBFNgwfupXQ==,type:str]
+    lastmodified: "2025-02-13T20:57:27Z"
+    mac: ENC[AES256_GCM,data:8unZQ3mm0ie+LGAYTgyMntXXGpRHIVbuvotZ4fx59Hx20klWrmRddw4LASV9Be0TxNtrdMfauKz4tg8JJVe4+vymEYzHpq+RFTEV3TZFsB9wsCYxhC0IKHvXpEZReqnOKEe0KgWm23YBq6JvNvuatcjoytK47HNPKIRy5DB0OpM=,iv:HGV58QX98R+N7KADXOiu7KEmkFlWN4+tFcP0JXe7jG0=,tag:3fbbAOzTuUHeEvECiDMT3Q==,type:str]
     pgp:
-        - created_at: "2025-02-12T16:33:40Z"
+        - created_at: "2025-02-13T20:57:27Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQwAxckUi5aFTt+28UgDFykZhcDyjxxxn2/mLeTuEH0b8e5y
-            sRnTwlzCMzacf7wOgRKiJXTEIrkMc7FGXi8Q68RcK9iVmZrutc4Zyu8f1HilLwU0
-            hahHqt/zf3w1ExTkMh1YRzmGwGoXHaXXnHrrQO6CNNeMw7uqRTReDsmfS4b4bHSw
-            q9l28S4sJ9FXuTuDJW5fa1EkGD0DKJlP+MWJwRfsbj6pSOOUUI2rbqm8bYttxB8c
-            C6oYR6K3eck59qSusKsYZDTFglhUDc18cpwQC7WyzAQvvnAYuLbCLJbVSOG/HS9Q
-            yLNGNtm73FINMhcRsKhOtPauawq9RiWh9JpihJ0cqXeM/mwzUyEJ/SslGfvTJduC
-            mDUZUh7zAww0Ba976vlvzHv/YmXT5OFOgDAE2xhEC7WRKXpoxzJK65SMyDnHPT2U
-            kxmM5fwVVA3Tw833NtPcMniO4e7kufYeYvViefWhISIG4wOrQ/e5KdsdZAuuqwnU
-            PTFiiG0lHFCSyFmzWVGD1GgBCQIQ2G/eVswyUIoLznBA+mLuz+ZnFr9ji+yIa3Ls
-            GsnejUw5GIY7IyZh2IlUE11pDrwPLlek9zDYdbXAo7iiCXHlw/9niThclxeI9AZa
-            jhSFL6+n67B+BtljkWUKtXOcvNhGaoq7nw==
-            =TW8x
+            hQGMA5xFaLh+EJKkAQv9Hjbymc4AqNhROQNBGrpiiz0UV7ZgPWIrpeCBnD32EeOm
+            KG3rVXBAr2a+tsidq6PPFilc7rvkWV1vaeJvJX0Tw7yxyMQ69ba7Jw8MsRIsyMSA
+            E1lj2a/wYrp/qjOo83nGneFPtoEA4rfA0MsPmVW+e60zh4sOZEMS2+kRpwP1ikM7
+            YMhBTaxJ7zoEAYX5Q+6M8O2c1DRcZY4E9kdmsCBogPVmHmEPjmTF4kywJ4ucFCZg
+            ukWLXCseHuLfSx+EXvHb7HVUHg3AFoufvA413CCFvkwfqv2NrtIpaKVzxyu09QXx
+            QBywILlYzRI0Pp0GnYtLoNRSqQlE1ToAe+lfT4zw0kJkel9MuEWA8wKbUKpzU4AL
+            znx0Izc8ls+PxidqCMjQs0SPFRs7TmcY6RpvkIVzGaUA8ZUkDkUvMgJHFaj8Butp
+            ctQxNOp5N/WXfgMql88hTDbhQbgqOe8pOKdY9yT0BJCkkw75ayB4RbTNdzUikJFZ
+            TK4Xj7mNBc5nDFj4eMnR1GYBCQIQUnh/4iOAQWjyITcgNnaFhUN72jnL0ZdRdSiv
+            8JXl6m0bStEZ8hzAjmTLwIctKKbn5Dbl60/8X/sRNhAw0yijDvKgtw2/2l8ulmWa
+            Cll/mr8Vsch2OQiTJ6DpGE1zbRDvIQM=
+            =0hRV
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc

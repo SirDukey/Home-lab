@@ -1,0 +1,11 @@
+---
+hypervisor_node: true
+
+proxmox_template__cloudimg_download_url_path: "https://cloud-images.ubuntu.com/noble/current"
+proxmox_template__cloudimg_download_checksum: "MD5SUMS"
+proxmox_template__cloudimg: "noble-server-cloudimg-amd64.img"
+proxmox_template__name: "template-ubuntu-24-04-cloud"
+proxmox_template__datastore: "local-zfs"
+
+zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.2+debian12_all.deb
+zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+debian12_all.deb

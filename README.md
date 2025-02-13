@@ -73,32 +73,30 @@ That method is useful when testing out the encryption but you can also encrypt/d
 
 ## Steps to rebuild entire home lab ##
 
-1. install proxmox hypervisor on each node
-2. login to each pve node and set repository from `enterprise-subscription` to `pve-no-subscription`
+1. install proxmox hypervisor on each node, set disk to `zfs`
+2. login to each pve node and set repository from `enterprise-subscription` to `pve-no-subscription`, update & reboot
 3. create cluster `pve-cluster` and join secondary node
-4. create `terraform-prov` user, role and api key, copy and paste the code from into a shell on a node from [here](./terraform/README.md#proxmox-api)
-5. update terraform proxmox api connection details in terraform `terraform/secrets.enc.yaml` (remember to lock after)
-6. download ct templates from the proxmox templates repo and cloud image files from ubuntu cloud image site to match terraform spec on both nodes
-7. install **vim** and **sudo** via the shell on each node: `apt install -y vim sudo`
-8. create your user account on each node: `useradd michael; passwd michael; usermod -aG sudo michael`
-9. allow ssh key authentication on `/etc/ssh/sshd_config`
-10. setup ssh key access to each node (your account and root with same pub key): `ssh-copy-id 192.168.1.50`
-11. disable password authentication in `sshd_config`
-12. run playbook to install provision template script: `ansible-playbook -K tool.yml --tags provision_template_script`
-13. run the script on each node bash `/var/lib/vz/snippets/provision-template.sh`
-14. run **terraform plan** & **apply**
-15. run bootstrap playbook on all hosts with `--skip-tags zabbix_agent,dns_record`
-16. run **dns, docker, zabbix** playbooks, expect the zabbix playbook to take some time during the db schema import
-17. visit zabbix url http://192.168.1.51:8080 and complete the installation
+4. download ct templates from the proxmox templates repo to match terraform spec on both nodes, cloud image file downloads are automated via the provision script
+5. install **vim** and **sudo** via the shell on each node: `apt install -y vim sudo`
+6. create your user account on each node: `useradd -m -s /bin/bash michael && usermod -aG sudo michael && passwd michael`
+7. allow ssh key authentication on `/etc/ssh/sshd_config`
+8. setup ssh key access to each node (your account and root with same pub key): `ssh-copy-id 192.168.1.40`
+    - optional: disable password authentication in `sshd_config`
+9. create `terraform-prov` user, role and api key, copy and paste the code from into a shell on a node from [here](./terraform/README.md#proxmox-api)
+    - update terraform proxmox api connection details in terraform `terraform/secrets.enc.yaml` (remember to lock after)
+10. run playbook to install provision template script: `ansible-playbook -K tool.yml --tags provision_template_script --extra-vars="run_provision_template_script=true"`
+11. run **terraform plan** & **apply**
+12. run bootstrap playbook on all hosts with `--skip-tags zabbix_agent,dns_record`
+13. run **dns, docker, zabbix** playbooks, expect the zabbix playbook to take some time during the db schema import
+14. visit zabbix url http://192.168.1.51:8080 and complete the installation
     - Zabbix db password from `ansible/group_vars/zabbix.sops.yaml`
     - Server name `Zabbix server`
     - Timezone as `Europe/Amsterdam`
-18. create the zabbix api token and update it in `ansible/group_vars/all.sop.yaml`
-19. re-run boostrap playbook `--tags zabbix_agent,dns_record`
-20. Install the zabbix agent manually on each hypervisor node
-21. Finally push the repository changes to github
+15. create the zabbix api token and update it in `ansible/group_vars/all.sop.yaml`
+16. re-run boostrap playbook `--tags zabbix_agent,dns_record`
+17. Finally push the repository changes to github
 
 Notes:
-    - improve the process so as it does not take +- 20 steps to rebuild the infra
-    - currently the process can take a few hours
+    - improve the process so as it does not take 17 steps to rebuild the infra
+    - currently the process can take a 2-3 hours
     - consolodate the hypervisor shell tasks into a single script

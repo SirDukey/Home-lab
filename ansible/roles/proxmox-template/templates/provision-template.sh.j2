@@ -53,8 +53,8 @@ echo -e "${GREEN}Importing the cloud image disk${NC}"
 qm importdisk {{ proxmox_template__id }} $FILE {{ proxmox_template__datastore }}
 
 echo -e "${GREEN}Setting options${NC}"
-qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-{{ proxmox_template__id }}-disk-0
-qm set {{ proxmox_template__id }} --ide2 local-lvm:cloudinit
+qm set {{ proxmox_template__id }} --scsihw virtio-scsi-pci --scsi0 {{ proxmox_template__datastore }}:vm-{{ proxmox_template__id }}-disk-0
+qm set {{ proxmox_template__id }} --ide2 {{ proxmox_template__datastore }}:cloudinit
 qm set {{ proxmox_template__id }} --boot c --bootdisk scsi0
 qm set {{ proxmox_template__id }} --serial0 socket --vga serial0
 

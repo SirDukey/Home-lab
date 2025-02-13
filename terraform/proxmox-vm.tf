@@ -31,14 +31,13 @@ resource "proxmox_vm_qemu" "vm-instance" {
     size    = each.value.size
     type    = "disk"
     slot    = "scsi0"
-    storage = "local-lvm"
+    storage = "local-zfs"
     discard = true
   }
   disk {
     type    = "cloudinit"
     slot    = "ide2"
-    storage = "local-lvm"
-    discard = true
+    storage = "local-zfs"
   }
 
   ipconfig0     = "ip=${each.value.ip},gw=${var.default_gw}"

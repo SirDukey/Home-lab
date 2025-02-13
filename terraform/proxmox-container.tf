@@ -16,7 +16,7 @@ resource "proxmox_lxc" "container-instance" {
   ssh_public_keys = file(var.ssh_provisioning_key_path.public_key)
 
   rootfs {
-    storage = "local-lvm"
+    storage = "local-zfs"
     size    = each.value.size
   }
 
