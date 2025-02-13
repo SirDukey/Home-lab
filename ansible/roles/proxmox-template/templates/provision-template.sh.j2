@@ -8,12 +8,27 @@ NC="\033[0m"
 WHITE="\033[1;37m"
 BLUE='\033[0;34m'
 
+check_md5() {
+    CHECKSUM_FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg_download_checksum }}"
+    curl -s -o $CHECKSUM_FILE {{ proxmox_template__cloudimg_download_url_path }}/{{ proxmox_template__cloudimg_download_checksum }}
+    cd {{ proxmox_template__iso_directory }}
+    CHECK=$(grep {{ proxmox_template__cloudimg }} $CHECKSUM_FILE | md5sum -c - | awk '{print $2}')
+    if [ "$CHECK" == "OK" ]; then
+        echo -e "${GREEN}Checksum passed${NC}"
+    else
+        echo -e "${RED}Checksum failed${NC}"
+        exit 1
+    fi
+    cd -
+}
+
 echo -e "${GREEN}Checking for cloud image file${NC}"
 FILE="{{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }}"
 
 if [ ! -e $FILE ]; then
     echo -e "${YELLOW}Cloud image file does not exist, downloading the image from the web...${NC}"
-    curl -s -o {{ proxmox_template__iso_directory }}/{{ proxmox_template__cloudimg }} {{ proxmox_template__cloudimg_download_url }}
+    curl -s -o $FILE {{ proxmox_template__cloudimg_download_url_path }}/{{ proxmox_template__cloudimg }}
+    check_md5
     echo -e "${YELLOW}Cloud image file has been downloaded${NC}"
 fi
 

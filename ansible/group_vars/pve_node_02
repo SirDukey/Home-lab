@@ -1,5 +1,6 @@
 ---
-proxmox_template__cloudimg_download_url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+proxmox_template__cloudimg_download_url_path: "https://cloud-images.ubuntu.com/noble/current"
+proxmox_template__cloudimg_download_checksum: "MD5SUMS"
 proxmox_template__cloudimg: "noble-server-cloudimg-amd64.img"
 proxmox_template__name: "template-ubuntu-24-04-cloud"
 proxmox_template__id: 9001
