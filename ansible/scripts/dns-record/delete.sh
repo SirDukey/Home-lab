@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use this script to create a dns record
+# Use this script to delete a dns record
 
 set -e
 
@@ -10,9 +10,9 @@ WHITE="\033[1;37m"
 BLUE='\033[0;34m'
 NC="\033[0m"
 
-if [ -z "$1" ] || [ -z "$2" ] || [ -x "$3" ]; then
+if [ -z "$1" ] || [ -z "$2" ]; then
     echo -e "${YELLOW}A required argument is missing${NC}"
-    echo -e "${YELLOW}Usage:${NC} ${WHITE}scripts/dns-record/create.sh${NC} ${BLUE}name ipv4|name type${NC}"
+    echo -e "${YELLOW}Usage:${NC} ${WHITE}scripts/dns-record/delete.sh${NC} ${BLUE}name type${NC}"
     exit 1
 fi
 
@@ -24,9 +24,8 @@ DOMAIN=$(grep global_dns_domain $VARIABLE_FILE | awk '{print $2}')
 cat << EOF | nsupdate -y hmac-sha512:nameserver:$DNS_TSIG_KEY
 server $SERVER
 update delete $1.$DOMAIN $3
-update add $1.$DOMAIN 86400 $3 $2
 send
 EOF
 
 dig $1.$DOMAIN @$SERVER
-echo -e "${GREEN}Record has been added/udpdated${NC}"
+echo -e "${GREEN}Record has been deleted${NC}"
