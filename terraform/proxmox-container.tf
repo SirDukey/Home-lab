@@ -44,4 +44,10 @@ resource "proxmox_lxc" "container-instance" {
     "chmod 600 /home/${data.sops_file.tfvars.data["default_user.username"]}/.ssh/authorized_keys"
     ]
   }
+
+  lifecycle {
+    ignore_changes = [
+      onboot
+    ]
+  }
 }

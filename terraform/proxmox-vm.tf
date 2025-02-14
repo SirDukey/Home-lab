@@ -54,7 +54,8 @@ resource "proxmox_vm_qemu" "vm-instance" {
       ssh_port,
       ipconfig0,
       disk,
-      network
+      network,
+      onboot
     ]
   }
 }
