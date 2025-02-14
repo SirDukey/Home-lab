@@ -27,6 +27,9 @@
     line: 'Hostname={{ zabbix_agent2__hostname }}'
     state: present
 
+- name: ZABBIX-AGENT2 | Enable docker plugin if required
+  ansible.builtin.include_tasks: enable_docker_plugin.yml
+
 - name: ZABBIX-AGENT2 | Ensure Zabbix agent is running and enabled
   ansible.builtin.service:
     name: zabbix-agent2

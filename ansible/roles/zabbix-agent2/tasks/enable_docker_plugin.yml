@@ -1,0 +1,29 @@
+---
+- name: ZABBIX-AGENT2 | Check if Docker is installed
+  ansible.builtin.command: docker --version
+  register: docker_check
+  ignore_errors: true
+  tags: zabbix_docker_plugin
+
+- name: ZABBIX-AGENT2 | Set fact if Docker is installed
+  ansible.builtin.set_fact:
+    docker_is_installed: "{{ docker_check.rc == 0 }}"
+  tags: zabbix_docker_plugin
+
+- name: ZABBIX-AGENT2 | Ensure user group membership for zabbix
+  ansible.builtin.user:
+    name: zabbix
+    groups: docker
+    append: true
+  when: docker_is_installed
+  tags: zabbix_docker_plugin
+
+- name: ZABBIX-AGENT2 | Ensure docker plugin is enabled
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agent2.d/plugins.d/docker.conf
+    regexp: '^Plugins.Docker.Endpoint='
+    line: 'Plugins.Docker.Endpoint=unix:///var/run/docker.sock'
+    state: present
+  when: docker_is_installed
+  tags: zabbix_docker_plugin
+  notify: Restart zabbix-agent2

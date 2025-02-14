@@ -29,11 +29,18 @@
     name: docker
     state: present
 
-- name: DOCKER | Ensure user group membership
+- name: DOCKER | Ensure user group membership for user
   ansible.builtin.user:
     name: michael
     groups: docker
     append: true
+
+- name: DOCKER | Get docker zabbix agent from zabbix-agent2 role
+  ansible.builtin.include_role:
+    name: zabbix-agent2
+    apply:
+      tags:
+        - zabbix_docker_plugin
 
 - name: DOCKER | Run containers
   ansible.builtin.include_tasks: containers.yml

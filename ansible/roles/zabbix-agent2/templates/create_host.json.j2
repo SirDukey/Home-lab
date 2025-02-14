@@ -18,11 +18,7 @@
                 "groupid": "{{ zabbix__linux_servers_group_id }}"
             }
         ],
-        "templates": [
-            {
-                "templateid": "{{ zabbix__linux_by_zabbix_agent_template_id }}"
-            }
-        ],
+        "templates": [{% for template_id in zabbix__template_id %}{"templateid": "{{ template_id }}"}{% if not loop.last %},{% endif %}{% endfor %}],
         "inventory_mode": 1,
         "inventory": {
             "location_lat": "{{ default_geo_location_lat }}",
