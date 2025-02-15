@@ -5,9 +5,10 @@
   become: true
 
   roles:
-    - { role: repositories, tags: repositories }
     - { role: packages, tags: packages, when: hypervisor_node is not defined }
     - { role: locale, tags: locale, when: hypervisor_node is not defined }
     - { role: timezone, tags: timezone, when: hypervisor_node is not defined }
+    - { role: repositories, tags: repositories }
     - { role: zabbix-agent2, tags: zabbix_agent }
     - { role: dns-record, tags: dns_record }
+    - { role: fluent-bit, tags: fluent_bit }
