@@ -1,0 +1,23 @@
+---
+- name: FLUENTD | Download fluentd install script
+  ansible.builtin.get_url:
+    url: https://toolbelt.treasuredata.com/sh/install-ubuntu-noble-fluent-package5-lts.sh
+    dest: /tmp/install-fluentd.sh
+    mode: '0755'
+
+- name: FLUENTD | Run fluentd install script
+  ansible.builtin.command: "sh /tmp/install-fluentd.sh"
+  when: ansible_facts.packages['td-agent'] is not defined
+
+- name: FLUENTD | Add Fluentd source and match configuration from file
+  ansible.builtin.blockinfile:
+    path: /etc/fluent/fluentd.conf
+    block: "{{ lookup('file', 'files/fluentd_source_match.conf') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+
+- name: FLUENTD | Ensure fluentd is enabled and started
+  ansible.builtin.service:
+    name: fluentd
+    state: restarted
+    enabled: true
+  notify: Restart fluentd

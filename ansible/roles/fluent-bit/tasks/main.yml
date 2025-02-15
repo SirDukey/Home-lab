@@ -1,0 +1,33 @@
+---
+- name: FLUENT-BIT | Ensure fluent-bit is installed
+  ansible.builtin.apt:
+    package:
+      - fluent-bit
+    state: present
+  when: hypervisor_node is not defined
+
+- name: FLUENT-BIT | Ensure configuration is copied
+  ansible.builtin.template:
+    src: "fluent-bit.conf.j2"
+    dest: "/etc/fluent-bit/fluent-bit.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: hypervisor_node is not defined
+
+- name: FLUENT-BIT | Ensure fluent-bit db directory exists
+  ansible.builtin.file:
+    path: "/var/log/fluentbit/"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+    state: directory
+  when: hypervisor_node is not defined
+
+- name: FLUENT-BIT | Ensure fluent-bit is running and enabled
+  ansible.builtin.service:
+    name: fluent-bit
+    state: restarted
+    enabled: true
+  notify: Restart fluent-bit
+  when: hypervisor_node is not defined

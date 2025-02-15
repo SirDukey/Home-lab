@@ -1,0 +1,8 @@
+---
+- name: PLAYBOOK | Setup fluentd server
+  hosts: fluentd
+  gather_facts: true
+  become: true
+
+  roles:
+    - { role: fluentd, tags: fluentd }

@@ -1,0 +1,25 @@
+[SERVICE]
+    Flush        1
+    Log_Level    info
+
+[INPUT]
+    Name         tail
+    Path         /var/log/zabbix/zabbix_server.log
+    Tag          zabbix.server
+    DB           /var/log/fluentbit/zabbix_server.db
+    Mem_Buf_Limit 5MB
+    Skip_Long_Lines On
+
+[INPUT]
+    Name         tail
+    Path         /var/log/zabbix/zabbix_agentd.log
+    Tag          zabbix.agent
+    DB           /var/log/fluentbit/zabbix_agent.db
+    Mem_Buf_Limit 5MB
+    Skip_Long_Lines On
+
+[OUTPUT]
+    Name         forward
+    Match        zabbix.*
+    Host         {{ fluent_bit__fluentd_server_ip }}
+    Port         24224

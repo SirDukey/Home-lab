@@ -41,5 +41,18 @@ variable "containers" {
       onboot      = true
       start       = true
     }
+    fluentd = {
+      target_node = "pve-node-01"
+      vmid        = 202
+      hostname    = "fluentd"
+      template    = "ubuntu_24_04"
+      ip          = "192.168.1.54/24"
+      cores       = 1
+      memory      = 1024
+      swap        = 256
+      size        = "10G"
+      onboot      = true
+      start       = true
+    }
   }
 }

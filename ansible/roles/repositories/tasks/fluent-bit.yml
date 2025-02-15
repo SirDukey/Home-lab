@@ -1,0 +1,36 @@
+---
+- name: REPOSITORIES | Download Fluent Bit GPG key to /tmp/
+  ansible.builtin.get_url:
+    url: https://packages.fluentbit.io/fluentbit.key
+    dest: /tmp/fluentbit.key
+    mode: '0644'
+  when: hypervisor_node is not defined
+
+- name: REPOSITORIES | Convert and move Fluent Bit GPG key to /usr/share/keyrings/
+  ansible.builtin.shell: |
+    gpg --dearmor -o /usr/share/keyrings/fluentbit-keyring.gpg /tmp/fluentbit.key
+  args:
+    creates: /usr/share/keyrings/fluentbit-keyring.gpg
+  when: hypervisor_node is not defined
+
+- name: REPOSITORIES | Clean up temporary GPG key file
+  ansible.builtin.file:
+    path: /tmp/fluentbit.key
+    state: absent
+  when: hypervisor_node is not defined
+
+- name: REPOSITORIES | Set fluent-bit repository url conditionally for Ubuntu
+  set_fact:
+    fluent_bit_repository_url: "https://packages.fluentbit.io/ubuntu/noble noble main"
+  when: ansible_distribution == 'Ubuntu' and hypervisor_node is not defined
+
+- name: REPOSITORIES | Set fluent-bit repository url conditionally for Debian
+  set_fact:
+    fluent_bit_repository_url: "deb [signed-by=/usr/share/keyrings/fluentbit-keyring.gpg] https://packages.fluentbit.io/debian/bookworm bookworm main"
+  when: ansible_distribution == 'Debian' and hypervisor_node is not defined
+
+- name: REPOSITORIES | Ensure fluent-bit is added to sources
+  ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list
+    line: deb [signed-by=/usr/share/keyrings/fluentbit-keyring.gpg] {{ fluent_bit_repository_url }}
+  when: hypervisor_node is not defined

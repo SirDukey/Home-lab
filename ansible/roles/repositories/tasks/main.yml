@@ -3,6 +3,10 @@
   ansible.builtin.include_tasks:
     file: zabbix.yml
 
+- name: REPOSITORIES | Add fluent-bit repository
+  ansible.builtin.include_tasks:
+    file: fluent-bit.yml
+
 # - name: REPOSITORIES | Add Gitlab repository
 #   hosts: gitlab
 #   ansible.builtin.include_tasks:
