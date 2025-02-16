@@ -1,0 +1,12 @@
+---
+- name: CONTAINER | Run portainer
+  ansible.builtin.include_tasks: portainer.yml
+  tags: portainer
+
+- name: CONTAINER | Run openvpn-as
+  ansible.builtin.include_tasks: openvpn-as.yml
+  tags: openvpn
+
+- name: CONTAINER | Run ElasticSearch
+  ansible.builtin.include_tasks: elastic.yml
+  tags: elastic

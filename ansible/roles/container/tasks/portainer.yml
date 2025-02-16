@@ -1,15 +1,15 @@
 ---
-- name: DOCKER | Pull the latest portainer-ce image
+- name: CONTAINER | Pull the latest Portainer-CE image
   community.docker.docker_image:
     name: portainer/portainer-ce:latest
     source: pull
 
-- name: DOCKER | Ensure portainer volume is present
+- name: CONTAINER | Ensure Portainer-CE volume is present
   community.docker.docker_volume:
     name: portainer_data
     state: present
 
-- name: DOCKER | Run portainer container
+- name: CONTAINER | Run Portainer-CE container
   community.docker.docker_container:
     name: portainer
     image: portainer/portainer-ce:latest

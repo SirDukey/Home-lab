@@ -1,3 +1,0 @@
----
-- name: DOCKER | Run portainer
-  ansible.builtin.include_tasks: portainer.yml

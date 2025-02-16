@@ -1,0 +1,41 @@
+---
+- name: CONTAINER | Pull the latest OpenVPN-AS image
+  community.docker.docker_image:
+    name: openvpn/openvpn-as:latest
+    source: pull
+
+- name: CONTAINER | Ensure OpenVPN-AS volume is present
+  community.docker.docker_volume:
+    name: openvpn_data
+    state: present
+
+# - name: CONTAINER | Run openvpn-as container
+#   community.docker.docker_container:
+#     name: openvpn-as
+#     image: openvpn/openvpn-as:latest
+#     state: started
+#     restart_policy: "unless-stopped"
+#     devices:
+#       - /dev/net/tun:/dev/net/tun
+#     cap_add:
+#       - NET_ADMIN
+#       - MKNOD
+#     ports:
+#       - "943:943"
+#       - "443:443"
+#       - "1194:1194/udp"
+#     volumes:
+#       - openvpn_data:/openvpn
+
+- name: CONTAINER | Deploy OpenVPN-AS container using docker CLI
+  ansible.builtin.command: >
+    docker run -d --name openvpn-as
+    --device /dev/net/tun:/dev/net/tun
+    --cap-add NET_ADMIN
+    --cap-add MKNOD
+    -p 943:943
+    -p 443:443
+    -p 1194:1194/udp
+    -v openvpn_data:/openvpn
+    --restart unless-stopped
+    openvpn/openvpn-as:latest

@@ -42,9 +42,6 @@
       tags:
         - zabbix_docker_plugin
 
-- name: DOCKER | Run containers
-  ansible.builtin.include_tasks: containers.yml
-
 - name: DOCKER | Prune unused Docker objects
   community.docker.docker_prune:
     containers: true

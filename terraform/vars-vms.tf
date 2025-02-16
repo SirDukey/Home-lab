@@ -26,6 +26,19 @@ variable "vms" {
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+    },
+    elastic = {
+      target_node = "pve-node-01"
+      vmid        = 301
+      name        = "elastic"
+      ip          = "192.168.1.55/24"
+      cores       = 4
+      memory      = 6144
+      size        = "20G"
+      onboot      = false
+      state       = "started"
+      template    = "template-ubuntu-24-04-cloud"
+      full_clone  = true
     }
   }
 }

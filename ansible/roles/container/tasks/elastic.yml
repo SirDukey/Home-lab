@@ -1,0 +1,23 @@
+---
+- name: CONTAINER | Pull the latest ElasticSearch image
+  community.docker.docker_image:
+    name: docker.elastic.co/elasticsearch/elasticsearch:8.17.2
+    source: pull
+
+- name: CONTAINER | Ensure ElasticSearch volume is present
+  community.docker.docker_volume:
+    name: elastic_data
+    state: present
+
+- name: CONTAINER | Run ElasticSearch container
+  community.docker.docker_container:
+    name: es01
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.2
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "9200:9200"
+    env:
+      ELASTIC_PASSWORD: {{ elastic__password__enc }}
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
