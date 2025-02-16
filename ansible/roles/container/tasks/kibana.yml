@@ -21,5 +21,5 @@
       - "5601:5601"
     memory: "4G"
     env:
-      - {"ELASTICSEARCH_HOSTS": "http://es01:9200"}
+      ELASTICSEARCH_HOSTS: "http://es01:9200"
   tags: kibana

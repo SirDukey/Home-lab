@@ -1,0 +1,19 @@
+---
+- name: CONTAINER | Pull image for Portainer-Agent
+  community.docker_image:
+    name: portainer/agent:latest
+    source: pull
+  tags: portainer_agent
+
+- name: CONTAINER | Run Portainer-Agent container
+  community.docker_container:
+    name: portainer_agent
+    state: started
+    restart_policy: "always"
+    ports:
+      - "9001:9001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /:/host
+  tags: portainer_agent

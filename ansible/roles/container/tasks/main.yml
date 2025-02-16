@@ -3,6 +3,10 @@
   ansible.builtin.include_tasks: portainer.yml
   tags: portainer
 
+- name: CONTAINER | Run portainer agent
+  ansible.builtin.include_tasks: portainer-agent.yml
+  tags: portainer_agent
+
 - name: CONTAINER | Run openvpn-as
   ansible.builtin.include_tasks: openvpn-as.yml
   tags: openvpn

@@ -12,7 +12,9 @@ NC="\033[0m"
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -x "$3" ]; then
     echo -e "${YELLOW}A required argument is missing${NC}"
-    echo -e "${YELLOW}Usage:${NC} ${WHITE}scripts/dns-record/create.sh${NC} ${BLUE}name ipv4|name type${NC}"
+    echo -e "${YELLOW}Usage:${NC} ${WHITE}scripts/dns-record/create.sh${NC} ${BLUE}record ipv4|record type${NC}"
+    echo -e "${YELLOW}Examples:{NC} ${BLUE}create.sh es-01 192.168.1.55 A${NC}"
+    echo -e "${YELLOW}         {NC} ${BLUE}create.sh es-01 elastic CNAME${NC}"
     exit 1
 fi
 
