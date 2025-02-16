@@ -3,11 +3,13 @@
   community.docker.docker_image:
     name: portainer/portainer-ce:latest
     source: pull
+  tags: portainer
 
 - name: CONTAINER | Ensure Portainer-CE volume is present
   community.docker.docker_volume:
     name: portainer_data
     state: present
+  tags: portainer
 
 - name: CONTAINER | Run Portainer-CE container
   community.docker.docker_container:
@@ -21,3 +23,4 @@
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+  tags: portainer

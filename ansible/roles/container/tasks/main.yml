@@ -10,3 +10,7 @@
 - name: CONTAINER | Run ElasticSearch
   ansible.builtin.include_tasks: elastic.yml
   tags: elastic
+
+- name: CONTAINER | Run Kibana
+  ansible.builtin.include_tasks: kibana.yml
+  tags: kibana

@@ -33,7 +33,7 @@ variable "vms" {
       name        = "elastic"
       ip          = "192.168.1.55/24"
       cores       = 4
-      memory      = 6144
+      memory      = 8196
       size        = "20G"
       onboot      = false
       state       = "started"

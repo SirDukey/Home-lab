@@ -8,6 +8,7 @@
   community.docker.docker_volume:
     name: openvpn_data
     state: present
+  tags: openvpn
 
 # - name: CONTAINER | Run openvpn-as container
 #   community.docker.docker_container:
@@ -39,3 +40,4 @@
     -v openvpn_data:/openvpn
     --restart unless-stopped
     openvpn/openvpn-as:latest
+  tags: openvpn

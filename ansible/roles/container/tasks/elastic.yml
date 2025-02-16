@@ -1,13 +1,21 @@
 ---
+- name: CONTAINER | Ensure elastic network is created
+  community.docker.docker_network:
+    name: elastic
+    state: present
+  tags: elastic
+
 - name: CONTAINER | Pull the latest ElasticSearch image
   community.docker.docker_image:
     name: docker.elastic.co/elasticsearch/elasticsearch:8.17.2
     source: pull
+  tags: elastic
 
 - name: CONTAINER | Ensure ElasticSearch volume is present
   community.docker.docker_volume:
     name: elastic_data
     state: present
+  tags: elastic
 
 - name: CONTAINER | Run ElasticSearch container
   community.docker.docker_container:
@@ -17,7 +25,12 @@
     restart_policy: "unless-stopped"
     ports:
       - "9200:9200"
+    memory: "4G"
     env:
-      ELASTIC_PASSWORD: {{ elastic__password__enc }}
+      ELASTIC_PASSWORD: "{{ elastic__password__enc }}"
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
+  tags: elastic
+
+# Kibana access token
+# docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
