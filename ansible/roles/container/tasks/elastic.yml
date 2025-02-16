@@ -30,6 +30,8 @@
       ELASTIC_PASSWORD: "{{ elastic__password__enc }}"
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
+    networks:
+      - name: elastic
   tags: elastic
 
 # Kibana access token
