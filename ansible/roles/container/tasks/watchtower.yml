@@ -1,0 +1,16 @@
+---
+- name: CONTAINER | Pull the latest watchtower image
+  community.docker.docker_image:
+    name: containrrr/watchtower
+    source: pull
+  tags: watchtower
+
+- name: CONTAINER | Run watchtower container
+  community.docker.docker_container:
+    name: watchtower
+    image: containrrr/watchtower
+    state: started
+    restart_policy: "unless-stopped"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  tags: watchtower

@@ -22,3 +22,7 @@
 - name: CONTAINER | Run Nginx Proxy Manager
   ansible.builtin.include_tasks: nginx-proxy-manager.yml
   tags: nginx_proxy_manager
+
+- name: CONTAINER | Run watchtower
+  ansible.builtin.include_tasks: watchtower.yml
+  tags: watchtower
