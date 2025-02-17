@@ -18,3 +18,7 @@
 - name: CONTAINER | Run Kibana
   ansible.builtin.include_tasks: kibana.yml
   tags: kibana
+
+- name: CONTAINER | Run Nginx Proxy Manager
+  ansible.builtin.include_tasks: nginx-proxy-manager.yml
+  tags: nginx_proxy_manager
