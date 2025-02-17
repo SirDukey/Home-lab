@@ -13,8 +13,8 @@ NC="\033[0m"
 if [ -z "$1" ] || [ -z "$2" ]; then
     echo -e "${YELLOW}A required argument is missing${NC}"
     echo -e "${YELLOW}Usage:${NC} ${WHITE}scripts/dns-record/delete.sh${NC} ${BLUE}name type${NC}"
-    echo -e "${YELLOW}Examples:{NC} ${BLUE}delete.sh es-01 A${NC}"
-    echo -e "${YELLOW}         {NC} ${BLUE}delete.sh es-01 CNAME${NC}"
+    echo -e "${YELLOW}Examples:${NC} ${BLUE}delete.sh es-01 A${NC}"
+    echo -e "${YELLOW}         ${NC} ${BLUE}delete.sh es-01 CNAME${NC}"
     exit 1
 fi
 
