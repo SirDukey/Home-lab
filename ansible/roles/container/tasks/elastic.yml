@@ -27,12 +27,17 @@
       - "9200:9200"
     memory: "4G"
     env:
-      ELASTIC_PASSWORD: "{{ elastic__password__enc }}"
+      ES_SETTING_DISCOVERY_TYPE: "single-node"
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
     networks:
       - name: elastic
   tags: elastic
 
-# Kibana access token
-# docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+- name: CONTAINER | Elastic manual steps
+  ansible.builtin.debug:
+    msg:
+      - Set the elastic user account password
+      - docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+      - Create a Kibana access token
+      - docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana

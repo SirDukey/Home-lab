@@ -20,8 +20,11 @@
     ports:
       - "5601:5601"
     memory: "4G"
-    env:
-      ELASTICSEARCH_HOSTS: "http://es01:9200"
     networks:
       - name: elastic
   tags: kibana
+
+- name: CONTAINER | Kibana manual steps
+  ansible.builtin.debug:
+    msg:
+      - Check the container logs for the access id url
