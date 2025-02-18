@@ -40,5 +40,44 @@ variable "vms" {
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
     }
+    kube-01 = {
+      target_node = "pve-node-01"
+      vmid        = 302
+      name        = "kube-01"
+      ip          = "192.168.1.56/24"
+      cores       = 2
+      memory      = 2048
+      size        = "10G"
+      onboot      = false
+      state       = "started"
+      template    = "template-ubuntu-24-04-cloud"
+      full_clone  = true
+    }
+    kube-02 = {
+      target_node = "pve-node-01"
+      vmid        = 303
+      name        = "kube-02"
+      ip          = "192.168.1.57/24"
+      cores       = 2
+      memory      = 2048
+      size        = "10G"
+      onboot      = false
+      state       = "started"
+      template    = "template-ubuntu-24-04-cloud"
+      full_clone  = true
+    }
+    kube-03 = {
+      target_node = "pve-node-01"
+      vmid        = 304
+      name        = "kube-03"
+      ip          = "192.168.1.58/24"
+      cores       = 2
+      memory      = 2048
+      size        = "10G"
+      onboot      = false
+      state       = "started"
+      template    = "template-ubuntu-24-04-cloud"
+      full_clone  = true
+    }
   }
 }

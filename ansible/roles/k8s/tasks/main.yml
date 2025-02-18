@@ -1,0 +1,70 @@
+---
+
+- name: K8S | Download Kubernetes APT key
+  ansible.builtin.get_url:
+    url: "https://pkgs.k8s.io/core:/stable:/{{ k8s__kubernetes_version }}/deb/Release.key"
+    dest: /tmp/kubernetes-Release.key
+    mode: '0644'
+
+- name: K8S | Download Cri-o APT key
+  ansible.builtin.get_url:
+    url: "https://download.opensuse.org/repositories/isv:/cri-o:/stable:/{{ k8s__crio_version }}/deb/Release.key"
+    dest: /tmp/cri-o-Release.key
+    mode: '0644'
+
+- name: K8S | Convert keys to GPG format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /etc/apt/keyrings/{{ item }}-apt-keyring.gpg /tmp/{{ item }}-Release.key
+  args:
+    creates: /etc/apt/keyrings/{{ item }}-apt-keyring.gpg
+  with_items:
+    - kubernetes
+    - cri-o
+
+- name: K8S | Remove temporary key files
+  ansible.builtin.file:
+    path: /tmp/{{ item }}
+    state: absent
+  with_items:
+    - kubernetes-Release.key
+    - cri-o-Release.key
+
+- name: K8S | Add Kubernetes APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{ k8s__kubernetes_version }}/deb/ /"
+    state: present
+    filename: 'kubernetes'
+
+- name: K8S | Add Cri-o APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/cri-o-apt-keyring.gpg] https://download.opensuse.org/repositories/isv:/cri-o:/stable:/{{ k8s__crio_version }}/deb/ /"
+    state: present
+    filename: 'cri-o'
+
+- name: K8S | Download the packages
+  ansible.builtin.apt:
+    pkg:
+      - cri-o
+      - kubelet
+      - kubeadm
+      - kubectl
+    update_cache: true
+
+- name: K8S | Ensure crio service is enabled and started
+  ansible.builtin.service:
+    name: crio
+    state: started
+    enabled: true
+
+- name: K8S | Load br_netfilter module
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+
+- name: K8S | Ensure net.ipv4.ip_forward is enabled
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    state: present
+    sysctl_set: true
+    reload: true

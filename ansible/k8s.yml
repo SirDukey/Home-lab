@@ -1,0 +1,8 @@
+---
+- name: PLAYBOOK | Configure k8s
+  hosts: k8s
+  gather_facts: true
+  become: true
+
+  roles:
+    - { role: k8s, tags: k8s }
