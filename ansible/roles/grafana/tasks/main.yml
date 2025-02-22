@@ -1,0 +1,31 @@
+---
+- name: GRAFANA | Download Kubernetes APT key
+  ansible.builtin.get_url:
+    url: "https://apt.grafana.com/gpg.key"
+    dest: /tmp/grafana-Release.key
+    mode: '0644'
+
+- name: GRAFANA | Convert keys to GPG format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /etc/apt/keyrings/grafana-apt-keyring.gpg /tmp/grafana-Release.key
+  args:
+    creates: /etc/apt/keyrings/grafana-apt-keyring.gpg
+
+- name: GRAFANA | Remove temporary key files
+  ansible.builtin.file:
+    path: /tmp/grafana-Release.key
+    state: absent
+
+
+- name: GRAFANA | Add Grafana APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana-apt-keyring.gpg] https://apt.grafana.com stable main"
+    state: present
+    filename: grafana
+
+- name: GRAFANA | Download the packages
+  ansible.builtin.apt:
+    pkg:
+      - grafana
+      - loki
+    update_cache: true
