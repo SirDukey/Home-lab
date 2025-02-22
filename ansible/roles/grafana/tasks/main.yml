@@ -32,3 +32,12 @@
 
 - name: GRAFANA | Configure database
   ansible.builtin.include_tasks: database.yml
+
+- name: GRAFANA | Configure grafana
+  ansible.builtin.include_tasks: configuration.yml
+
+- name: GRAFANA | Ensure grafana-server is running and enabled
+  ansible.builtin.service:
+    name: grafana-server
+    state: restarted
+    enabled: true

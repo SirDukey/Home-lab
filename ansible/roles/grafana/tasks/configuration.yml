@@ -1,0 +1,84 @@
+---
+- name: GRAFANA | Configure protocol
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;protocol = http"
+    line: "protocol = http"
+    state: present
+
+- name: GRAFANA | Configure interface
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;http_addr ="
+    line: "http_addr ="
+    state: present
+
+- name: GRAFANA | Configure port
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;port = 3000"
+    line: "port = 3000"
+    state: present
+
+- name: GRAFANA | Configure domain
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;domain = localhost"
+    line: "domain = {{ ansible_hostname }}.{{ global_dns_domain }}"
+    state: present
+
+- name: GRAFANA | Configure db type
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;type = sqlite3"
+    line: "type = mysql"
+    state: present
+
+- name: GRAFANA | Configure db host
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;host = 127.0.0.1:3306"
+    line: "host = 127.0.0.1:3306"
+    state: present
+
+- name: GRAFANA | Configure db host
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;name = grafana"
+    line: "name = {{ grafana__mysql_db__enc }}"
+    state: present
+
+- name: GRAFANA | Configure db user
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;user = root"
+    line: "user = {{ grafana__mysql_user_name__enc }}"
+    state: present
+
+- name: GRAFANA | Configure db password
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;password ="
+    line: "password = {{ grafana__mysql_user_password__enc }}"
+    state: present
+
+- name: GRAFANA | Configure admin login user
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;admin_user ="
+    line: "admin_user = {{ grafana__admin_user_name__enc }}"
+    state: present
+
+- name: GRAFANA | Configure admin login password
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;admin_password ="
+    line: "admin_password = {{ grafana__admin_user_password__enc }}"
+    state: present
+
+- name: GRAFANA | Configure Loki hostname entries
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: "^127.0.0.1"
+    line: "127.0.0.1  localhost loki loki-querier loki-distributor"
+    state: present
