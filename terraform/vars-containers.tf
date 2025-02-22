@@ -54,5 +54,18 @@ variable "containers" {
       onboot      = true
       start       = true
     }
+    grafana = {
+      target_node = "pve-node-02"
+      vmid        = 203
+      hostname    = "grafana"
+      template    = "ubuntu_24_04"
+      ip          = "192.168.1.59/24"
+      cores       = 1
+      memory      = 1024
+      swap        = 256
+      size        = "10G"
+      onboot      = true
+      start       = true
+    }
   }
 }

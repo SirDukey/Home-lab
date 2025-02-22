@@ -1,0 +1,22 @@
+---
+- name: GRAFANA | Install mysql
+  ansible.builtin.include_role:
+    name: mysql
+
+- name: GRAFANA | Create grafana database
+  community.mysql.mysql_db:
+    name: "{{ grafana__mysql_db__enc }}"
+    state: present
+    login_user: root
+    login_password: "{{ proxmox_lxc_containers__root_password__enc }}"
+
+
+- name: GRAFANA | Create database user
+  community.mysql.mysql_user:
+    name: "{{ grafana__mysql_user_name__enc }}"
+    host: localhost
+    password: "{{ grafana__mysql_user_password__enc }}"
+    priv: "{{ grafana__mysql_db__enc }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ proxmox_lxc_containers__root_password__enc }}"

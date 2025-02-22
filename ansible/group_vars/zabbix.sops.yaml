@@ -1,7 +1,6 @@
-proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:mHm31XDV8YIe,iv:0dqMcIFgcHkzIuhI3bl6p9ZZi3zl8/dDyVmgfe+bQto=,tag:kdmq4Pk6oq7W2NLfnsZ8qg==,type:str]
-zabbix__mysql_db__enc: ENC[AES256_GCM,data:hDbU1Zw8,iv:0+1g+IGbP64zfXEUqYqhMBqDjXbkzFoRlivlZaMsq3g=,tag:Xv8Wpl5Ur8boSRUlj43xfA==,type:str]
-zabbix__mysql_user_name__enc: ENC[AES256_GCM,data:EWICuuCS,iv:nxwESG/vlinvq3U+SJYdKUolzRsSCykNwlyFbpy7jvY=,tag:HeJUuiv+0MSnu7jPebjeAg==,type:str]
-zabbix__mysql_user_password__enc: ENC[AES256_GCM,data:9oBNEYPaSZ9pDnttGR11QQ==,iv:xJmMHqAwBjzvGfr0qfamXeRWKLR9pYv0zattOz56RQ4=,tag:JHbvx/u/kB47XH7HjlCZqw==,type:str]
+zabbix__mysql_db__enc: ENC[AES256_GCM,data:3cpvtlRS,iv:+a2LaWRFx3VKnLUPN5Bc8bpeAcONy0jv65/9wIowtJQ=,tag:ri2GyOLezCpFTNygIefDKw==,type:str]
+zabbix__mysql_user_name__enc: ENC[AES256_GCM,data:8t7GQQKb,iv:VPv+7Xh7rYP+FGdYzc3/ILWLn6TDHHRBh6+65mU71CQ=,tag:3HoezYaoUw1I3jvGVTKSNg==,type:str]
+zabbix__mysql_user_password__enc: ENC[AES256_GCM,data:E3oi4OcDJmj0+RsApekMUQ==,iv:L4JGzuWUCj1qX3ZCd499TW4KCGyfzRer1WkzGr6OD8s=,tag:TM5+qPREuOj6oq3ydlnIBg==,type:str]
 zabbix__frontend_port: "8080"
 zabbix_agent2__disable_auto_create_host: true
 zabbix_agent2__hostname: Zabbix server
@@ -15,25 +14,25 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-12T16:24:53Z"
-    mac: ENC[AES256_GCM,data:w+9irU/D0vN9+0JygWJ57oq+T4qdxQBsSZ69+Yyt0AkM759nAlU8bNDVBv/vvTF7VCNydEjZ0+7rw98gMaHrsoMdxJcGK7xfdpR7MQEDHplq9VlcQ5lkOsEeUzskD+XI0nK0X4iebUZ7gB3PvReT6ScjlZQS6CfoPYeZB+XX+xI=,iv:UqxmWCJfak6TcT7taigXdt4lbOckq9A6q+xmZLVmqlc=,tag:mwh0ECrvY0loxofnKybmcw==,type:str]
+    lastmodified: "2025-02-22T17:26:15Z"
+    mac: ENC[AES256_GCM,data:/cAIgasmJAtAtL/uyLcKHuxK4UG0GoLG0XvulOBxX0ZPdSP83mcGY76ifzeRwT2DdagRT8XYjp0HLCaRuCU1LLOvRxrN7OcnStgzcsfOyN2Y/M6ef8Rt0fXFP44rtq89DCWD9WtKaoRnQ0frWuCdtEvIiUeH6Oh0rutM9qsXdp4=,iv:Ri45aFtQRAcKCxXg4PW00K8MePZgzG708mpKAdHXgpI=,tag:Dv95TU0mrsmDaVriDg6pKA==,type:str]
     pgp:
-        - created_at: "2025-02-12T16:24:53Z"
+        - created_at: "2025-02-22T17:26:15Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQwAjUsE0yDl68kfoBw0c/EYbkQnGnWMkZrh1sbppVEiYKhs
-            WufK4kLuypniVFv39jXQHqr58dyZIPibIwvw94LK9FC8C4GGnebvAZ5JuV4xP9d0
-            tr/OuK9ZOxTbyeNDB6heJ4+0DXSHin59ERah4/dxQ21Kcb1o0UnRGa3q6uR68212
-            BXwy5y4eRRjD4tr3HOPk+i677Arrz9OL4ZMWIEOcY5+QLhi8AKoHYgb2hgVClSMG
-            rLS6KK8I3dSCjlhgSNdQY8rDxy+znvtNCsK2TsdCSlm6xhlqZuynLnp8jaKimv0Q
-            r1R7kzYCs+6vJm0N3mbU3i+sV27EQV42vAMRSkJcmkl3z+4nEsWtQQCBhqiw9M2J
-            XeDUOjBoTMrwPMU6zrj/WuVH5tNFbpM58avQBxLH+L1lrx/V2tHGnq4fB8v1+1hc
-            vbocS2FKh1FegdVeXQZ1LaQhchW6HSY5wb140ISO4Dv5Hu/kqM5KGPbM+Z0R3rX9
-            tHPo3ztNbrn8wCbxR8LG1GgBCQIQrWZsztgf/cYtLAeJ5G3lIeKFD+mu3hR5IZup
-            m2AWtsgy0ghHBUiQ/wts+ZpMXEOSOd/zh2I4e1Z/WigKIYytC1UmePBpuzAQl/oT
-            doqymgeoWvn7oPFQL6Nv1xaal4ZWkamIyQ==
-            =jFK1
+            hQGMA5xFaLh+EJKkAQwAsp18gJYDGVclRvROh+feuslmdCeqZvUrpdyCieSdGngh
+            +rl5nUsPRmOoST389wU2EcsvNG9SyKB7LNtGXPQ17iFmpjzCBRVLXCDZhayaZlZY
+            8Cz8/XrIHOoTiSUL1gByCP8wp1QNXLNlWuC5DDPDDGMvY3DvHXiNkHhr1/p9M6vG
+            sXnTQbqCYXnvFXjR7xw2NgaRFGrKHBwbvAHgPd2HQb0LqPjz7IsGDiL2Twz4S6WW
+            vLQKqXpLv2qrChifafchQJkXLNujtg7tSs9FHKqDHy2FhULB5V5QqcQmuopSHEvn
+            VyQiizzh6M5v9XuS8Tcsa/whPXXpjXohHqVty6aFZ3b0jd8HLzaxBdaqEfOVt1tP
+            I2p7cYPuswIOZtt6AnMDfm84p0LimlmhHf3egzlNFLmynVk1dVa48K4Y045f/prj
+            scd4P1QZm+S01cxClvTm4q2cA+l7YivaZWg1pE7mVnDGn0OCX+KaxLb0hYZjWf/W
+            G3yTZJOnF0aH2ZxnoGgU1GgBCQIQa3h4zdY9JWPg1SL4tNovVO7SdzJ4/sGHgNhQ
+            kV9kJDsvb+W/yPMi2OuzcW5EiLTJFWyS4rQIzyt5qk5qXVvRPG1odroRrzQ3bleE
+            xxgrOJWvLbVDAVwNGi0iq1wEsGTDuvseMQ==
+            =yfq5
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc

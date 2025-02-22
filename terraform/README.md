@@ -2,6 +2,11 @@
 
 # Terraform provisioning environment
 
+ID ranges:
+  - lcx containers: 200 onwards
+  - virtual machines: 300 onwards
+  - templates: 9000 onwards
+
 ## Quick start
 
 **1. Create a user, role, permissions and a token in Proxmvox. Read [Proxmox API](#proxmox-api) for details on how I configure the API access.**

@@ -29,3 +29,6 @@
       - grafana
       - loki
     update_cache: true
+
+- name: GRAFANA | Configure database
+  ansible.builtin.include_tasks: database.yml
