@@ -1,5 +1,5 @@
 ---
-- name: GRAFANA | Download Kubernetes APT key
+- name: GRAFANA | Download Grafana APT key
   ansible.builtin.get_url:
     url: "https://apt.grafana.com/gpg.key"
     dest: /tmp/grafana-Release.key

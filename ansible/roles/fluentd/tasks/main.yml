@@ -10,7 +10,7 @@
   when: ansible_facts.packages['fluent-package'] is not defined
 
 - name: FLUENTD | Installl elastic plugin
-  ansible.builtin.command: "/usr/sbin/fluent-gem install fluent-plugin-elasticsearch"
+  ansible.builtin.command: "/usr/sbin/fluent-gem install fluent-plugin-elasticsearch fluent-plugin-grafana-loki"
   when: ansible_facts.packages['fluent-package'] is not defined
 
 - name: FLUENTD | Add Fluentd source and match configuration from file

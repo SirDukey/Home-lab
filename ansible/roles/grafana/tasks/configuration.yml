@@ -16,8 +16,8 @@
 - name: GRAFANA | Configure port
   ansible.builtin.lineinfile:
     path: /etc/grafana/grafana.ini
-    regexp: "^;port = 3000"
-    line: "port = 3000"
+    regexp: "^;http_port = 3000"
+    line: "http_port = 3000"
     state: present
 
 - name: GRAFANA | Configure domain
@@ -76,9 +76,17 @@
     line: "admin_password = {{ grafana__admin_user_password__enc }}"
     state: present
 
+- name: GRAFANA | Configure loki url
+  ansible.builtin.lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: '^; loki_remote_url = "http://loki:3100"'
+    line: 'loki_remote_url = "http://loki:3100"'
+    state: present
+
+
 - name: GRAFANA | Configure Loki hostname entries
   ansible.builtin.lineinfile:
     path: /etc/hosts
     regexp: "^127.0.0.1"
-    line: "127.0.0.1  localhost loki loki-querier loki-distributor"
+    line: "127.0.0.1  localhost loki"
     state: present
