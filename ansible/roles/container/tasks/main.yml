@@ -26,3 +26,7 @@
 - name: CONTAINER | Run watchtower
   ansible.builtin.include_tasks: watchtower.yml
   tags: watchtower
+
+- name: CONTAINER | Run Gitea
+  ansible.builtin.include_tasks: gitea.yml
+  tags: gitea

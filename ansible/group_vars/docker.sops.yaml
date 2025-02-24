@@ -1,0 +1,42 @@
+docker__prune: true
+zabbix__template_id:
+    # Linux by Zabbix agent
+    - "10001"
+    # Docker by Zabbix agent 2
+    - "10318"
+elastic__password__enc: ENC[AES256_GCM,data:XJ3BNRaOBVSQvlhx8swHuUo=,iv:L+ZqdTGhFn4fAxVNnaAeGn06Va2bGiHYTxrZRjAKd/I=,tag:X7gvW/kCg8h+Eq+Y+4xgxw==,type:str]
+nginx_proxy_manager__password__enc: ENC[AES256_GCM,data:yCAgHm4IQuI0IFGYJBcP,iv:ia6F6KGtuo1KeEfp4eJtZOrLj0AyKrKJcP3ThwpLUYc=,tag:0CKKq1mM5fHFqqIToo+/JQ==,type:str]
+my_email_account__enc: ENC[AES256_GCM,data:/K07uxLeOGRu5MLNe/+IRdTN76O8Epj0,iv:DSzVVVM2JN/YX5PgxeFB59CcgkBwtqVGB09sz0Bn9Ww=,tag:Mpb+Kg+j6DiP33mwrA69cg==,type:str]
+gitea__mysql_db_name__enc: ENC[AES256_GCM,data:9vRlTnY=,iv:1i4OTq8lLeg+nUYgKiaitSM0DozK67w7gP7D7gXabp4=,tag:k6gvOhr0NvoSQtvaq4heYw==,type:str]
+gitea__mysql_user_name__enc: ENC[AES256_GCM,data:hGbtYRA=,iv:2Im5yciwgiz26uK4vc0P9Exk5THVnSnuA2SXjk2imuM=,tag:2HrHbr6IItYBLLvBtPX44g==,type:str]
+gitea__mysql_user_password__enc: ENC[AES256_GCM,data:kSVGjAQ5RWCI1dWufHtH,iv:QxIkJyHZcJEqOzeesyiLp8Jq8FbtS5JG9Rzj8UdEgvo=,tag:A//fmrSBZEbcUEXYRMMW3g==,type:str]
+gitea__mysql_root_password__enc: ENC[AES256_GCM,data:sL8HUCslAmfL,iv:DNgPtxSLLzo76XUxv15yxFZU5mi6VTXHqrGV/GGpVDE=,tag:Kk1rF8mGmi1naXY8Io76tg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2025-02-24T21:53:39Z"
+    mac: ENC[AES256_GCM,data:kIO6t8Ilw5byEZ2FuAfOUkjLpxjEitrsc8164dk5L9pQKBOvCP8NO8GrT7Qu0YT5apEqqNuA8MgpS38oey/FIrav86SxNGRD90vsnsi0Hg3UlTOWFjuW3k8kb+jeJynTZpHNi6jrmR8J3MCeahbh7mIKBN+L4FX1fA2EF1+dnTA=,iv:ir962Mxm1gziCKUu9hBrcg1Q3jj/q9vFSvZnyTN4jnw=,tag:ux+J8Hy1SHzRlPXrXhF7Rw==,type:str]
+    pgp:
+        - created_at: "2025-02-24T21:53:39Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA5xFaLh+EJKkAQwAmU3km6JE5fgOSVN4BkteFEJQ+R9/NwuWRJTQU7+pl71w
+            z5qt/zrpGu33V+Xv70e5EeptMP8N6t7Pc9B7gHGyST5jyQHGOS9+AodJukoxhctr
+            gbQnLapVtw3mO44jM6yiL6JGGtrGboehCYmGq3e6k7vkQctQwH6NRiD7yRekHim4
+            3p0ToAWeIjAFrWcLqQieBoUGs7FWGBaC7R4192YkQQ7ZaxPoOPKRPL1G7BRIZuPS
+            icqcTQOOmbTazu5JlYb9Ri8Kis4Z++7NPwVQYzSnq2HyF3eCndEte4mJuBb7dWS3
+            xzBZhfOWS9PJoBXGfkojp8/ZVQ9AuGbIPS0aJWq9t/5cvp8h/El3CBUJ7rnJvqV/
+            kmzlG28Eahp4nNd41JTil1PSNve9vWGQCNyyAm8dhCvFrkJPj+4lypZTqsqj/egx
+            2bKn0sEY3vd0R0CcgoJ67MzHzSpJNRJPWtlDDwXKxyStdxl9OfrrK8xHK9ImUJj1
+            RiUai7FzS8BOzPFUwvxh1GgBCQIQaDJSIXDTYD9DMlYIwpucW6Ab8Ly2Wc129Dym
+            8lIad1cMAO+rGbMYyJVzxbEh7EM4mk+h6S+ZZ0zXmvwYN5TIfi0BBF0x2EQrMlTI
+            /m6Man0v1yfQ/S0pZkU26Df/nt84Cm5AEg==
+            =ifZ6
+            -----END PGP MESSAGE-----
+          fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
+    encrypted_suffix: __enc
+    version: 3.9.4

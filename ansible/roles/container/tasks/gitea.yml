@@ -1,0 +1,72 @@
+---
+- name: CONTAINER | Pull the latest Gitea image
+  community.docker.docker_image:
+    name: docker.io/gitea/gitea:1.23.4
+    source: pull
+  tags: gitea
+
+- name: CONTAINER | Pull the latest Mysql image
+  community.docker.docker_image:
+    name: docker.io/library/mysql:8
+    source: pull
+  tags: gitea
+
+- name: CONTAINER | Ensure gitea_network is created
+  community.docker.docker_network:
+    name: gitea_network
+    state: present
+  tags: gitea
+
+- name: CONTAINER | Ensure Gitea volume is present
+  community.docker.docker_volume:
+    name: gitea_data
+    state: present
+  tags: gitea
+
+- name: CONTAINER | Ensure Gitea mysql volume is present
+  community.docker.docker_volume:
+    name: gitea_mysql_data
+    state: present
+  tags: gitea
+
+- name: CONTAINER | Run Gitea database container
+  community.docker.docker_container:
+    name: gitea_db
+    image: docker.io/library/mysql:8
+    state: started
+    restart_policy: "unless-stopped"
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ gitea__mysql_root_password__enc }}"
+      MYSQL_USER: "{{ gitea__mysql_user_name__enc }}"
+      MYSQL_PASSWORD: "{{ gitea__mysql_user_password__enc }}"
+      MYSQL_DATABASE: "{{ gitea__mysql_db_name__enc }}"
+    networks:
+      - name: gitea_network
+    volumes:
+      - gitea_mysql_data:/var/lib/mysql
+  tags: gitea
+
+- name: CONTAINER | Run Gitea container
+  community.docker.docker_container:
+    name: gitea
+    image: docker.io/gitea/gitea:1.23.4
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "3000:3000"
+      - "222:22"
+    env:
+      USER_UID: "1000"
+      USER_GID: "1000"
+      GITEA__database__DB_TYPE: mysql
+      GITEA__database__HOST: gitea_db:3306
+      GITEA__database__NAME: "{{ gitea__mysql_db_name__enc }}"
+      GITEA__database__USER: "{{ gitea__mysql_user_name__enc }}"
+      GITEA__database__PASSWD: "{{ gitea__mysql_user_password__enc }}"
+    networks:
+      - name: gitea_network
+    volumes:
+      - gitea_data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+  tags: gitea

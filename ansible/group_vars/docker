@@ -1,5 +1,0 @@
----
-docker__prune: true
-zabbix__template_id:
-  - "10001" # Linux by Zabbix agent
-  - "10318" # Docker by Zabbix agent 2
