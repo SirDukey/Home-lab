@@ -18,8 +18,21 @@
     Mem_Buf_Limit 5MB
     Skip_Long_Lines On
 
+[INPUT]
+    Name         tail
+    Path         /var/log/mysql/error.log
+    Tag          mysql.error
+    DB           /var/log/fluentbit/mysql_error.db
+    Mem_Buf_Limit 5MB
+    Skip_Long_Lines On
+
+[FILTER]
+    Name         record_modifier
+    Match        *.*
+    Record       hostname ${HOSTNAME}
+
 [OUTPUT]
     Name         forward
-    Match        zabbix.*
+    Match        *.*
     Host         {{ fluent_bit__fluentd_server_ip }}
     Port         24224
