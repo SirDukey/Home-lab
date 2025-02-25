@@ -1,0 +1,38 @@
+---
+- name: CONTAINER | Ensure ddclietn config directory exists
+  ansible.builtin.file:
+    path: /opt/ddclient/
+    state: directory
+    owner: root
+    group: root
+    mode: "0644"
+  tags: ddclient
+
+- name: CONTAINER | Copy the ddclient configuration file
+  ansible.builtin.template:
+    src: ddclient.conf.j2
+    dest: /opt/ddclient/ddclient.conf
+    owner: root
+    group: root
+    mode: "0644"
+  tags: ddclient
+
+- name: CONTAINER | Pull the latest ddclient image
+  community.docker.docker_image:
+    name: linuxserver/ddclient:latest
+    source: pull
+  tags: ddclient
+
+- name: CONTAINER | Run ddclient container
+  community.docker.docker_container:
+    name: ddclient
+    image: linuxserver/ddclient:latest
+    state: started
+    restart_policy: "unless-stopped"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Amsterdam"
+    volumes:
+      - /opt/ddclient:/config
+  tags: ddclient

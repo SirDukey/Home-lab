@@ -30,3 +30,7 @@
 - name: CONTAINER | Run Gitea
   ansible.builtin.include_tasks: gitea.yml
   tags: gitea
+
+- name: CONTAINER | Run ddclient
+  ansible.builtin.include_tasks: ddclient.yml
+  tags: ddclient
