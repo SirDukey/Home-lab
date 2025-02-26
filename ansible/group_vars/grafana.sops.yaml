@@ -1,33 +1,36 @@
-grafana__mysql_db__enc: ENC[AES256_GCM,data:kMCfG9r6xw==,iv:mMI7xaz26dRrdA/ZVFSjoknITNCQD6eaJ0CEnhRbu7s=,tag:DTxbNfYqwtrxuEyjq3dXBg==,type:str]
-grafana__mysql_user_name__enc: ENC[AES256_GCM,data:sfHoYQuGDg==,iv:eign11jPK7lE98S125jcrfihDXVef1lRxi8z+hDC9rY=,tag:6/RGO0mN+RsgRULCYpjzHw==,type:str]
-grafana__mysql_user_password__enc: ENC[AES256_GCM,data:r+CHGjxSKkxt4Nr4hShQJTE=,iv:1V78At/O1nfWZl2yF1eyn/jPxCi3q2/9rqX0PXxmMhw=,tag:dswpocIayZ9n2K/6as279Q==,type:str]
-grafana__admin_user_name__enc: ENC[AES256_GCM,data:wp/P2Vw=,iv:XFQwkntdTDymrU7BSZ3D4hs4KlNF9p+hdnnOmx+SBVU=,tag:Fpk6TSrio/hiQdRWZ3C05Q==,type:str]
-grafana__admin_user_password__enc: ENC[AES256_GCM,data:EclFT6kUcVD4gzFcPdBhE2w=,iv:uucfZr3/BnfYGRBDKRMH0VhPxz0biqwLh51PZIcMyhg=,tag:g2/3Kc6IjtpednuHrYfdtQ==,type:str]
+grafana__mysql_db__enc: ENC[AES256_GCM,data:TeWHzsliQQ==,iv:W9+TqSrKb4aMVDAYvlb4xgtqQYbAasQyZ1q7hROYdZ0=,tag:Z2qBY8Ba83VjAjryOT463A==,type:str]
+grafana__mysql_user_name__enc: ENC[AES256_GCM,data:E0BhMKa0xw==,iv:Ll5VqwPFDjsr1hvrsYuJbFGlnRcVKcqWQJF8EnqQzFY=,tag:x1yS+bRgeAvVRXVjFg9nVg==,type:str]
+grafana__mysql_user_password__enc: ENC[AES256_GCM,data:bBjHvGhvZfToXzSrtEXzfPY=,iv:x/NW/acy433vcunsL0cHyBReYM1uoDNNxKB36zJ0pD8=,tag:ozrPwMfchN0q5Wthzh/tJA==,type:str]
+grafana__admin_user_name__enc: ENC[AES256_GCM,data:rfmzKdM=,iv:b49qsHyF6zxEceAZdxWl3z3J6lHRyYyvYpnqRUZBJdU=,tag:LTL4BB8lb8rDqIS1gajNww==,type:str]
+grafana__admin_user_password__enc: ENC[AES256_GCM,data:f+NbF0L5wf1wzIqJioYR1U0=,iv:V4iXTldXyYZtNgglnbco2ztb5KI13VmhSg+dUKP9nRY=,tag:GAlV+XI5nummYPFFEieLIA==,type:str]
+alloy__group_access:
+    - mysql
+    - zabbix
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-24T21:53:11Z"
-    mac: ENC[AES256_GCM,data:oX5ZpMegReC0PI8HdmUatiAeDS162ZcAKADRD/8h3wfZT4gFIkm+4c75HMTzMuucikZndPrurmQVzv79IzliSvKRrmc+mfzhCfsZ/ijLZwm5YFPm1GaGuCbcMQcWmYunQVkuYEdSBSlHr9NSt0L6E+tuxdlu9oCil97QZSFaudU=,iv:d0WFws9YBokctBcisS5iZpdqqNCTtVoC6LbWJhelXN0=,tag:ZmxzjUx/pvymFigm8bUkFg==,type:str]
+    lastmodified: "2025-02-26T13:31:36Z"
+    mac: ENC[AES256_GCM,data:53uc+my8oSpP/ISP87nVYwRhujSBomyOMEmgZA0/HEfFxFao5FbherxfXUDYmOs2TTfLhm51f927BluFVDbKo2V6F5JbGoAXsjIngAAADA7quUwatYch+VVr+SAGzfgKyabJyNsEfT+Huvi8WdjB7kHFCJVuS3Us+2mD6Klyosg=,iv:HB2lxd4dcX+Phpy65bYQRZ/ssvx/6aS+kVaGJuaJHZE=,tag:b9p/MhXJy3j6MysZUf+YLQ==,type:str]
     pgp:
-        - created_at: "2025-02-24T21:53:11Z"
+        - created_at: "2025-02-26T13:31:36Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQv7B73xdKWOVKfHgXdacjleKKKi8G3O9v/vuJJdWn0UApJH
-            j/i7uuWoKyqb/q7NMTamp55zKP3bEcLfKqgNu2EiIBZDr6Pm/MnwqJhGGvoLA6gr
-            I14s+vMdARK5nLGPgKJpkbERMF7mPB7kMAYdNCe5W1Cn8DRRN2LwIJvT4avv+cUH
-            WXuR0UmxCmAw3BpXuuhKVBVULJSF+90dBj8qZYTp7WYIGDm6TvsuslmM9IEZXief
-            u9yoYBRJLFG3QkMZFVyrausrkr7QuAHXkgnNdmQ0CCVr4T/cBSzpxjwrFuwA5ol1
-            /OwUMNZ6CENzUlzWlAAuI/A7xevdrpuGTtnNLxNVB+1LC8FgRq7BhiGRPHr9djzD
-            rERjbFRzVH+lOLC+fqkIEvyHI/ZyyD1CvVFun9edPVMEMdzkL803d3nBFh5CQgqW
-            L1cy1pOcKotWYqcnPArci3CY/MR3Jm/eUOw4I0GV1v8pYH5e2VIkq1sUafrJO/gj
-            jW5UIy970hUDgfj7fv4F1GgBCQIQKpt/0s2NoDPz/B2f/dEEgmQHtATeMjwsEZQ3
-            Npe5c2wxibEXuKE0rNPS4EgAFO5NhzYgd0jg4O03ghqlIxikvAFrrQcrKrc8py/k
-            zZ0UQLpXG+ILUYhb4vu8pb21bkVAfYAQBg==
-            =wgoP
+            hQGMA5xFaLh+EJKkAQv/Ve/e4lDcJPsF+fzqnKgoQSkWfDjG9qSteaUyofZscImq
+            qsDqzbt3bQusdaVTV9XTRsrJt1futhU8kAblUY85qZo9BTTxPfgORITR7w2T68jO
+            oBmcCki1t0Ov9m4/qNbEZcWbS8xOg7wRXrZa/48T2yXr4cWz2YeXwvD+Hi5ZkaJA
+            KggS6I/SfTrkTIotoB8VrqF+p3o+4saa1/h8pt/ctbfCefoaBNq8oIM4QqW3wCd1
+            e/vNrUi3kPwE5fg5VZ8J6pEAc6LSkwmsGi3NcLqkHD9R/YtvSqMVg56dSxt/rXlr
+            klG/oLcVxXqC+szKLvYQTdsVAAEndw8WXxVL+ZAI12RO3QDu0TiDWc/3zgQRXY7w
+            WFuQfQ4s+ggLA23xFDL4godjTxVJsYXxsm413US+nvEYyo1jBZ4HQ6NXmq7gOjoQ
+            /chTreQCt55sdqvBbNe4xat3V4tqIstNp4IfpZ3tNyKgMDlBPx7k+rKIfYCqpBCK
+            Y2aNA2XVmU0wddkMEpPk1GYBCQIQNsaNXCzCNHDAhe207On7nqvBJyzb+EHYzVdi
+            gKGLjjZ+8T3ZffPn/5V8C2uZ3ewfxQFlQQifMIFYmgBpTYpAYAjfvhA0l7QK/gKX
+            K/nKeNwim2jBJvbQCX6z/0ywdZqO1Rg=
+            =RDXC
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc

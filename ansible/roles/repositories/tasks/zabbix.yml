@@ -1,18 +1,18 @@
 ---
-- name: REPOSITORIES | Download Zabbix repository package
+- name: REPOSITORIES | Zabbix | Download Zabbix repository package
   ansible.builtin.get_url:
     url: '{{ zabbix__debian_repo_download_url }}'
     dest: '{{ zabbix__debian_repo_download_file }}'
     mode: "0644"
   when: ansible_os_family == "Debian"
 
-- name: REPOSITORIES | Install Zabbix repository package
+- name: REPOSITORIES | Zabbix | Install Zabbix repository package
   ansible.builtin.apt:
     deb: '{{ zabbix__debian_repo_download_file }}'
     state: present
   when: ansible_os_family == "Debian"
 
-- name: REPOSITORIES | Remove the Zabbix repository package after installation
+- name: REPOSITORIES | Zabbix | Remove the Zabbix repository package after installation
   ansible.builtin.file:
     path: '{{ zabbix__debian_repo_download_file }}'
     state: absent

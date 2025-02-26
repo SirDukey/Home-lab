@@ -1,0 +1,26 @@
+---
+- name: ALLOY | Ensure package is installed
+  ansible.builtin.apt:
+    name: alloy
+    state: present
+    update_cache: true
+
+- name: ALLOY | Copy the configuration file
+  ansible.builtin.copy:
+    src: files/config.alloy
+    dest: /etc/alloy/config.alloy
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: ALLOY | Ensure user group membership for user
+  ansible.builtin.user:
+    name: alloy
+    groups: "{{ item }}"
+    append: true
+  with_items: "{{ alloy__group_access }}"
+
+- name: ALLOY | Ensure service is started
+  ansible.builtin.service:
+    name: alloy
+    state: restarted

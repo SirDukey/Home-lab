@@ -11,4 +11,5 @@
     - { role: repositories, tags: repositories }
     - { role: zabbix-agent2, tags: zabbix_agent }
     - { role: dns-record, tags: dns_record }
-    - { role: fluent-bit, tags: fluent_bit }
+    # - { role: fluent-bit, tags: fluent_bit }
+    - { role: alloy, tags: alloy }

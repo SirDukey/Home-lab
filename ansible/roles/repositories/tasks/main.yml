@@ -11,3 +11,7 @@
 #   hosts: gitlab
 #   ansible.builtin.include_tasks:
 #     file: gitlab.yml
+
+- name: REPOSITORIES | Add Grafana repository
+  ansible.builtin.include_tasks:
+    file: grafana.yml

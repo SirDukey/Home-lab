@@ -1,0 +1,51 @@
+discovery.docker "container" {
+  host = "unix:///var/run/docker.sock"
+}
+
+loki.source.docker "container" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.docker.container.targets
+  labels     = {"service_name" = "docker", instance = constants.hostname}
+  forward_to = [loki.write.local.receiver]
+}
+
+
+local.file_match "nginx" {
+  path_targets = [
+    {__path__ = "/var/log/nginx/error.log", "service_name" = "nginx", instance = constants.hostname},
+  ]
+}
+
+loki.source.file "nginx" {
+  targets    = local.file_match.nginx.targets
+  forward_to = [loki.write.local.receiver]
+}
+
+local.file_match "mysql" {
+  path_targets = [
+    {__path__ = "/var/log/mysql/error.log", "service_name" = "mysql", instance = constants.hostname},
+  ]
+}
+
+loki.source.file "mysql" {
+  targets    = local.file_match.mysql.targets
+  forward_to = [loki.write.local.receiver]
+}
+
+local.file_match "zabbix" {
+  path_targets = [
+    {__path__ = "/var/log/zabbix/zabbix_server.log", "service_name" = "zabbix_server", instance = constants.hostname},
+    {__path__ = "/var/log/zabbix/zabbix_agent2.log", "service_name" = "zabbix_agent", instance = constants.hostname},
+  ]
+}
+
+loki.source.file "zabbix" {
+  targets    = local.file_match.zabbix.targets
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://192.168.1.59:3100/loki/api/v1/push"
+  }
+}

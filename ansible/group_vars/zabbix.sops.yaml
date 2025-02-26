@@ -1,6 +1,6 @@
-zabbix__mysql_db__enc: ENC[AES256_GCM,data:3cpvtlRS,iv:+a2LaWRFx3VKnLUPN5Bc8bpeAcONy0jv65/9wIowtJQ=,tag:ri2GyOLezCpFTNygIefDKw==,type:str]
-zabbix__mysql_user_name__enc: ENC[AES256_GCM,data:8t7GQQKb,iv:VPv+7Xh7rYP+FGdYzc3/ILWLn6TDHHRBh6+65mU71CQ=,tag:3HoezYaoUw1I3jvGVTKSNg==,type:str]
-zabbix__mysql_user_password__enc: ENC[AES256_GCM,data:E3oi4OcDJmj0+RsApekMUQ==,iv:L4JGzuWUCj1qX3ZCd499TW4KCGyfzRer1WkzGr6OD8s=,tag:TM5+qPREuOj6oq3ydlnIBg==,type:str]
+zabbix__mysql_db__enc: ENC[AES256_GCM,data:4c3FwhKD,iv:dkMKk1lu4CBCsnqcA4a7wzJTxm2NlQquHVS8n8vWfsk=,tag:lBpR0wrri5XjMFQg0Sgpmw==,type:str]
+zabbix__mysql_user_name__enc: ENC[AES256_GCM,data:iODYx2AC,iv:NvPJFnGfBswqmfEv/n2wj/fyL5reWV7G7i59RLG8nk0=,tag:IC0lmb9C1rAmiw2ZMxszaw==,type:str]
+zabbix__mysql_user_password__enc: ENC[AES256_GCM,data:rtt/YZm1tn4nhyD23IRUkA==,iv:yXhA7y0k6SL1l/o7QpSp+M9vDTv2V6JvtIvwyFD1Zq4=,tag:rRki8JSgAaza4SxrJdUzUQ==,type:str]
 zabbix__frontend_port: "8080"
 zabbix_agent2__disable_auto_create_host: true
 zabbix_agent2__hostname: Zabbix server
@@ -8,31 +8,34 @@ zabbix_agent2__server: 127.0.0.1
 zabbix_agent2__server_active: 127.0.0.1
 packages__custom_packages:
     - acl
+alloy__group_access:
+    - mysql
+    - zabbix
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-22T17:26:15Z"
-    mac: ENC[AES256_GCM,data:/cAIgasmJAtAtL/uyLcKHuxK4UG0GoLG0XvulOBxX0ZPdSP83mcGY76ifzeRwT2DdagRT8XYjp0HLCaRuCU1LLOvRxrN7OcnStgzcsfOyN2Y/M6ef8Rt0fXFP44rtq89DCWD9WtKaoRnQ0frWuCdtEvIiUeH6Oh0rutM9qsXdp4=,iv:Ri45aFtQRAcKCxXg4PW00K8MePZgzG708mpKAdHXgpI=,tag:Dv95TU0mrsmDaVriDg6pKA==,type:str]
+    lastmodified: "2025-02-26T13:30:30Z"
+    mac: ENC[AES256_GCM,data:IlM9z8RxzteVKnI76SNs/jLzI0+xuzL6DjF+1ggpAkzbVEn0A6kNyFeFzxi/jiRZb5ngLmGScn3ZrHwBEzxTGR1dfAMF3lf2SHlil88Bu6Cx+n0wzMSBUZf/xuIjL8nNGYmgriLFJw5UVr0zeuZRmY2xzzprZt65kM31I9MPusc=,iv:49154BOTvPsY3VqfMEjmc0TLYNZneiSy9Q2z0DJN2+Q=,tag:AEwxaWp5Pd3yHhLmchm0BA==,type:str]
     pgp:
-        - created_at: "2025-02-22T17:26:15Z"
+        - created_at: "2025-02-26T13:30:30Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQwAsp18gJYDGVclRvROh+feuslmdCeqZvUrpdyCieSdGngh
-            +rl5nUsPRmOoST389wU2EcsvNG9SyKB7LNtGXPQ17iFmpjzCBRVLXCDZhayaZlZY
-            8Cz8/XrIHOoTiSUL1gByCP8wp1QNXLNlWuC5DDPDDGMvY3DvHXiNkHhr1/p9M6vG
-            sXnTQbqCYXnvFXjR7xw2NgaRFGrKHBwbvAHgPd2HQb0LqPjz7IsGDiL2Twz4S6WW
-            vLQKqXpLv2qrChifafchQJkXLNujtg7tSs9FHKqDHy2FhULB5V5QqcQmuopSHEvn
-            VyQiizzh6M5v9XuS8Tcsa/whPXXpjXohHqVty6aFZ3b0jd8HLzaxBdaqEfOVt1tP
-            I2p7cYPuswIOZtt6AnMDfm84p0LimlmhHf3egzlNFLmynVk1dVa48K4Y045f/prj
-            scd4P1QZm+S01cxClvTm4q2cA+l7YivaZWg1pE7mVnDGn0OCX+KaxLb0hYZjWf/W
-            G3yTZJOnF0aH2ZxnoGgU1GgBCQIQa3h4zdY9JWPg1SL4tNovVO7SdzJ4/sGHgNhQ
-            kV9kJDsvb+W/yPMi2OuzcW5EiLTJFWyS4rQIzyt5qk5qXVvRPG1odroRrzQ3bleE
-            xxgrOJWvLbVDAVwNGi0iq1wEsGTDuvseMQ==
-            =yfq5
+            hQGMA5xFaLh+EJKkAQwAov/PiqFbPJ4HeRnQ9eW4yuxhPRdVoU1c9kwLSaC/wPGs
+            ieyqrGGPVo1HwKvCFXOImZ0jfATzdpoYu3RB5DznAtEN+TZePGK3cU+s1/QAuv8y
+            60GZ3efCdtVX+3huZXvzLpVRqrene4AMuBINylTQpWJ3wekT+0Sf+zBJB5aAgrvA
+            vEQPWPywROZSJdmyFlvccfTHIycp5gaPHF7sA5kYc87JB/xKecED2iK3hb5q4cnf
+            sbCc9vZPGq5STA7xvnx8duilKXfmhD9hP1irH74UgtDRwl3aQMrSl2ki/AX5+Yil
+            u2TjVWT9i7rDTbrKDOjjnTFsLTF39NowH+edeh7Of+DgWX5OOS1GV5naOD37Nbhx
+            mdnaLKF3HoDCB46an84Jobd6LYuDXbilByjb3fKLhdG9gL6tZrPSlf7Sqi1ZqKi+
+            JWtwXlLSAfozJCug8qE1dxyvFj3FYKGWuHjWcHRJNzFx8YUU4+/phVwNQdvvrq7v
+            x16LD2ki+OW+KHHXorLQ1GgBCQIQGsOAMd+HIDo/PqmB5HmHjri7zxQO4vYDCwL5
+            eYVKs9e/SxYxLBDvdWkdIH0JPP4O9mkSviK5dST3bRaOBbyuLRxG90SajtmrERNm
+            6kRFJ+EyZLvt+kmszGy/ITFp88xnsd4K/g==
+            =g/8S
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc
