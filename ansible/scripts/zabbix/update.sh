@@ -21,6 +21,10 @@ if [ "$OPTION" == "plan" ]; then
     apt list --upgradable | grep zabbix
     echo -e "${YELLOW}To upgrade run with ${NC} ${WHITE}apply${NC} argument"
 elif ["$OPTION" == "apply" ]; then
+    echo -e "${YELLOW}Stopping services...${NC}"
+    systemctl stop zabbix-server.service zabbix-agent2.service
     apt install --only-upgrade zabbix-server-mysql zabbix-sql-scripts zabbix-nginx-conf zabbix-frontend-php zabbix-agent2
+    echo -e "${YELLOW}Starting services...${NC}"
+    systemctl start zabbix-server.service zabbix-agent2.service
     echo -e "${GREEN}Zabbix packages have been upgraded${NC}"
 fi
