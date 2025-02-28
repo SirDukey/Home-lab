@@ -11,9 +11,11 @@
     path: /var/ossec/etc/ossec.conf
     regexp: '(<address>)(.*)(</address>)'
     line: '<address>{{ wazuh__manager_ip }}</address>'
+  when: is_wazuh_server is not defined
 
 - name: WAZUH | Start wazuh-agent
   ansible.builtin.systemd:
     name: wazuh-agent
     enabled: true
     state: restarted
+  when: is_wazuh_server is not defined
