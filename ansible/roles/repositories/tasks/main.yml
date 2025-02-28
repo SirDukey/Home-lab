@@ -15,3 +15,8 @@
 - name: REPOSITORIES | Add Grafana repository
   ansible.builtin.include_tasks:
     file: grafana.yml
+
+- name: REPOSITORIES | Add Wazuh repository
+  ansible.builtin.include_tasks:
+    file: wazuh.yml
+  when: is_wazuh_server is not defined

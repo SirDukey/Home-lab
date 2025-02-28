@@ -1,0 +1,18 @@
+---
+- name: REPOSITORIES | Wazuh | Download Wazuh GPG key
+  ansible.builtin.get_url:
+    url: "https://packages.wazuh.com/key/GPG-KEY-WAZUH"
+    dest: /usr/share/keyrings/wazuh.gpg
+    mode: '0644'
+
+- name: REPOSITORIES | Wazuh | Import Wazuh GPG key
+  ansible.builtin.command:
+    cmd: "gpg --dearmor -o /etc/apt/keyrings/wazuh-apt-keyring.gpg /usr/share/keyrings/wazuh.gpg"
+  args:
+    creates: /etc/apt/keyrings/wazuh-apt-keyring.gpg
+
+- name: REPOSITORIES | Wazuh | Add Wazuh APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/wazuh-apt-keyring.gpg] https://packages.wazuh.com/4.x/apt/ stable main"
+    state: present
+    filename: wazuh

@@ -21,7 +21,7 @@ I prefer to use **.ini** formatting. Update the inventory as needed in [`invento
 To install packages for all hosts in the group 'dns':
 
 ```sh
-ansible-playbook -K --limit dns bootstrap --tags packages
+ansible-playbook -K --limit dns bootstrap.yml --tags packages
 ```
 
 ## Encrypted secrets

@@ -16,7 +16,6 @@
     path: /tmp/grafana-Release.key
     state: absent
 
-
 - name: REPOSITORIES | Grafana | Add Grafana APT repository
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/keyrings/grafana-apt-keyring.gpg] https://apt.grafana.com stable main"

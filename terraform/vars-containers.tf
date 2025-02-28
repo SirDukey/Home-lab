@@ -67,5 +67,18 @@ variable "containers" {
       onboot      = true
       start       = true
     }
+    wazuh = {
+      target_node = "pve-node-01"
+      vmid        = 204
+      hostname    = "wazuh"
+      template    = "ubuntu_24_04"
+      ip          = "192.168.1.60/24"
+      cores       = 4
+      memory      = 4098
+      swap        = 1024
+      size        = "40G"
+      onboot      = true
+      start       = true
+    }
   }
 }

@@ -149,3 +149,6 @@ See the official [documentation](https://developer.hashicorp.com/terraform/cli/c
     # State Refresh: Ensure that the state file is up-to-date with the actual state of your infrastructure. You can use the -refresh-only flag to refresh the state without applying changes
     terraform apply -refresh-only
 
+    # If you remove an instance directly in Proxmox then you can use the following example to remove the stale state from Terraform afterwards
+    terraform state rm 'proxmox_lxc.container-instance["wazuh"]'
+

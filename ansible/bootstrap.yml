@@ -13,3 +13,4 @@
     - { role: dns-record, tags: dns_record }
     # - { role: fluent-bit, tags: fluent_bit }
     - { role: alloy, tags: alloy }
+    - { role: wazuh-agent, tags: wazuh_agent }
