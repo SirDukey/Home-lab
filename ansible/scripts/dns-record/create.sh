@@ -30,10 +30,10 @@ else
   RECORD_2=$2
 fi
 
-cat << EOF | nsupdate -y hmac-sha512:nameserver:$DNS_TSIG_KEY
+cat << EOF | nsupdate -y hmac-sha256:nameserver:$DNS_TSIG_KEY
 server $SERVER
 update delete $RECORD_1 $RECORD_TYPE
-update add $RECORD_1 86400 $RECORD_TYPE $RECORD_2
+update add $RECORD_1 3600 $RECORD_TYPE $RECORD_2
 send
 EOF
 

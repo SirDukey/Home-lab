@@ -1,8 +1,10 @@
 ansible_managed_banner: '## This file is managed by Ansible ##'
 global_dns_domain: duke.lan
+external_dns_domain: m-duke.nl
 global_default_gateway: 192.168.1.1
 global_primary_nameserver: 192.168.1.53
-bind__tsig_key__enc: ENC[AES256_GCM,data:0U0KcQmCjDmhE1V+1EZVzL9Qi0tOgz7r0eKc4QU/Fz/cgFuEs+Vhmd9+C/NkEK/m0up/5gSsT3Q7JnfQnlYAn/xUvqI8PdaYGoUAklmE4/DwODEJSSETWw==,iv:68ydrX9/bCzaEP6rWm1xx4+jpxMsDc5Ebeha4uuaKFg=,tag:X5DbzlEgISRxKHvgc/RdvA==,type:str]
+external_ip_address__enc: ENC[AES256_GCM,data:nap/krMpjJGbWtH8,iv:kAduwp9OMtyyLBfGxN3wM/k56s1CeOVT3JM8omQgRFI=,tag:+UfYAXe0dYb/ySetW0woMQ==,type:str]
+bind__tsig_key__enc: ENC[AES256_GCM,data:oywk9fgeK9gLeh6XJCwFB6s95pLMCQBzKm3SYppQr+i9U2Y5S5Ckdh5h/dA=,iv:JNPFM0ukYn/OWDEeBaIaAPGhO0huC5ITeSBRh5G0+Gs=,tag:rbf6IearbFs+wcePdX2gpg==,type:str]
 default_geo_location_lat: "51.7997426198218"
 default_geo_location_lon: "4.48049039126418"
 packages__default_packages:
@@ -10,12 +12,12 @@ packages__default_packages:
     - chrony
     - curl
     - gnupg
-proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:ujy6gURc0siv,iv:HYsmu1Egae/+dy9LNvi++dMAoMmoccVeew8CD87XxMw=,tag:M7SpBg67P6/UVbkzMH/R5Q==,type:str]
+proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:uudMcU+JQvAg,iv:CamPS74mMMoVfLW8RD8Euf9Y1gf1puwRH1IcfPCUOes=,tag:bbOpu9ZfnF6+qhjbynnyrA==,type:str]
 zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 # TODO: fix the dns server, should be zabbix.duke.lan
 zabbix__server_hostname: 192.168.1.51
-zabbix__api_token__enc: ENC[AES256_GCM,data:fvqB4qHAXPNJi28uGlGKePfch4h+KbleYLD8zaSQwacnuZjjf7YWyvh8hlibKsk+dp7XV2WG/PkgSs5w9CzCtg==,iv:TMhS9A1HINmklFUoBhYxtWTb6Vy+Hq4f3UcK+gIw0dM=,tag:HJU7CjiTgXTb+YZNvppOOA==,type:str]
+zabbix__api_token__enc: ENC[AES256_GCM,data:GpNeyitvyb5mkl3IKpTTLlV/RGYz07+NK7EuUvhkAw0VT9+gKNkXRtKtCZnj6EsSQSu1OAZd1gv1+81uzHRGlA==,iv:lzWKKkTb/Uq13zWNFK5OF5+YH1zCnrKVxdrFkUqd/00=,tag:ZkHh/TucD7kk28dgg0ppow==,type:str]
 alloy__group_access:
     - zabbix
 sops:
@@ -24,25 +26,25 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-26T13:28:25Z"
-    mac: ENC[AES256_GCM,data:kUBP5ncrLNlXxSLNeD8wFTrGbN+sx9CBwD/d9qzKKsSRoRjgkLdnyvv98aUDiEGz7glYoDc1X9xstV4j3qFke9rQyM4Yg/a4OCX9Fko8o6mISpKOIsPTGxkLzkcAMAOWeVkTOJO0O+B7R+QHnK/cV2YCfInmAnbbHfChAdh53cI=,iv:/GE6KsoWlEijAtMTccd1WWQKP9KcoPi6HxPDHJcYw6g=,tag:GhrxQ0Usn2xb5iaS2HGsoQ==,type:str]
+    lastmodified: "2025-03-07T21:13:37Z"
+    mac: ENC[AES256_GCM,data:lGMJd87qaMEHXTUmEh4vN+UDPTkPVSfVshf5iPE3KpDgvr5mVLC4snNIhzCQJEKz8p4XcUFNktX49/EdxWbSsRLl/ypywar+QNlx47t2O4+DESf94hrW/1vuzdTAqld2TKHmZdljCmuktu4HiZyowGlswgQhtlllADIzjayPqf4=,iv:5JjJcs/0iXV57l9QXqNCtVXDNxsCiPNrwUqzv6uxijk=,tag:B7QbNgJ74YsAPdrvtFH93Q==,type:str]
     pgp:
-        - created_at: "2025-02-26T13:28:25Z"
+        - created_at: "2025-03-07T21:13:37Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQGMA5xFaLh+EJKkAQwAteLMh8DrmBGLqb5w/oVZo3dE6bsbX2NG7VK78Gmsvaev
-            B3kSrfWs2+XpK/VGsbxmeT/5guFWtDuYhkA8FZteop8hSAMNZhLXzcgWhQPbsX9F
-            IyrxSQHRKTR0/wesJcOZ8BH+LTI7+11i8BbiCzJChr+RLOmYNSL0U7FzQSF2bfN+
-            BSfoRXrCIYFZ91Fk2bhCcOOEvuo9uIAXtGt7sLoEO8jtPGY5vaCLLN5U69Whgq71
-            OELEI1aDVm6Lbtc/uMq+IvgJXVSjLpJnTbQbsRciyd5rNUWCR2boUJzakp9GtGfY
-            X6PSlxh9KuDjmqqkFJeawjow9MeizSsN+WS3WbvJ1XuFmcBmcsLLY3l3GMNDMThj
-            FqZyTSTThVr8BWdRSrIabNexX+UB7f9GBXWadzhrV9OxjcuR3sQY4un6UnfUmv9U
-            SFr9XPURlM2SR21eIBJ84RYOkZYphcTDa1mKaGTUbhsLOW4/zXtwUo5PtiIbTLjE
-            79fFI7ytNUgiontLFPvd1GgBCQIQyT66gMVqQmCaqE+xaNuKcFo1g8kY6aNs/0nP
-            deR2cy9YKGhWbFrRXw6EID3f5hSN75SEGOUqEwzggV1cyhWswLTVyn/TDpEyA6pP
-            MzrJHL8yX1QLpSpxggHZNfxC1cvalviYGQ==
-            =wGQa
+            hQGMA5xFaLh+EJKkAQv5AUatWFR4kvhsU9k0/DeE08jCkbLzqCabnTVb2STQdzko
+            WI0VuEyqkM2DWULTKcFZHTmFzERDlmtOOC1Hp2W7D1w+DOh53m0Yymbhdqk5+je0
+            90Fez7YbT5dJEQxfWpmHfpTjl3MEcLjF17LCaxQXfdLBFEYslUrF2FwcCbV3BWEf
+            tSZfHE1M8L0q6ohWY/pAF8c0bzaxGftKjpFWg5mIYfd/v81SoH0HDIMh/GG3B7De
+            TDRtdH3aGmniauNhMyxY33qOatAn9ZihAh02vjKeFtS8joF2zmTQ3BrM29ABdken
+            Hab+QZrGCbazKKJF42D++fMVpnlLt3HPipGjZ9IS1AQ1PiSE4sFg7tKxcf5WFANZ
+            a1KUvahbjiWrHyU2D1LSu9J81BF4kAi+XLNtNa8N3M/yoiPzyUkXETAA32OZjW/G
+            0rFYzO+Zwp1CkcjPVWpy10YAvFLwVGIZFpN9UwcD4nvYD0DTgLHYU2KjJO6N5dpV
+            5XFf2z+qre4oevBBMgej1GgBCQIQjM4gSN2JfII6KGXvfrTDdl77JYvMllIs4YGm
+            VDv9y0PJDqd1fXmCN4ciQW1cBY1sjXZM/XigN+R4QHtxzwL1WhtVQGjxI6FPEItl
+            eZvHOz88MZU8rx/uy/qQ3nt1rbefIw7M9A==
+            =Yt+G
             -----END PGP MESSAGE-----
           fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
     encrypted_suffix: __enc

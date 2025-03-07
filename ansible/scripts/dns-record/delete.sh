@@ -23,7 +23,7 @@ DNS_TSIG_KEY=$(sops -d $VARIABLE_FILE | grep bind__tsig_key__enc | awk '{print $
 SERVER=$(grep global_primary_nameserver $VARIABLE_FILE | awk '{print $2}')
 DOMAIN=$(grep global_dns_domain $VARIABLE_FILE | awk '{print $2}')
 
-cat << EOF | nsupdate -y hmac-sha512:nameserver:$DNS_TSIG_KEY
+cat << EOF | nsupdate -y hmac-sha256:nameserver:$DNS_TSIG_KEY
 server $SERVER
 update delete $1.$DOMAIN $2
 send

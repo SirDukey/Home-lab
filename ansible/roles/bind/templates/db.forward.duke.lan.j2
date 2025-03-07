@@ -1,0 +1,21 @@
+$TTL                            604800
+
+@               IN      SOA     ns1.{{ global_dns_domain }}. admin.{{ global_dns_domain }}. (
+                                1               ; Serial
+                                604800          ; Refresh
+                                86400           ; Retry
+                                2419200         ; Expire
+                                604800 )        ; Negative Cache TTL
+
+; name servers - NS records
+@               IN      NS      ns1.{{ global_dns_domain }}.
+
+; name servers - A records
+ns1             IN      A       {{ ansible_default_ipv4.address }}
+
+; A records
+gateway         IN      A       {{ global_default_gateway }}
+pve-node-01     IN      A       192.168.1.40
+pve-node-02     IN      A       192.168.1.41
+zabbix          IN      A       192.168.1.51
+docker          IN      A       192.168.1.52
