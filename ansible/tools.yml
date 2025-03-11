@@ -42,3 +42,27 @@
       ansible.builtin.debug:
         var: qm_output.stdout_lines
   tags: show_instances
+
+- name: TOOLS | Patch servers
+  hosts: all
+  become: true
+  tasks:
+    - name: Check for upgradable packages
+      ansible.builtin.command: apt list --upgradable
+      register: upgradable_packages
+
+    - name: Display upgradable packages
+      ansible.builtin.debug:
+        var: upgradable_packages.stdout_lines
+
+    - name: Pause for confirmation
+      ansible.builtin.pause:
+        prompt: "Do you want to continue with the package update? (yes/no)"
+      register: pause_result
+
+    - name: Update all packages to their latest version
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+      when: pause_result.user_input == 'yes'
+  tags: patch_servers
