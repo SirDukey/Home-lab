@@ -48,6 +48,7 @@
   with_items:
     - "{{ external_dns_domain }}"
     - "{{ global_dns_domain }}"
+  when: bind__skip_zone_copy is not defined
 
 - name: BIND | Copy reverse zone file
   ansible.builtin.template:
@@ -56,6 +57,7 @@
     owner: bind
     group: bind
     mode: "0770"
+  when: bind__skip_zone_copy is not defined
 
 - name: BIND | BIND | Restart bind service
   ansible.builtin.service:
