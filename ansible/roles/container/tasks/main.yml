@@ -34,3 +34,7 @@
 - name: CONTAINER | Run ddclient
   ansible.builtin.include_tasks: ddclient.yml
   tags: ddclient
+
+- name: CONTAINER | Run local-registry
+  ansible.builtin.include_tasks: local-registry.yml
+  tags: local-registry

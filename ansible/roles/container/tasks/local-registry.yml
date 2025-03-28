@@ -1,0 +1,15 @@
+- name: CONTAINER | Pull the latest registry image
+  community.docker.docker_image:
+    name: registry:latest
+    source: pull
+  tags: local-registry
+
+- name: CONTAINER | Run registry container
+  community.docker.docker_container:
+    name: local-registry
+    image: registry:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "5000:5000"
+  tags: local-registry
