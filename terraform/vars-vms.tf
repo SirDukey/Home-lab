@@ -12,6 +12,8 @@ variable "vms" {
     state       = string # Can be "running", "started", "stopped". Option "started" will only start the vm on creation and won't fully manage the power state
     template    = string # The name of the template to clone
     full_clone  = bool   # true: an independant clone, false: a linked clone where a snapshot of the base vm is made
+    hotplug     = string # Hotplug options for the VM. Can be "network", "disk", "usb", "memory", "cpu". Disabled with 0
+    numa        = bool   # Enable NUMA support.  Required for hotplugging memory and CPU
   }))
   default = {
     docker = {
@@ -20,12 +22,14 @@ variable "vms" {
       name        = "docker"
       ip          = "192.168.1.52/24"
       cores       = 4
-      memory      = 4096
+      memory      = 6144
       size        = "20G"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+      hotplug     = "disk,network,usb,memory,cpu"
+      numa        = true
     },
     elastic = {
       target_node = "pve-node-01"
@@ -39,6 +43,8 @@ variable "vms" {
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+      hotplug     = "network,disk,usb"
+      numa        = null
     }
     kube-01 = {
       target_node = "pve-node-01"
@@ -52,6 +58,8 @@ variable "vms" {
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+      hotplug     = "network,disk,usb"
+      numa        = null
     }
     kube-02 = {
       target_node = "pve-node-01"
@@ -65,6 +73,8 @@ variable "vms" {
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+      hotplug     = "network,disk,usb"
+      numa        = null
     }
     kube-03 = {
       target_node = "pve-node-01"
@@ -78,6 +88,8 @@ variable "vms" {
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
+      hotplug     = "network,disk,usb"
+      numa        = null
     }
   }
 }

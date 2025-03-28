@@ -9,6 +9,8 @@ resource "proxmox_vm_qemu" "vm-instance" {
   os_type       = "cloud-init"
   cores         = each.value.cores
   memory        = each.value.memory
+  hotplug       = each.value.hotplug
+  numa          = each.value.numa
   nameserver    = "${var.default_nameserver.primary} ${var.default_nameserver.secondary}"
   searchdomain  = var.default_searchdomain
   onboot        = each.value.onboot
