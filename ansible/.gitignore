@@ -1,4 +1,1 @@
 .vscode
-
-# Ignore sops configuration files
-.sops.yaml

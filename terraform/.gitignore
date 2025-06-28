@@ -28,6 +28,3 @@ terraform.rc
 
 # Ignore SSH keys used by root account for provisioning
 **/data/keys/id_*
-
-# Ingore sops configuration files
-.sops.yaml
