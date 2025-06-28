@@ -51,12 +51,17 @@ resource "proxmox_vm_qemu" "vm-instance" {
 
   provisioner "local-exec" {
     command = <<EOT
-  ansible-playbook \
-    -i '${element(split("/", each.value.ip), 0)},' \
-    -u ${data.sops_file.tfvars.data["default_user.username"]} \
-    --private-key ${var.ssh_provisioning_key_path.private_key} \
-    --extra-vars "ansible_become_pass='$BECOME_PASSWORD'" \
-    ../ansible/bootstrap.yml
+  if grep -iq "${each.value.hostname}" ../ansible/inventory/hosts.ini; then
+    echo "Running bootstrap playbook for ${each.value.hostname}..."
+    ansible-playbook \
+      -i '${element(split("/", each.value.ip), 0)},' \
+      -u ${data.sops_file.tfvars.data["default_user.username"]} \
+      --private-key ${var.ssh_provisioning_key_path.private_key} \
+      --extra-vars "ansible_become_pass=$BECOME_PASSWORD" \
+      ../ansible/bootstrap.yml
+  else
+    echo "Host ${each.value.hostname} is not in the ansible inventory file, skipping bootstrap playbook."
+  fi
   EOT
 
     environment = {

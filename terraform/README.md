@@ -145,6 +145,8 @@ See the official [documentation](https://developer.hashicorp.com/terraform/cli/c
 
     # Apply the changes
     terraform apply
+
+    # If you create the resource in the Ansible inventory file Terraform will automatically run the bootstrap playbook when you provision a resource.
     
     # State Refresh: Ensure that the state file is up-to-date with the actual state of your infrastructure. You can use the -refresh-only flag to refresh the state without applying changes
     terraform apply -refresh-only
@@ -152,3 +154,7 @@ See the official [documentation](https://developer.hashicorp.com/terraform/cli/c
     # If you remove an instance directly in Proxmox then you can use the following example to remove the stale state from Terraform afterwards
     terraform state rm 'proxmox_lxc.container-instance["wazuh"]'
 
+    # If you want to see the state of your infrastructure, you can use the following example
+    terraform state list
+
+    
