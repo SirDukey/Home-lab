@@ -44,6 +44,25 @@ resource "proxmox_lxc" "container-instance" {
     "chmod 600 /home/${data.sops_file.tfvars.data["default_user.username"]}/.ssh/authorized_keys"
     ]
   }
+  provisioner "local-exec" {
+    command = <<EOT
+  ansible-playbook \
+    -i '${element(split("/", each.value.ip), 0)},' \
+    -u ${data.sops_file.tfvars.data["default_user.username"]} \
+    --private-key ${var.ssh_provisioning_key_path.private_key} \
+    --extra-vars "ansible_become_pass='$BECOME_PASSWORD'" \
+    ../ansible/bootstrap.yml
+  EOT
+
+    environment = {
+      BECOME_PASSWORD = data.sops_file.tfvars.data["default_user.password"]
+      ANSIBLE_CONFIG = "../ansible/ansible.cfg"
+      ANSIBLE_HOST_KEY_CHECKING = "False"
+    }
+
+    working_dir = "${path.module}"
+  }
+
 
   lifecycle {
     ignore_changes = [
