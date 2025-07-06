@@ -1,4 +1,5 @@
 creation_rules:
   - path_regex: ".*"
     encrypted_suffix: '__enc'
-    pgp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
+    #pgp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
+    age: age129fjlypxle3gxtj4z77hp7f33cvh5yluymzn5tyfgr2hrc6f8dhq43e765

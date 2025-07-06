@@ -1,4 +1,5 @@
 .vscode
 **/.gpg_keys/*.asc
+**/.age_keys/*.key
 *.tfstate
 *.tfstate.*

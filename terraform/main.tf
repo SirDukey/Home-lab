@@ -1,4 +1,10 @@
 terraform {
+  cloud {
+    organization = "SirDukey"
+    workspaces {
+      name = "Home-lab"
+    }
+  }
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"

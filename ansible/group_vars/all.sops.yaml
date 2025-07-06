@@ -3,8 +3,8 @@ global_dns_domain: duke.lan
 external_dns_domain: m-duke.nl
 global_default_gateway: 192.168.1.1
 global_primary_nameserver: 192.168.1.53
-external_ip_address__enc: ENC[AES256_GCM,data:NDIN8lXQtrMYnnZ0,iv:7C6bfpug8GQ3KxIbkAVKeZSf+1VJLb9kelvMJrRNdcw=,tag:WX+Bf3Y7k+fzK8dTipPh8A==,type:str]
-bind__tsig_key__enc: ENC[AES256_GCM,data:MBxmybAhIgI2eD+7L78SrabifZfkqWhPIoALKjHVNHpGJbT2ItCZPQvfVEk=,iv:deIjV1EpatMqUtfsnQjzhkwFlrmskCaJpzEfQi2RQnE=,tag:jKJiyTcS3GuTxdpfuGswWA==,type:str]
+external_ip_address__enc: ENC[AES256_GCM,data:3k7kekkYUNpY1Brh,iv:XvNfgdZLQSmOzjFIsyapSKRS2/fR+0XRiaLZTJD9Lqs=,tag:gj4kWBR153otuuT5uufl4A==,type:str]
+bind__tsig_key__enc: ENC[AES256_GCM,data:47PfAmk5pMlHtXzoHNBsEZS1dUEifeiNYfi0SS+zdm6tYVVrWx2Tg/Yen5k=,iv:qVef98b9Cr4LAVndIT3lWZ275zqsp2ci4P5k+u3myv0=,tag:QLzPZ/vAOZlhsvCw79mFkA==,type:str]
 default_geo_location_lat: "51.7997426198218"
 default_geo_location_lon: "4.48049039126418"
 packages__default_packages:
@@ -12,12 +12,12 @@ packages__default_packages:
     - chrony
     - curl
     - gnupg
-proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:rJN5BTUjyVf9,iv:aVB++rg4YoAufjVxLaHcX2khWmqlhZLnYufpm7Dbfb0=,tag:TyO9ZiZvUa2juz2+72h2gA==,type:str]
+proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:BlxZqj+UTQyE,iv:QTzCNW1G/05ssR4yMLOfQY4qHTVDNFErc2B3LzQoa9g=,tag:IHn0dghORdZzBlbR7hH22Q==,type:str]
 zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 # TODO: fix the dns server, should be zabbix.duke.lan
 zabbix__server_hostname: 192.168.1.51
-zabbix__api_token__enc: ENC[AES256_GCM,data:uayb05Zj+XsqJeNoR9o/MWHi7ayjBXVlmhiAwzRKAsYrraisWW8arDmIxrg5b/Zf7zsFfV7pFyJAB1UL7cerWw==,iv:gQB2Ez2fvkjfABwrQF8my+8xK5Qkt9KhhS1DAorWpAw=,tag:OPoEkKnMjpeqEKMPOC+5qg==,type:str]
+zabbix__api_token__enc: ENC[AES256_GCM,data:8SWeNDaN9r1VwATJX79RQPbimlAT6a8cx6SqP1eaBBHe0tlKgqn0Nrz02GLvVEW3/ovZLvP3MWPGDIhf1JHtOg==,iv:QFxbuzm1+FlC0Z4Jhnfo7VGes1WKt4g9nQ2FlDPwCTk=,tag:CLd9VDmvIbdUE6uZFOMKog==,type:str]
 alloy__group_access:
     - zabbix
 sops:
@@ -25,27 +25,18 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    age: []
-    lastmodified: "2025-03-13T10:46:15Z"
-    mac: ENC[AES256_GCM,data:HBqO6yNOI5v/taNqicTalOgxiv3qlfRxBA7IFqW3PPA7afYY7KSdUlTvKAQDKh4L4NvSV0cNIKdG9GIvf4TkYafISJwr8FpvYc94o5v+oX6QLdu+o1gUBqiwnkBXNCIyGTIR9NAS6Tc+vjsArumCZPoxLE/P9RVduQNYEaRbCtM=,iv:dFDlPoSFvze17JD+97k93663lhYjWtZvBh5FpAL5jJs=,tag:3rBBSdaFMhXXRKWPNNy1fQ==,type:str]
-    pgp:
-        - created_at: "2025-03-13T10:46:15Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hQGMA5xFaLh+EJKkAQv/UUKBkIRcIu5pCPPIdTPnNced91ElElYAyPR6cNrlOc2t
-            o1YCgHbW0TtVq/DbT6+Dr4MaxoTbUQyDPiATy9fc2fb0nOqFZX1lAyj/jdLBqe3z
-            PJGQUXS24gYJDpuq2Kmy6uqAeMTUB4NjP8Xil/YUTrql0OYfGbIE5+Jycd3zMmMU
-            M2AijKajOBL4YZlnTMv+ewE2ILlW/tFLAeK0RHpDF+jdoYbX5mTJ5GTP8cC07Y9E
-            11hs/7DKJllmxJCim2Nz4uCQ8OiZLuH0RjTa2Wn6WX+7HPfag3TYWoDMX0TxuhOt
-            gEoiFwGtQRZKQrIuO1+UiqKGObxCBZPTQoKDZORPcvVBPVIHYV2zNEU4S/1SsTJX
-            ViVb8D4E/kC40srHPweyQvfkMOcrnBlRJV2SF7lo8H5+rjH66UZKnb+sZp7U3441
-            x76n6dsqppr5nitTr7w5hPCjWLEjC3iJlBEJSC651kbegbIDym+O8VzOxcKyCFuo
-            Df6VwDVgzpC6cCT4LEuk1GgBCQIQih4FadzI+8E+1luAnyYT31op3K79J+WosuSV
-            7K3y8de4B1xs95YSjEgYu9EplZpm8s/8TVuytGuKuxPaeCAn2TILMuZWSiANTWtW
-            fR6IGfNwkLPzFREito8LP4WAd9XIY7p4pQ==
-            =Owfy
-            -----END PGP MESSAGE-----
-          fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
+    age:
+        - recipient: age129fjlypxle3gxtj4z77hp7f33cvh5yluymzn5tyfgr2hrc6f8dhq43e765
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwOHhMOEFHblJJckgxZkJX
+            ZmVGWjYxaGxMRUxwV1o2Z2dKS1lKQzhFWjJ3CndoSyt0OTUxVDUrWUJlN1dFcHN0
+            UGMyWU5lRFAyUHhoendBQWJnaVZFRHcKLS0tIEs1a2F5SzFjQVh0YXc2QnlzVjVx
+            YWF4VHpqbkhXM2kvY1ArRHVadlFpV2sKRGD4Xu1AN+u8YJfPI6YViN+o7Mj+RYKv
+            qSbNi5bmQ7qWvFc3PSSYCGiAv9r3NZ+igD09sfCK87kWLCR+L0yZQA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-06T18:22:26Z"
+    mac: ENC[AES256_GCM,data:nmCG4KdxmATT4RxOXP24ZYGC59hFdld4ioCgA1WgV2xPoC4CnW9m3lz4JFIPGQlyQymlTrgWifC75hjl6dapdGjB/6n81F/kmV7BSfBkHj1Uh50oICyU/ZjtxbnTODJMulQtO92nemkZ/31a7LO9WFylO+hI35W7rv+ETXrFf6w=,iv:QYBjCJ+bqgGie9EEZdUnv3lo4MdBd8YY0io1r1o/TRI=,tag:Ad4OF/oVA4aB48by3WONEw==,type:str]
+    pgp: []
     encrypted_suffix: __enc
     version: 3.9.4

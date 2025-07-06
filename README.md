@@ -23,6 +23,10 @@ Although Ansible has a vault facility which is really nice I wanted something th
 
 Install SOPS with homebrew `brew install sops`
 
+Enrypt the secrets with either PGP or AGE keys.  AGE is easier to work with especially if you decide to use Terraform Cloud or CICD.
+
+### PGP key
+
 gpg can be used to generate keys for encrypting files, install gpg with homebrew `brew install gnupg`
 
 Now generate a new key `gpg --full-generate-key`
@@ -52,6 +56,24 @@ Lastly, consider backing up your private and public keys (not really necessary f
 Restoring the keys can be done like this
 
     gpg --import private_key_backup.asc
+
+### AGE key
+
+An alternative to pgp is to use age, install with homebrew `brew install age`
+
+Now generate a key file with `age-keygen -o age.key`
+
+set the path to the keyfile for SOPS to locate it with 
+    
+    echo "export SOPS_AGE_KEY_FILE=<path>/age.key" >> ~/.zshrc
+    source ~/.zshrc
+
+Configure the `.sops.yaml` file with the AGE public key
+
+    creation_rules:
+    - path_regex: ".*"
+      age: 1234567890987654321
+
 
 ## Using *sops* to protect secrets
 Now that the keys are created and `.sops.yaml` config is in place you can encrypt/decrypt files with **sops**

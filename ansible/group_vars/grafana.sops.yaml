@@ -1,8 +1,8 @@
-grafana__mysql_db__enc: ENC[AES256_GCM,data:TeWHzsliQQ==,iv:W9+TqSrKb4aMVDAYvlb4xgtqQYbAasQyZ1q7hROYdZ0=,tag:Z2qBY8Ba83VjAjryOT463A==,type:str]
-grafana__mysql_user_name__enc: ENC[AES256_GCM,data:E0BhMKa0xw==,iv:Ll5VqwPFDjsr1hvrsYuJbFGlnRcVKcqWQJF8EnqQzFY=,tag:x1yS+bRgeAvVRXVjFg9nVg==,type:str]
-grafana__mysql_user_password__enc: ENC[AES256_GCM,data:bBjHvGhvZfToXzSrtEXzfPY=,iv:x/NW/acy433vcunsL0cHyBReYM1uoDNNxKB36zJ0pD8=,tag:ozrPwMfchN0q5Wthzh/tJA==,type:str]
-grafana__admin_user_name__enc: ENC[AES256_GCM,data:rfmzKdM=,iv:b49qsHyF6zxEceAZdxWl3z3J6lHRyYyvYpnqRUZBJdU=,tag:LTL4BB8lb8rDqIS1gajNww==,type:str]
-grafana__admin_user_password__enc: ENC[AES256_GCM,data:f+NbF0L5wf1wzIqJioYR1U0=,iv:V4iXTldXyYZtNgglnbco2ztb5KI13VmhSg+dUKP9nRY=,tag:GAlV+XI5nummYPFFEieLIA==,type:str]
+grafana__mysql_db__enc: ENC[AES256_GCM,data:cqK/0ICaFw==,iv:l3DCVzTAwOci2Gk1JSoHVTAXzIz1AVXL5eHbBFsPs5c=,tag:4qs5Ve9zQmtntAXFV7S23Q==,type:str]
+grafana__mysql_user_name__enc: ENC[AES256_GCM,data:sVYDZ61TaQ==,iv:HaiG8LnXX8USRPdU2nY64SzJiZoY4wNBj5v+5emIBJ4=,tag:qOUeaXwA2pcljSKz/BzgVA==,type:str]
+grafana__mysql_user_password__enc: ENC[AES256_GCM,data:2818x4uYJRg824Kc7wEwiN0=,iv:7E9pczhRSMgQNaLXYVcBSzCp/XJCG0y6VJErkSkm70I=,tag:HrFW6yLTIUKxnojGHKOlMA==,type:str]
+grafana__admin_user_name__enc: ENC[AES256_GCM,data:BDPn8Ck=,iv:7DS8OhDtDQxwsTOZswenHU9LIpcqmAKGMLrLXBUBXS8=,tag:fvZ0kHxYpbiGvoTVR24ddQ==,type:str]
+grafana__admin_user_password__enc: ENC[AES256_GCM,data:wjuHSmIp3bASjL+qxM+a1Z4=,iv:8ZT4BztyRNpLAkKjZk1YPxXRDnCQ2CJEde4fOwLkBAg=,tag:PXqLuOonAICZp/jQiT12Xg==,type:str]
 alloy__group_access:
     - mysql
     - zabbix
@@ -11,27 +11,18 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    age: []
-    lastmodified: "2025-02-26T13:31:36Z"
-    mac: ENC[AES256_GCM,data:53uc+my8oSpP/ISP87nVYwRhujSBomyOMEmgZA0/HEfFxFao5FbherxfXUDYmOs2TTfLhm51f927BluFVDbKo2V6F5JbGoAXsjIngAAADA7quUwatYch+VVr+SAGzfgKyabJyNsEfT+Huvi8WdjB7kHFCJVuS3Us+2mD6Klyosg=,iv:HB2lxd4dcX+Phpy65bYQRZ/ssvx/6aS+kVaGJuaJHZE=,tag:b9p/MhXJy3j6MysZUf+YLQ==,type:str]
-    pgp:
-        - created_at: "2025-02-26T13:31:36Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hQGMA5xFaLh+EJKkAQv/Ve/e4lDcJPsF+fzqnKgoQSkWfDjG9qSteaUyofZscImq
-            qsDqzbt3bQusdaVTV9XTRsrJt1futhU8kAblUY85qZo9BTTxPfgORITR7w2T68jO
-            oBmcCki1t0Ov9m4/qNbEZcWbS8xOg7wRXrZa/48T2yXr4cWz2YeXwvD+Hi5ZkaJA
-            KggS6I/SfTrkTIotoB8VrqF+p3o+4saa1/h8pt/ctbfCefoaBNq8oIM4QqW3wCd1
-            e/vNrUi3kPwE5fg5VZ8J6pEAc6LSkwmsGi3NcLqkHD9R/YtvSqMVg56dSxt/rXlr
-            klG/oLcVxXqC+szKLvYQTdsVAAEndw8WXxVL+ZAI12RO3QDu0TiDWc/3zgQRXY7w
-            WFuQfQ4s+ggLA23xFDL4godjTxVJsYXxsm413US+nvEYyo1jBZ4HQ6NXmq7gOjoQ
-            /chTreQCt55sdqvBbNe4xat3V4tqIstNp4IfpZ3tNyKgMDlBPx7k+rKIfYCqpBCK
-            Y2aNA2XVmU0wddkMEpPk1GYBCQIQNsaNXCzCNHDAhe207On7nqvBJyzb+EHYzVdi
-            gKGLjjZ+8T3ZffPn/5V8C2uZ3ewfxQFlQQifMIFYmgBpTYpAYAjfvhA0l7QK/gKX
-            K/nKeNwim2jBJvbQCX6z/0ywdZqO1Rg=
-            =RDXC
-            -----END PGP MESSAGE-----
-          fp: 14C605DAE8C937F3301EAC6A5F486CD6B1ACA8C4
+    age:
+        - recipient: age129fjlypxle3gxtj4z77hp7f33cvh5yluymzn5tyfgr2hrc6f8dhq43e765
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyK05UOUFCMHNYME5uWWxK
+            aXkyNDdYNGZJZGRMWkRnNlEzWlJvUnJJN0V3CmYvaEU4UWExSmh4L21zYlZMUlAv
+            eHJpa1dHMGN0SWZlY2JadHQvR3Y5c1kKLS0tIFU2c1pZU21xUUVJRitpaDNlMjRI
+            K3pQakFFNWRjTFdBU3NvdVBCcnAwSW8KSrBE0/VcamuZV3gvnZZ7hARlxWvjtjwz
+            YVzXDTRe4x6xMdd+uRZkf5vJwm1Pv1SNwz+T0wuYGvTQsEuSgBSDmg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-06T18:22:16Z"
+    mac: ENC[AES256_GCM,data:zy6v9LD7WklsKWtO87BwPcqai1kDhCsZtSbQMZbUL3jOeCQOso/aZ6ymPmXmRWpT9lypdcxXY3cANSzydbpY7cOHMTRAs3IB9XYxFoSimDTW7Ww5+ZykC8oI6pF+zuhL8+HK9R9S1REQWugf2FftTjGMT5TqkHabudghgc8pG/c=,iv:PPLttsjcTNY7UCASZWGdkLyZjqvXeK5gQ4Xw5s7wW9g=,tag:K4ZAYAqJP7Q/uRx88wyufQ==,type:str]
+    pgp: []
     encrypted_suffix: __enc
     version: 3.9.4

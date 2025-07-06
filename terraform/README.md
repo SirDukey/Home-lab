@@ -130,10 +130,44 @@ a sudo user after the container is provisioned and this is the account you shoul
 You can create a private/public key pair for your user account with:
 `ssh-keygen -t rsa`
 
+## Maintaining the state using a cloud backend
+I use Terraform cloud to maintain the state, this does not work nicely with PGP keys so I use AGE key encryption.
+
+Login to the cloud portal https://app.terraform.io
+
+The configuration in `main.tf` is used to point to the cloud environment
+
+    terraform {
+        cloud {
+            organization = "SirDukey"
+            workspaces {
+                name = "Home-lab"
+        }
+    }
+
+Now you can initialize the environment
+
+    terraform login
+    terraform init
+
+Before running a plan the encryption key needs to be set
+1. Login to https://app.terraform.io
+2. Go to your **Workspace**
+3. Navigate to **Variables**
+4. Under **Environment Variables** add:
+  - **Key**: SOPS_AGE_KEY
+  - **Value**: AGE-SECRET-KEY-1xyz... (paste in the full private key)
+  - **Mark it as sensitive**
+
+
+
 ## Managing resources with Terraform
 
 See the official [documentation](https://developer.hashicorp.com/terraform/cli/commands) for more information
     
+    # Initialize the environment
+    terraform init
+
     # Destroy VM instance
     terraform destroy -target='proxmox_vm_qemu.vm-instance["docker"]'
 
@@ -157,4 +191,6 @@ See the official [documentation](https://developer.hashicorp.com/terraform/cli/c
     # If you want to see the state of your infrastructure, you can use the following example
     terraform state list
 
-    
+    # If you use a backend, use the login command to login to the cloud backend storage
+    terraform login
+
