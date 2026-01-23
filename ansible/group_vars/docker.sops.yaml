@@ -4,34 +4,34 @@ zabbix__template_id:
     - "10001"
     # Docker by Zabbix agent 2
     - "10318"
-elastic__password__enc: ENC[AES256_GCM,data:t2BXB/q02JkIGmSHZaPyfkg=,iv:qPoonOKFC/M3KxDEG2peue80Ak+08e4yyWvJ5liH6ws=,tag:RnJt9pVOY9T1PM4hmdjVtg==,type:str]
-nginx_proxy_manager__password__enc: ENC[AES256_GCM,data:atwKq0SXtYujfhm+J9wX,iv:wI9TRSd+dyX1/dTmjWHWg9dwEBorUlnG4orXD/K7Qio=,tag:EGDN3Y1gi2G/08RYFQ1PCg==,type:str]
-my_email_account__enc: ENC[AES256_GCM,data:M110D1ZQg1j4Jjuv3c8kku2vsxCHMBmX,iv:JrY90012wkSj7VtlULdvYm3zEqj6LFtTeM1jjggEoM0=,tag:O5LqhNz0HyDS4VJQWL72bA==,type:str]
-gitea__mysql_db_name__enc: ENC[AES256_GCM,data:ZY4uTtU=,iv:aT7QPbOsA0WQGMdOHxyMIVZwsc/4YqqQbt747yH/W38=,tag:TuSC9GUkGrmYZARgnJpBQA==,type:str]
-gitea__mysql_user_name__enc: ENC[AES256_GCM,data:iT470Vs=,iv:6pmuBuSdBvAMcA1p2MfPhMzKGgCgceXaIBh38E1WO5I=,tag:cmcyz4VVIIFZXXcAAZ3ezw==,type:str]
-gitea__mysql_user_password__enc: ENC[AES256_GCM,data:nKQa7G22rGmUmX8aeubU,iv:eacL3zPRKqxWy7PSvR/E916715bTeL/hGviCiz/Rbfs=,tag:8ETF6DE0KloqbWjFn39iaA==,type:str]
-gitea__mysql_root_password__enc: ENC[AES256_GCM,data:IIMfnf7U5TUg,iv:RqPl5lQhj4EcmPkmd63+ubSlEZRCcSPH/swZ8rv236U=,tag:JX0Ocqdz1x+aAYf/+rRFhw==,type:str]
-ddclient__username__enc: ENC[AES256_GCM,data:Tggirz/U+VPtH826jYcK1sBeXrqleMYV,iv:rlC6Y7/jELQvkE5P9KkmuMV2VeE2ZErFxmlHHIpCWvo=,tag:F/Rze2cCB7gLiNmsYIZTWQ==,type:str]
-ddclient__password__enc: ENC[AES256_GCM,data:01U5fpPs+Ug0qLCL,iv:6pplwcmeYh75DcEdg4j4+xubbxEzth8ykR/p1vL1rr8=,tag:pUBN1X8lwaz+e6aSeLmB8g==,type:str]
-ddclient__hostname__enc: ENC[AES256_GCM,data:4a59SOg6KMssQFcEoU6GdAy3sw==,iv:bMd/hCbwQkVwcUlzt/B76YzeiayFwLKzuvogb6Xu5fA=,tag:oxexEUN9nLIMK1vEQd87Vg==,type:str]
+elastic__password__enc: ENC[AES256_GCM,data:bW0+MZ+qIcZcfLbbrvPyKNY=,iv:9e6OqxGWJ5WzyLLcG+5JEYHUhQOCKR16rzWnd4WnpoY=,tag:NWI9hBoIlQhN0SUIZarYXg==,type:str]
+nginx_proxy_manager__password__enc: ENC[AES256_GCM,data:cJ6P95h+KC8Vx83o0rH9,iv:YCT26J1ctwUyyqQrZjBIPjzpexT5uYNMrclOeKM4o2w=,tag:BQoTmk8DLC/UQlHrjKLvgQ==,type:str]
+my_email_account__enc: ENC[AES256_GCM,data:I61jhz6184TuoE2VRyxymt8VU/PBr2N9,iv:bXXrskYT9fpC7YMrfr2OlkmAezcaDTGT10c31Xz/tBA=,tag:RRdVOiQTWdiljixAIlMk8g==,type:str]
+gitea__mysql_db_name__enc: ENC[AES256_GCM,data:fQVnfSs=,iv:+DgF4i498kgyn0Q4G8gKB76W8IYVUzM5FwsFk1yumIA=,tag:Cc7pf/wSxyrdclMy/vwrQQ==,type:str]
+gitea__mysql_user_name__enc: ENC[AES256_GCM,data:t2BZqUc=,iv:65PeGiAuQmXvueTMeIAlM+Fks8fL9/DCO6J3NSS/AXs=,tag:5n3tSu2Txp10xjmRUZ1Spg==,type:str]
+gitea__mysql_user_password__enc: ENC[AES256_GCM,data:cb/n6xSJmrbJMuGgu+bv,iv:lQWn3hQNEFM8LH/CYYnJQlsO6MKu1O1hmRnWIfAlslA=,tag:hk8aGVVqkTzZXh1rtyV2IA==,type:str]
+gitea__mysql_root_password__enc: ENC[AES256_GCM,data:vrpy3JOwmDBf,iv:XL+3lG+dpPPjhp4u0/JSrURcBzAGRsalRrzMUG/Yl2w=,tag:U5U0rV3FN9dNebo7jj1+MQ==,type:str]
+ddclient__username__enc: ENC[AES256_GCM,data:zzqajGJXgHNnJtKVytbPLIVg81Fe1K4+,iv:8sEVFDesRRtpT9p5xi7iLDKlLOy/HfBWoaeGcRTIQ78=,tag:C8oeTLrsUiIfrMdzh2H7PA==,type:str]
+ddclient__password__enc: ENC[AES256_GCM,data:GpP6BKXQMKyEX88N,iv:bShTv4DP9K2eXBMk6aYdrkTzWI+gs9EmElhUfX7+OH4=,tag:5lBzQa9OpYXQv8s7hGgq1g==,type:str]
+ddclient__hostname__enc: ENC[AES256_GCM,data:KKk/y9vVgoNodFhhV87cP1UiaA==,iv:uX98mdixmfdtUPmIh8sHoDYHzvM2JbaQuMPXs0Ue2Po=,tag:OlpzyLPaFjDB5FZw1uMg3w==,type:str]
 alloy__group_access:
     - docker
     - zabbix
 packages__custom_packages:
     - nfs-common
-nfs__server: '''192.168.1.62'''
+nfs__server: 192.168.1.62
 sops:
     age:
         - recipient: age129fjlypxle3gxtj4z77hp7f33cvh5yluymzn5tyfgr2hrc6f8dhq43e765
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjZ3NSeHBucWFOYXZaWklk
-            R0FwZFhzQ04ycktOUnBja1ExZnVJT3JMSm1JCkUrYUhSTHp5dW9lNGJTOSttWG1q
-            dUVxb2hQQWtLeFRkSWxqRXlKdVVsT1EKLS0tIHFBditNVXhtTHB1NkJLa09PelBI
-            QWFxcUtvc1hTZUhSZHNYbHUveGc0aEUK0vcDnm0NkBbPxZCvsXP1Jdr89AKeP6dk
-            VFy+APQh2PVyQ9DgBYeR8JULIoUC1Y+ecdLc4VyUv2RjzxzsidAeEg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSS3NjbmEwYU54NkMrLzB2
+            VW9IczM4SUFDM0w5TXNCL2VIYVVaNG1jaldNCkJzNlBMNU5HYlRBSUdmY1FTTWN2
+            eXdRQTFjWnhtY1V6bTdXWjhnaFZvcDQKLS0tIDdwR3dtMHc0dkh4Q1JtM3ptNkpM
+            NTJVNnRNUkJxK05FZHZqc2xjM0V6bGsKtsz9sOXTFbrqBRpiphuHwrhoBjBL4pII
+            /FVogQWdMPRNKkXRij8FF9kYfLpFuPkQWaf+fOkfnvnaJsmMYIVFEw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-23T16:08:07Z"
-    mac: ENC[AES256_GCM,data:yKclD4VlTHDV0g9D+snfdoW7bLSROuvKpRpx2PBGZPzEjBWvhdj/gIErmHR2XRA4jUdKLYrOYzbHQV8MR8BLTtQ/yWfN1faxeja4NKL4Szo4RPhhYxH9HZQ/ngiU3g7uiKAGXk1zyqI2WPsi1OGfpSqEPX2PgoxpR5vSduYXQ7I=,iv:UeyRvnoKPKthWOoPthykCnCs5T5+YlL6kPjn39+mPIo=,tag:m1BLcO+RxWHnCDW3bdG6Ow==,type:str]
+    lastmodified: "2026-01-23T18:25:04Z"
+    mac: ENC[AES256_GCM,data:vSZXXwjaIyNGfqs/R6qghB/QEZXgHHZ/6iuRaTwDMkP6pys9mVI9Ud93PYgtdEw48RGWJWSEUW74/TYoq6eDtCxPYR8ST/ErFqNs82MdKOarsP/LiLcQzYdraBawcqIKGPo/C4T+a1Q0DEbz72Z98j9vNKaJBD/3Vsjkzx5DNEY=,iv:NLVbGcngl4qVygT17Q7XgzWm+M5z3R+76XdnQjklW7o=,tag:ZvN/jl2sDiiA8hf96M/LWg==,type:str]
     encrypted_suffix: __enc
     version: 3.11.0

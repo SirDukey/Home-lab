@@ -38,3 +38,7 @@
 - name: CONTAINER | Run local-registry
   ansible.builtin.include_tasks: local-registry.yml
   tags: local-registry
+
+- name: CONTAINER | Run Jellyfin
+  ansible.builtin.include_tasks: jellyfin.yml
+  tags: jellyfin

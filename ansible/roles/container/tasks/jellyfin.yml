@@ -17,13 +17,25 @@
     state: present
   tags: jellyfin
 
-- name: CONTAINER | Ensure media is mounted from nfs share
-  ansible.builtin.mount:
-    path: /media
-    src: "{{ nfs__server }}:/media"
-    fstype: nfs
-    opts: defaults,ro
-    state: mounted
+- name: CONTAINER | Ensure mount point directory exists
+  ansible.builtin.file:
+    path: /data
+    state: directory
+    mode: '0755'
+  become: true
+  tags: jellyfin
+
+- name: CONTAINER | Ensure data is mounted from nfs share, add to fstab if not present
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "{{ nfs__server }}:/data /data nfs defaults,ro 0 0"
+    create: true
+  become: true
+  tags: jellyfin
+
+- name: CONTAINER | Run fstab to mount /data
+  ansible.builtin.command: mount -a
+  become: true
   tags: jellyfin
 
 - name: CONTAINER | Run Jellyfin container
@@ -37,6 +49,6 @@
     volumes:
       - jellyfin_config:/config
       - jellyfin_cache:/cache
-      - /media:/media:ro
+      - /data:/media:ro
     image: jellyfin/jellyfin
   tags: jellyfin
