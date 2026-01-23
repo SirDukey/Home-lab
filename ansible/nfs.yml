@@ -1,0 +1,8 @@
+---
+- name: PLAYBOOK | Install nfs on target hosts
+  hosts: nfs
+  become: true
+
+  roles:
+    - { role: nfs, tags: nfs }
+  

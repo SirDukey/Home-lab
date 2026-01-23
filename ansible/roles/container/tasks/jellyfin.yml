@@ -1,0 +1,42 @@
+---
+- name: CONTAINER | Pull image for Jellyfin
+  community.docker.docker_image:
+    name: jellyfin/jellyfin
+    source: pull
+  tags: jellyfin
+
+- name: CONTAINER | Ensure Jellyfin config volume is present
+  community.docker.docker_volume:
+    name: jellyfin_config
+    state: present
+  tags: jellyfin
+
+- name: CONTAINER | Ensure Jellyfin cache volume is present
+  community.docker.docker_volume:
+    name: jellyfin_cache
+    state: present
+  tags: jellyfin
+
+- name: CONTAINER | Ensure media is mounted from nfs share
+  ansible.builtin.mount:
+    path: /media
+    src: "{{ nfs__server }}:/media"
+    fstype: nfs
+    opts: defaults,ro
+    state: mounted
+  tags: jellyfin
+
+- name: CONTAINER | Run Jellyfin container
+  community.docker.docker_container:
+    name: jellyfin
+    state: started
+    restart_policy: "always"
+    ports:
+      - "8096:8096/tcp"
+      - "7359:7359/udp"
+    volumes:
+      - jellyfin_config:/config
+      - jellyfin_cache:/cache
+      - /media:/media:ro
+    image: jellyfin/jellyfin
+  tags: jellyfin
