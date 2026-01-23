@@ -8,6 +8,7 @@ variable "vms" {
     cores       = number # How many cores to allocate the VM
     memory      = number # Memory size
     size        = string # The size of the disk
+    storage     = string # Which disk id to use
     onboot      = bool   # Automatically start the VM when the node starts
     state       = string # Can be "running", "started", "stopped". Option "started" will only start the vm on creation and won't fully manage the power state
     template    = string # The name of the template to clone
@@ -24,6 +25,7 @@ variable "vms" {
       cores       = 4
       memory      = 6144
       size        = "20G"
+      storage     = "local-zfs"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
@@ -39,6 +41,7 @@ variable "vms" {
       cores       = 4
       memory      = 8196
       size        = "20G"
+      storage     = "local-zfs"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
@@ -54,6 +57,7 @@ variable "vms" {
       cores       = 2
       memory      = 2048
       size        = "10G"
+      storage     = "local-zfs"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
@@ -69,6 +73,7 @@ variable "vms" {
       cores       = 2
       memory      = 2048
       size        = "10G"
+      storage     = "local-zfs"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
@@ -84,6 +89,7 @@ variable "vms" {
       cores       = 2
       memory      = 2048
       size        = "10G"
+      storage     = "local-zfs"
       onboot      = false
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"

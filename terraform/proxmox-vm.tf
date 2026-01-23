@@ -33,7 +33,7 @@ resource "proxmox_vm_qemu" "vm-instance" {
     size    = each.value.size
     type    = "disk"
     slot    = "scsi0"
-    storage = "local-zfs"
+    storage = each.value.storage
     discard = true
   }
   disk {
@@ -81,7 +81,8 @@ resource "proxmox_vm_qemu" "vm-instance" {
       ipconfig0,
       disk,
       network,
-      onboot
+      onboot,
+      sshkeys
     ]
   }
 }

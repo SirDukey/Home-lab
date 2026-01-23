@@ -10,6 +10,7 @@ variable "containers" {
     memory      = number  # Memory size
     swap        = number  # Allocate swap space
     size        = string  # Allocate disk space
+    storage     = string  # Which disk id to use
     onboot      = bool    # Automatically start the container when the node starts
     start       = bool    # Start the container after it is created
   }))
@@ -22,9 +23,10 @@ variable "containers" {
       template    = "ubuntu_24_04"
       ip          = "192.168.1.51/24"
       cores       = 2
-      memory      = 1536
+      memory      = 1024
       swap        = 512
       size        = "4G"
+      storage     = "local-zfs"
       onboot      = true
       start       = true
     }
@@ -35,9 +37,10 @@ variable "containers" {
       template    = "ubuntu_24_04"
       ip          = "192.168.1.53/24"
       cores       = 1
-      memory      = 1024
+      memory      = 512
       swap        = 256
       size        = "4G"
+      storage     = "local-zfs"
       onboot      = true
       start       = true
     }
@@ -51,6 +54,7 @@ variable "containers" {
       memory      = 1024
       swap        = 256
       size        = "10G"
+      storage     = "local-zfs"
       onboot      = true
       start       = true
     }
@@ -64,6 +68,7 @@ variable "containers" {
       memory      = 1024
       swap        = 256
       size        = "10G"
+      storage     = "local-zfs"
       onboot      = true
       start       = true
     }
@@ -77,6 +82,7 @@ variable "containers" {
       memory      = 4098
       swap        = 1024
       size        = "40G"
+      storage     = "local-zfs"
       onboot      = true
       start       = true
     }

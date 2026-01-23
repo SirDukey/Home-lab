@@ -16,7 +16,7 @@ resource "proxmox_lxc" "container-instance" {
   ssh_public_keys = file(var.ssh_provisioning_key_path.public_key)
 
   rootfs {
-    storage = "local-zfs"
+    storage = each.value.storage
     size    = each.value.size
   }
 
@@ -71,7 +71,8 @@ resource "proxmox_lxc" "container-instance" {
 
   lifecycle {
     ignore_changes = [
-      onboot
+      onboot,
+      ssh_public_keys
     ]
   }
 }
