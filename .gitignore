@@ -4,3 +4,6 @@
 *.tfplan
 *.tfstate
 *.tfstate.*
+
+# Ignore SOPS encrypted tmp files
+*.sops.tmp.yaml
