@@ -86,5 +86,19 @@ variable "containers" {
       onboot      = true
       start       = true
     }
+    ollama = {
+      target_node = "pve-node-01"
+      vmid        = 205
+      hostname    = "ollama"
+      template    = "ubuntu_24_04"
+      ip          = "192.168.1.61/24"
+      cores       = 1
+      memory      = 2048
+      swap        = 0
+      size        = "40G"
+      storage     = "local-zfs"
+      onboot      = true
+      start       = true
+    }
   }
 }
