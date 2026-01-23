@@ -1,25 +1,42 @@
 ---
 - name: NFS | Ensure NFS export directory exists
   ansible.builtin.file:
-    path: /media
+    path: /data
     state: directory
     mode: '0755'
   tags: nfs
 
-- name: NFS | Ensure export line is present in /etc/exports
+- name: NFS | Ensure domain is in idmapd.conf
   ansible.builtin.lineinfile:
-    path: /etc/exports
-    line: "/media {{ nfs__allowed_clients | default('*') }}(rw,sync,no_subtree_check,no_root_squash)"
+    path: /etc/idmapd.conf
+    line: "Domain = {{ global_dns_domain }}"
     create: true
     mode: '0644'
     state: present
-    regexp: "^/media\\s"
+    regexp: "^Domain\\s*="
+
+- name: NFS | Ensure export line is present in /etc/exports
+  ansible.builtin.lineinfile:
+    path: /etc/exports
+    line: "/data {{ nfs__allowed_clients | default('*') }}(rw,no_root_squash)"
+    create: true
+    mode: '0644'
+    state: present
+    regexp: "^/data\\s"
   notify: Reload NFS exports
   tags: nfs
 
 - name: NFS | Ensure NFS service is enabled and started
   ansible.builtin.service:
     name: "{{ 'nfs-kernel-server' if ansible_os_family == 'Debian' else 'nfs-server' }}"
+    enabled: true
+    state: started
+  become: true
+  tags: nfs
+
+- name: NFS | Ensure rpcbind service is enabled and started
+  ansible.builtin.service:
+    name: rpcbind
     enabled: true
     state: started
   become: true

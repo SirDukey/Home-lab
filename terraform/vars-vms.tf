@@ -3,7 +3,7 @@ variable "vms" {
   type = map(object({
     target_node = string # The Proxmox node to host the VM
     vmid        = number # The unique VM ID
-    name        = string # The name of the instance
+    hostname    = string # The name of the instance
     ip          = string # Ip address and subnet
     cores       = number # How many cores to allocate the VM
     memory      = number # Memory size
@@ -20,7 +20,7 @@ variable "vms" {
     docker = {
       target_node = "pve-node-01"
       vmid        = 300
-      name        = "docker"
+      hostname    = "docker"
       ip          = "192.168.1.52/24"
       cores       = 4
       memory      = 3072
@@ -36,7 +36,7 @@ variable "vms" {
     elastic = {
       target_node = "pve-node-01"
       vmid        = 301
-      name        = "elastic"
+      hostname    = "elastic"
       ip          = "192.168.1.55/24"
       cores       = 4
       memory      = 8196
@@ -52,7 +52,7 @@ variable "vms" {
     kube-01 = {
       target_node = "pve-node-01"
       vmid        = 302
-      name        = "kube-01"
+      hostname    = "kube-01"
       ip          = "192.168.1.56/24"
       cores       = 2
       memory      = 2048
@@ -68,7 +68,7 @@ variable "vms" {
     kube-02 = {
       target_node = "pve-node-01"
       vmid        = 303
-      name        = "kube-02"
+      hostname    = "kube-02"
       ip          = "192.168.1.57/24"
       cores       = 2
       memory      = 2048
@@ -84,13 +84,29 @@ variable "vms" {
     kube-03 = {
       target_node = "pve-node-01"
       vmid        = 304
-      name        = "kube-03"
+      hostname    = "kube-03"
       ip          = "192.168.1.58/24"
       cores       = 2
       memory      = 2048
       size        = "10G"
       storage     = "local-zfs"
       onboot      = false
+      state       = "started"
+      template    = "template-ubuntu-24-04-cloud"
+      full_clone  = true
+      hotplug     = "network,disk,usb"
+      numa        = null
+    }
+    nfs= {
+      target_node = "pve-node-02"
+      vmid        = 305
+      hostname    = "nfs"
+      ip          = "192.168.1.62/24"
+      cores       = 1
+      memory      = 512
+      size        = "80G"
+      storage     = "media"
+      onboot      = true
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true

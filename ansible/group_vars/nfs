@@ -1,3 +1,4 @@
 ---
 packages__custom_packages:
     - nfs-kernel-server
+    - rpcbind

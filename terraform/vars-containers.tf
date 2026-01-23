@@ -92,12 +92,12 @@ variable "containers" {
       hostname    = "ollama"
       template    = "ubuntu_24_04"
       ip          = "192.168.1.61/24"
-      cores       = 1
-      memory      = 4096
-      swap        = 0
+      cores       = 2
+      memory      = 6144
+      swap        = 1024
       size        = "40G"
       storage     = "local-zfs"
-      onboot      = true
+      onboot      = false
       start       = true
     }
   }

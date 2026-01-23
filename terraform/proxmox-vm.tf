@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "vm-instance" {
   for_each      = var.vms
-  name          = each.value.name
+  name          = each.value.hostname
   target_node   = each.value.target_node
   vmid          = each.value.vmid
   clone         = each.value.template

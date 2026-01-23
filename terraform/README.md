@@ -175,10 +175,10 @@ See the official [documentation](https://developer.hashicorp.com/terraform/cli/c
     terraform destroy -target='proxmox_lxc.vm-instance["zabbix"]'
   
     # Dry run on your infrasctructure provisioning
-    terraform plan
+    terraform plan -out="plans/230126.tfplan"
 
     # Apply the changes
-    terraform apply
+    terraform apply "plans/230126.tfplan"
 
     # If you create the resource in the Ansible inventory file Terraform will automatically run the bootstrap playbook when you provision a resource.
     

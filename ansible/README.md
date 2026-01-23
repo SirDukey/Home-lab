@@ -44,6 +44,8 @@ To decrypt or encrypt:
     # In-place encrypt
     sops -e -i group_vars/zabbix.sops.yaml
 
+VSCode has plugins which auto decrypt/encrypt the sops files so you don't have to worry about this, for example: SOPS Easy Edit
+
 ## Tools
 
 A collection of tools used to help manage the PVE infrastructure,  call these by using the --tags option and/or use the --limit option.
