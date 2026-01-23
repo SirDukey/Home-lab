@@ -1,0 +1,29 @@
+---
+ollama__install_script_url: "https://ollama.com/install.sh"
+ollama__install_script_path: "/usr/local/bin/ollama-install.sh"
+
+ollama__model: "codegemma:latest"
+
+ollama__service_name: "ollama"
+
+# === Networking / exposure ===
+# Bind address for Ollama server: "0.0.0.0" (all interfaces) or a specific LAN IP (e.g., "192.168.1.10")
+ollama__bind_address: "0.0.0.0"
+
+# Listening port (default 11434)
+ollama__port: 11434
+
+# Control whether to open the firewall (recommended true for remote access)
+ollama__configure_firewall: true
+
+# CIDRs allowed to reach the Ollama port (tighten to your real subnet!)
+ollama__allowed_cidrs:
+  - "192.168.1.0/16"
+  - "10.0.0.0/8"
+  - "172.16.0.0/12"
+
+# Choose firewall backend preference order: ufw, firewalld, iptables (auto-detect)
+ollama__firewall_backends_preference:
+  - "ufw"
+  - "firewalld"
+  - "iptables"

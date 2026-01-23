@@ -1,0 +1,139 @@
+---
+- name: OLLAMA | Check if Ollama is already installed
+  ansible.builtin.command: ollama --version
+  register: ollama_check
+  changed_when: false
+  failed_when: false
+
+- name: OLLAMA | Download Ollama install script
+  ansible.builtin.get_url:
+    url: "{{ ollama__install_script_url }}"
+    dest: "{{ ollama__install_script_path }}"
+    mode: "0755"
+    owner: root
+    group: root
+  when: ollama_check.rc != 0
+
+- name: OLLAMA | Run Ollama installer
+  ansible.builtin.shell: "{{ ollama__install_script_path }}"
+  args:
+    executable: /bin/bash
+  when: ollama_check.rc != 0
+
+- name: OLLAMA | Remove installer script
+  ansible.builtin.file:
+    path: "{{ ollama__install_script_path }}"
+    state: absent
+  when: ollama_check.rc != 0
+
+
+# --- Configure service to listen on LAN ---
+
+- name: OLLAMA | Create systemd override directory for Ollama
+  ansible.builtin.file:
+    path: "/etc/systemd/system/{{ ollama__service_name }}.service.d"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: OLLAMA | Configure Ollama bind address and port via systemd override
+  ansible.builtin.copy:
+    dest: "/etc/systemd/system/{{ ollama__service_name }}.service.d/override.conf"
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Service]
+      Environment="OLLAMA_HOST={{ ollama__bind_address }}"
+      Environment="OLLAMA_PORT={{ ollama__port }}"
+  notify:
+    - systemd daemon-reload
+    - restart ollama
+
+- name: OLLAMA | Enable and start Ollama service
+  ansible.builtin.service:
+    name: "{{ ollama__service_name }}"
+    state: started
+    enabled: true
+
+
+# Optional: wait briefly for API/socket readiness
+- name: OLLAMA | Wait for Ollama service to become ready
+  ansible.builtin.pause:
+    seconds: 3
+
+
+# --- Firewall rules (optional but recommended) ---
+
+- name: OLLAMA | Detect firewall backend availability
+  ansible.builtin.shell: |
+    if command -v ufw >/dev/null 2>&1; then echo ufw; \
+    elif command -v firewall-cmd >/dev/null 2>&1; then echo firewalld; \
+    elif command -v iptables >/dev/null 2>&1; then echo iptables; \
+    else echo none; fi
+  register: _fw_backend
+  changed_when: false
+  failed_when: false
+  when: ollama__configure_firewall
+
+
+# UFW rules
+
+# --- Ensure SSH is allowed from the safe LAN subnet ---
+- name: OLLAMA | Allow SSH from LAN subnet 192.168.1.0/24
+  ansible.builtin.command: >
+    ufw allow from 192.168.1.0/24 to any port 22 proto tcp
+  when:
+    - ollama__configure_firewall
+    - _fw_backend.stdout == "ufw"
+  register: _ufw_ssh_rule
+  changed_when: "'Skipping adding existing rule' not in (_ufw_ssh_rule.stdout | default(''))"
+  failed_when: false
+
+- name: OLLAMA | Ensure UFW allows Ollama from allowed CIDRs
+  ansible.builtin.command: >
+    ufw allow from {{ item }} to any port {{ ollama__port }} proto tcp
+  loop: "{{ ollama__allowed_cidrs }}"
+  when:
+    - ollama__configure_firewall
+    - _fw_backend.stdout == "ufw"
+  register: _ufw_rules
+  changed_when: "'Skipping adding existing rule' not in (_ufw_rules.stdout | default(''))"
+  failed_when: false
+
+- name: OLLAMA | Enable UFW if inactive
+  ansible.builtin.command: ufw --force enable
+  when:
+    - ollama__configure_firewall
+    - _fw_backend.stdout == "ufw"
+  register: _ufw_enable
+  changed_when: "'already enabled' not in (_ufw_enable.stdout | default(''))"
+  failed_when: false
+
+- name: OLLAMA | Add iptables rule if missing
+  ansible.builtin.command: >
+    iptables -A INPUT -p tcp -s {{ item }} --dport {{ ollama__port }} -j ACCEPT
+  when:
+    - ollama__configure_firewall
+    - _fw_backend.stdout == "iptables"
+    - _iptables_check.rc != 0
+  loop: "{{ ollama__allowed_cidrs }}"
+
+# --- Model presence check & pull ---
+
+- name: OLLAMA | Check if model is already present {{ ollama__model }}
+  ansible.builtin.shell: |
+    set -o pipefail
+    ollama list | awk '{print $1}' | grep -Fx "{{ ollama__model }}"
+  args:
+    executable: /bin/bash
+  register: ollama_model_present
+  changed_when: false
+  failed_when: false
+
+- name: OLLAMA | Pull model {{ ollama__model }}
+  ansible.builtin.command: ollama pull "{{ ollama__model }}"
+  register: ollama_pull
+  changed_when: "'pulling' in (ollama_pull.stdout | lower) or ollama_pull.rc == 0"
+  when: ollama_model_present.rc != 0

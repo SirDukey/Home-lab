@@ -93,7 +93,7 @@ variable "containers" {
       template    = "ubuntu_24_04"
       ip          = "192.168.1.61/24"
       cores       = 1
-      memory      = 2048
+      memory      = 4096
       swap        = 0
       size        = "40G"
       storage     = "local-zfs"

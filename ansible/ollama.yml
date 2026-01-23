@@ -1,0 +1,7 @@
+---
+- name: PLAYBOOK | Install Ollama on target hosts
+  hosts: ollama
+  become: true
+
+  roles:
+    - { role: ollama, tags: ollama }

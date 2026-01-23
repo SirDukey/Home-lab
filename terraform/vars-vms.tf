@@ -23,7 +23,7 @@ variable "vms" {
       name        = "docker"
       ip          = "192.168.1.52/24"
       cores       = 4
-      memory      = 6144
+      memory      = 3072
       size        = "20G"
       storage     = "local-zfs"
       onboot      = false

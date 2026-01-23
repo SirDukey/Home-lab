@@ -1,0 +1,5 @@
+---
+packages__custom_packages:
+    - zstd
+  
+ollama__model: "codegemma:2b"
