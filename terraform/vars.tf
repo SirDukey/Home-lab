@@ -47,8 +47,8 @@ variable "ssh_provisioning_key_path" {
     public_key = string
   })
   default = {
-    private_key = "data/keys/id_rsa"
-    public_key  = "data/keys/id_rsa.pub"
+    private_key = "data/keys/id_ed25519"
+    public_key  = "data/keys/id_ed25519.pub"
   }
 }
 
