@@ -5,8 +5,8 @@
     source: pull
   tags: sonarr
 
-- name: CONTAINER | Ensure media-data task is run
-  ansible.builtin.include_tasks: media-data.yml
+- name: CONTAINER | Ensure media-config is run
+  ansible.builtin.include_tasks: media-config.yml
   tags: sonarr
 
 - name: CONTAINER | Ensure config volume is present
@@ -25,12 +25,11 @@
       - "8989:8989"
     volumes:
       - sonarr_config:/config
-      - /data/downloads:/downloads:rw
-      - /data/shows:/tv
+      - /data:/data
     env:
       PUID: "1000"
       PGID: "1000"
       TZ: Etc/UTC
     networks:
-      - media_network
+      - name: media_network
   tags: sonarr

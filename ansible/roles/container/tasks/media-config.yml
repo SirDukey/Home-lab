@@ -1,0 +1,97 @@
+---
+- name: CONTAINER | Ensure the media_network is created
+  community.docker.docker_network:
+    name: media_network
+    state: present
+  tags:
+    - qbittorrent
+    - jellyfin
+    - prowlarr
+    - radarr
+    - sonarr
+
+- name: CONTAINER | Check if /data is already a mountpoint
+  ansible.builtin.command:
+    cmd: mountpoint -q /data
+  register: data_mount_check
+  ignore_errors: true
+  changed_when: false
+  tags:
+    - qbittorrent
+    - jellyfin
+    - prowlarr
+    - radarr
+    - sonarr
+
+- name: CONTAINER | Ensure NFS server is reachable (TCP 2049)
+  ansible.builtin.wait_for:
+    host: "{{ nfs__server }}"
+    port: 2049
+    timeout: 30
+    state: started
+  when: data_mount_check.rc != 0
+  tags:
+    - qbittorrent
+    - jellyfin
+    - prowlarr
+    - radarr
+    - sonarr
+
+- name: CONTAINER | Mount NFS share and ensure fstab entry
+  ansible.builtin.mount:
+    path: /data
+    src: "{{ nfs__server }}:/data"
+    fstype: nfs
+    opts: "defaults,rw,vers=4"
+    dump: 0
+    passno: 0
+    state: mounted
+  when: data_mount_check.rc != 0
+  tags:
+    - qbittorrent
+    - jellyfin
+    - prowlarr
+    - radarr
+    - sonarr
+
+- name: CONTAINER | Ensure download directory exists
+  ansible.builtin.file:
+    path: /data/downloads
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: '0755'
+  tags:
+  - qbittorrent
+  - jellyfin
+  - prowlarr
+  - radarr
+  - sonarr
+
+- name: CONTAINER | Ensure shows directory exists
+  ansible.builtin.file:
+    path: /data/shows
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: '0755'
+  tags:
+  - qbittorrent
+  - jellyfin
+  - prowlarr
+  - radarr
+  - sonarr
+
+- name: CONTAINER | Ensure movies directory exists
+  ansible.builtin.file:
+    path: /data/movies
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: '0755'
+  tags:
+  - qbittorrent
+  - jellyfin
+  - prowlarr
+  - radarr
+  - sonarr

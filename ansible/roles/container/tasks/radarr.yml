@@ -5,8 +5,8 @@
     source: pull
   tags: radarr
 
-- name: CONTAINER | Ensure media-data task is run
-  ansible.builtin.include_tasks: media-data.yml
+- name: CONTAINER | Ensure media-config is run
+  ansible.builtin.include_tasks: media-config.yml
   tags: radarr
 
 - name: CONTAINER | Ensure config volume is present
@@ -25,12 +25,11 @@
       - "7878:7878"
     volumes:
       - radarr_config:/config
-      - /data/downloads:/downloads:rw
-      - /data/movies:/movies
+      - /data:/data
     env:
       PUID: "1000"
       PGID: "1000"
       TZ: Etc/UTC
     networks:
-      - media_network
+      - name: media_network
   tags: radarr

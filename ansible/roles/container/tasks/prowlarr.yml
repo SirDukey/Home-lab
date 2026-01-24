@@ -5,8 +5,8 @@
     source: pull
   tags: prowlarr
 
-- name: CONTAINER | Ensure media-data config is Run
-  ansible.builtin.include_tasks: media-data.yml
+- name: CONTAINER | Ensure media-config is Run
+  ansible.builtin.include_tasks: media-config.yml
   tags: prowlarr
 
 - name: CONTAINER | Ensure config volume is present
@@ -30,5 +30,5 @@
       PGID: "1000"
       TZ: Etc/UTC
     networks:
-      - media_network
+      - name: media_network
   tags: prowlarr
