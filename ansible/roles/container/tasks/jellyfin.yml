@@ -5,12 +5,6 @@
     source: pull
   tags: jellyfin
 
-- name: CONTAINER | Ensure media_network is created
-  community.docker.docker_network:
-    name: media_network
-    state: present
-  tags: jellyfin
-
 - name: CONTAINER | Ensure Jellyfin config volume is present
   community.docker.docker_volume:
     name: jellyfin_config
