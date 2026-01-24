@@ -1,0 +1,48 @@
+---
+- name: CONTAINER | Ensure the media_network is created
+  community.docker.docker_network:
+    name: media_network
+    state: present
+  tags: media-data
+
+- name: CONTAINER | Ensure mount point directory exists
+  ansible.builtin.file:
+    path: /data
+    state: directory
+    mode: '0755'
+  become: true
+  tags: media-data
+
+- name: CONTAINER | Ensure data is mounted from nfs share, add to fstab if not present
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "{{ nfs__server }}:/data /data nfs defaults,ro 0 0"
+    create: true
+  become: true
+  tags: media-data
+
+- name: CONTAINER | Run fstab to mount /data
+  ansible.builtin.command: mount -a
+  become: true
+  tags: media-data
+
+- name: CONTAINER | Ensure download mount point directory exists
+  ansible.builtin.file:
+    path: /data/downloads
+    state: directory
+    mode: '0755'
+  tags: media-data
+
+- name: CONTAINER | Ensure shows mount point directory exists
+  ansible.builtin.file:
+    path: /data/shows
+    state: directory
+    mode: '0755'
+  tags: media-data
+
+- name: CONTAINER | Ensure movies mount point directory exists
+  ansible.builtin.file:
+    path: /data/movies
+    state: directory
+    mode: '0755'
+  tags: media-data

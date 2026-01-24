@@ -1,0 +1,36 @@
+---
+- name: CONTAINER | Pull the latest sonarr image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/sonarr:latest
+    source: pull
+  tags: sonarr
+
+- name: CONTAINER | Ensure media-data task is run
+  ansible.builtin.include_tasks: media-data.yml
+  tags: sonarr
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: sonarr_config
+    state: present
+  tags: sonarr
+
+- name: CONTAINER | Run sonarr container
+  community.docker.docker_container:
+    name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "8989:8989"
+    volumes:
+      - sonarr_config:/config
+      - /data/downloads:/downloads:rw
+      - /data/shows:/tv
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - media_network
+  tags: sonarr

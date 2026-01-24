@@ -1,0 +1,37 @@
+---
+- name: CONTAINER | Pull the latest qbittorrent image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/qbittorrent:latest
+    source: pull
+  tags: qbittorrent
+
+- name: CONTAINER | Ensure media-data task is run
+  ansible.builtin.include_tasks: media-data.yml
+  tags: qbittorrent
+
+- name: Ensure config volume is present
+  community.docker.docker_volume:
+    name: qbittorrent_config
+    state: present
+  tags: qbittorrent
+
+- name: CONTAINER | Run qbittorrent container
+  community.docker.docker_container:
+    name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "8080:8080"
+    volumes:
+      - qbittorrent_config:/config
+      - /data/downloads:/downloads:rw
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - media_network
+  tags: qbittorrent

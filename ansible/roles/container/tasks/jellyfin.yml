@@ -5,6 +5,12 @@
     source: pull
   tags: jellyfin
 
+- name: CONTAINER | Ensure media_network is created
+  community.docker.docker_network:
+    name: media_network
+    state: present
+  tags: jellyfin
+
 - name: CONTAINER | Ensure Jellyfin config volume is present
   community.docker.docker_volume:
     name: jellyfin_config
@@ -17,25 +23,8 @@
     state: present
   tags: jellyfin
 
-- name: CONTAINER | Ensure mount point directory exists
-  ansible.builtin.file:
-    path: /data
-    state: directory
-    mode: '0755'
-  become: true
-  tags: jellyfin
-
-- name: CONTAINER | Ensure data is mounted from nfs share, add to fstab if not present
-  ansible.builtin.lineinfile:
-    path: /etc/fstab
-    line: "{{ nfs__server }}:/data /data nfs defaults,ro 0 0"
-    create: true
-  become: true
-  tags: jellyfin
-
-- name: CONTAINER | Run fstab to mount /data
-  ansible.builtin.command: mount -a
-  become: true
+- name: CONTAINER | Ensure media-data config is Run
+  ansible.builtin.include_tasks: media-data.yml
   tags: jellyfin
 
 - name: CONTAINER | Run Jellyfin container
@@ -51,4 +40,6 @@
       - jellyfin_cache:/cache
       - /data:/media:ro
     image: jellyfin/jellyfin
+    networks:
+      - media_network
   tags: jellyfin

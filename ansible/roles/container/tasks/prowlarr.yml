@@ -1,0 +1,34 @@
+---
+- name: CONTAINER | Pull the latest prowlarr image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/prowlarr:latest
+    source: pull
+  tags: prowlarr
+
+- name: CONTAINER | Ensure media-data config is Run
+  ansible.builtin.include_tasks: media-data.yml
+  tags: prowlarr
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: prowlarr_config
+    state: present
+  tags: prowlarr
+
+- name: CONTAINER | Run prowlarr container
+  community.docker.docker_container:
+    name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "9696:9696"
+    volumes:
+      - prowlarr_config:/config
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - media_network
+  tags: prowlarr

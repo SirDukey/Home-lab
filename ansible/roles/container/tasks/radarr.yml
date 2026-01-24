@@ -1,0 +1,36 @@
+---
+- name: CONTAINER | Pull the latest radarr image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/radarr:latest
+    source: pull
+  tags: radarr
+
+- name: CONTAINER | Ensure media-data task is run
+  ansible.builtin.include_tasks: media-data.yml
+  tags: radarr
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: radarr_config
+    state: present
+  tags: radarr
+
+- name: CONTAINER | Run radarr container
+  community.docker.docker_container:
+    name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "7878:7878"
+    volumes:
+      - radarr_config:/config
+      - /data/downloads:/downloads:rw
+      - /data/movies:/movies
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - media_network
+  tags: radarr

@@ -39,6 +39,23 @@
   ansible.builtin.include_tasks: local-registry.yml
   tags: local-registry
 
+# Media Server Stack
 - name: CONTAINER | Run Jellyfin
   ansible.builtin.include_tasks: jellyfin.yml
   tags: jellyfin
+
+- name: CONTAINER | Run qBittorrent
+  ansible.builtin.include_tasks: qbittorrent.yml
+  tags: qbittorrent
+
+- name: CONTAINER | Run Prowlarr
+  ansible.builtin.include_tasks: prowlarr.yml
+  tags: prowlarr
+
+- name: CONTAINER | Run Radarr
+  ansible.builtin.include_tasks: radarr.yml
+  tags: radarr
+
+- name: CONTAINER | Run Sonarr
+  ansible.builtin.include_tasks: sonarr.yml
+  tags: sonarr
