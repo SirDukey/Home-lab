@@ -3,8 +3,8 @@ global_dns_domain: duke.lan
 external_dns_domain: m-duke.nl
 global_default_gateway: 192.168.1.1
 global_primary_nameserver: 192.168.1.53
-external_ip_address__enc: ENC[AES256_GCM,data:ZXOQfKj1BV100R9vhCY=,iv:JJdRcJ95hrVUiAZ9YBPm0jRWxD8rygCwAkWsJU0ySpg=,tag:z1kZCKl0bP2sp7iSgZB7gg==,type:str]
-bind__tsig_key__enc: ENC[AES256_GCM,data:LSk3UaKgAeIlKPdL7wccQjT2rspvXJ4kf4jmdVa1v5Nvggmc6Clmo0+9L3g=,iv:8ksAIMPLcjVPSMJUtngdcID4nq1UvK8lkVxiH2xtnAE=,tag:+/MmlzlCVTH5kmWph+uiIw==,type:str]
+external_ip_address__enc: ENC[AES256_GCM,data:+7M36YfsN2xM/WtiwSc=,iv:ifNJ+khnWmACzw3VX2qdXhubVeVEPtNIGf+6YRDsgS0=,tag:CA8WihJQt4mSk9m1Ji+RFw==,type:str]
+bind__tsig_key__enc: ENC[AES256_GCM,data:TceUuHozdtnXA8guYYY+xigtTlSGw8g5RFFBGkmsYekooZIgmZ17W55VwVg=,iv:NNT+41CQPwFvKfSUTIzqd/exUTWELhmP88s1VCARUCw=,tag:Rk4Pw4/m+s1XurtD5MBGGw==,type:str]
 default_geo_location_lat: "51.7997426198218"
 default_geo_location_lon: "4.48049039126418"
 packages__default_packages:
@@ -12,12 +12,11 @@ packages__default_packages:
     - chrony
     - curl
     - gnupg
-proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:37xxbrqXK3LQ,iv:Mxry/zEVX7bIDHmk1SAhVz+mORU8M81xTrRtcDKayg4=,tag:vKv4ARk3+qbbdQIP91A+bA==,type:str]
+proxmox_lxc_containers__root_password__enc: ENC[AES256_GCM,data:46qoOCWpjiAh,iv:Nu+ACYAw/8H/cr2P0DN3Py7Thf+Hel/yyDyl1uF05G8=,tag:8Rr/I4aVAVbyj23k/ebozw==,type:str]
 zabbix__debian_repo_download_url: https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu24.04_all.deb
 zabbix__debian_repo_download_file: /opt/zabbix-release_latest_7.2+ubuntu24.04_all.deb
-# TODO: fix the dns server, should be zabbix.duke.lan
 zabbix__server_hostname: 192.168.1.51
-zabbix__api_token__enc: ENC[AES256_GCM,data:s3qWCZTy+NXg9T9XH5P/zAyMw9eHqH4HSo8ceI2ublz3bUbnU8VxxspTNLi6YXpmyYVqqEoUR6rJBUFxsG3q7g==,iv:KCCWi88dpEN8VlcwyXQ86vavxMtkNLFsvv0vXrKfyxw=,tag:DdBhG0NyCbyk/DxKmAudYA==,type:str]
+zabbix__api_token__enc: ENC[AES256_GCM,data:5L1CiwvBsPD9B/V7cRpBoy2OfHYsEqnry+SLQ9RuWoMoiMkOSYJ1RQnEQx/FFIvYoN3GGgYb/Bk0vHlWlJcV5w==,iv:y65R2x/jnaw00KrRDF2T3Sb+/+N11D68kRgz4k2MNjo=,tag:5dJDsCjyW7ukiV4hu/SwTA==,type:str]
 alloy__group_access:
     - zabbix
 sops:
@@ -25,13 +24,13 @@ sops:
         - recipient: age129fjlypxle3gxtj4z77hp7f33cvh5yluymzn5tyfgr2hrc6f8dhq43e765
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvTDROTnc0UGpncTdtdlll
-            a1l5RHozbzhhaVlEeE8yUWVkTEsvWUoyRUFrClN5QWxMVG1QdzhWdGdGaTVjWUN5
-            ZnRPNmRmbzRkcGRSVUF0UGxxbEhqRVUKLS0tICtUeXJ1aUxvcEY1Y1hDU2FVajRX
-            aGJScE82R3M5d3Rpem5OYTgza1dMZ3cK0B2nuVlisF0SOWVp95q6mArPl1mNyr4R
-            3rY3O99P7KM7FFz0GdjuH3vVBlOeQTfIF7BpDgh8+NnsYxU26awPMw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1MlpneloyV1AzdWRYNSti
+            V09Bbk84cUNKL1RkYzJjY3Z2MFRuZ1pCb1VvCmoyMGl0UHArMTRsMnQwenRsaW5S
+            azFOcDBFWExTRC8ralFjeC9aZUxzeDAKLS0tIFdMRDJkNDFacFVCdkhYQURIT2tQ
+            bnFlN0dwMHMweFhFNDZMNjFWZTc4WlEKBQbrMr+Ms4GfbPWDqSY5+vruy33xjY+C
+            6ZzE8uA01Hwv2vIP9GI6FYuWF1Tr/tW9FylRjrbgEXzY0eKKQrto2g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-23T07:42:27Z"
-    mac: ENC[AES256_GCM,data:WWNLNWf9xCVDIbltlZ+pv4onwT0oRTAifPBoTybRdoLhwAhNStbd7xKK91fYPNxL6vqSoa1MF4BkmkKBsLEV2HopOKjtbShib2YdFvVO8gfXRlBLqO+c8AiVMUER7KSeMLHsWFPWA015DnsMU/ooLTKOO+0Zq4mcPrgO7wCzwd0=,iv:iKjwh9tipY5Wg/5B5O/RJSmfkAXU618R1KtmN8V0ynU=,tag:xJOhig3EvkfqqRvXNwd7IA==,type:str]
+    lastmodified: "2026-01-24T18:16:33Z"
+    mac: ENC[AES256_GCM,data:qavY8ccqeVNTpdwypyg77/iV8t0hSgBJzKGPJ/JbKIJ+0K/f64Ub4HWQnbskgCjcSjYJNSWm8BvpzFzpnW3PgDCx+afWMWWBEbHMRUwsfJZgEYbv1Ldj0Myt7W55SzdWxo5KC79tWlISsRYgN5BQD7O7C7Htq17tYUuWWFiwtE8=,iv:qjCS+WL0JETjnIdvCxNvXFBvR9SmjQ4eDsQCk9QB1h0=,tag:rj4XHMqaXObKcz73R4dKyw==,type:str]
     encrypted_suffix: __enc
     version: 3.11.0
