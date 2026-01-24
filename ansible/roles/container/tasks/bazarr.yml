@@ -1,0 +1,35 @@
+---
+- name: CONTAINER | Pull the latest bazarr image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/bazarr:latest
+    source: pull
+  tags: bazarr
+
+- name: CONTAINER | Ensure media-config is run
+  ansible.builtin.include_tasks: media-config.yml
+  tags: bazarr
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: bazarr_config
+    state: present
+  tags: bazarr
+
+- name: CONTAINER | Run bazarr container
+  community.docker.docker_container:
+    name: bazarr
+    image: lscr.io/linuxserver/bazarr:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "6767:6767"
+    volumes:
+      - bazarr_config:/config
+      - /data:/data
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - name: media_network
+  tags: bazarr

@@ -59,3 +59,7 @@
 - name: CONTAINER | Run Sonarr
   ansible.builtin.include_tasks: sonarr.yml
   tags: sonarr
+
+- name: CONTAINER | Run Bazarr
+  ansible.builtin.include_tasks: bazarr.yml
+  tags: bazarr
