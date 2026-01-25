@@ -1,0 +1,29 @@
+---
+- name: CONTAINER | Pull FlareSolverr image
+  community.docker.docker_image:
+    name: ghcr.io/flaresolverr/flaresolverr
+    tag: latest
+    source: pull
+  tags: flaresolverr
+
+- name: CONTAINER | Create FlareSolverr config volume
+  community.docker.docker_volume:
+    name: flaresolverr_config
+  tags: flaresolverr
+
+- name: CONTAINER | Run FlareSolverr container
+  community.docker.docker_container:
+    name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "8191:8191"
+    volumes:
+      - flaresolverr_config:/config
+    env:
+      LOG_LEVEL: "info"
+      TZ: Etc/UTC
+    networks:
+      - name: media_network
+  tags: flaresolverr

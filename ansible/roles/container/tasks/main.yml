@@ -63,3 +63,7 @@
 - name: CONTAINER | Run Bazarr
   ansible.builtin.include_tasks: bazarr.yml
   tags: bazarr
+
+- name: CONTAINER | Run FlareSolverr
+  ansible.builtin.include_tasks: flaresolverr.yml
+  tags: flaresolverr
