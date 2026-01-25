@@ -37,7 +37,7 @@ variable "containers" {
       template    = "ubuntu_24_04"
       ip          = "192.168.1.53/24"
       cores       = 1
-      memory      = 512
+      memory      = 125
       swap        = 256
       size        = "4G"
       storage     = "local-zfs"
@@ -65,7 +65,7 @@ variable "containers" {
       template    = "ubuntu_24_04"
       ip          = "192.168.1.59/24"
       cores       = 1
-      memory      = 1024
+      memory      = 750
       swap        = 256
       size        = "10G"
       storage     = "local-zfs"

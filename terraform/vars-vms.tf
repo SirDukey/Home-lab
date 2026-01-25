@@ -23,8 +23,8 @@ variable "vms" {
       hostname    = "docker"
       ip          = "192.168.1.52/24"
       cores       = 4
-      memory      = 3072
-      size        = "20G"
+      memory      = 5120
+      size        = "40G"
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
@@ -32,7 +32,7 @@ variable "vms" {
       full_clone  = true
       hotplug     = "disk,network,usb,memory,cpu"
       numa        = true
-    },
+    }
     elastic = {
       target_node = "pve-node-01"
       vmid        = 301
@@ -103,15 +103,15 @@ variable "vms" {
       hostname    = "nfs"
       ip          = "192.168.1.62/24"
       cores       = 1
-      memory      = 512
-      size        = "80G"
+      memory      = 375
+      size        = "180G"
       storage     = "media"
       onboot      = true
       state       = "started"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"
-      numa        = null
+      numa        = false
     }
   }
 }

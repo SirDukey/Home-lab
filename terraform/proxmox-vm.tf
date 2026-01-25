@@ -76,13 +76,14 @@ resource "proxmox_vm_qemu" "vm-instance" {
   lifecycle {
     ignore_changes = [
       default_ipv4_address,
+      default_ipv6_address,
       ssh_host,
       ssh_port,
       ipconfig0,
       disk,
       network,
       onboot,
-      sshkeys
+      sshkeys,
     ]
   }
 }
