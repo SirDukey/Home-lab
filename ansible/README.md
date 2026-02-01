@@ -23,6 +23,11 @@ To install packages for all hosts in the group 'dns':
 ```sh
 ansible-playbook -K --limit dns bootstrap.yml --tags packages
 ```
+Deploy a container using its tag against the docker playbook (use --limit if targeting):
+
+```sh
+ansible-playbook -K docker.yml --tags jellyfin,prowlarr,radarr,sonarr
+```
 
 ## Encrypted secrets
 I have chosen to use SOPS as it works well with both Ansible and Terraform.\

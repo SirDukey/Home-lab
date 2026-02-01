@@ -1,7 +1,7 @@
 ---
-- name: CONTAINER | Pull image for Jellyfin
+- name: CONTAINER | Pull image for Jellyfin:{{ jellyfin__version }}
   community.docker.docker_image:
-    name: jellyfin/jellyfin
+    name: jellyfin/jellyfin:{{ jellyfin__version }}
     source: pull
   tags: jellyfin
 
@@ -33,7 +33,7 @@
       - jellyfin_config:/config
       - jellyfin_cache:/cache
       - /data:/media:ro
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:{{ jellyfin__version }}
     networks:
       - name: media_network
   tags: jellyfin

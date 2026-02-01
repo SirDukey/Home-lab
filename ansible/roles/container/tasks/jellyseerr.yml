@@ -1,0 +1,39 @@
+---
+- name: CONTAINER | Pull jellyseerr image from Docker Hub
+  docker_image:
+    name: ghcr.io/fallenbagel/jellyseerr:latest
+    source: pull
+    state: present
+  tags: jellyseerr
+
+- name: CONTAINER | Ensure Jellyseerr config volume is present
+  community.docker.docker_volume:
+    name: jellyseerr_config
+    state: present
+  tags: jellyseerr
+
+- name: CONTAINER | Ensure media-config is Run
+  ansible.builtin.include_tasks: media-config.yml
+  tags: jellyseerr
+
+- name: CONTAINER | Run Jellyseerr container
+  community.docker.docker_container:
+    name: jellyseerr
+    state: started
+    restart_policy: always
+    ports:
+      - "5055:5055/tcp"
+    volumes:
+      - jellyseerr_config:/app/config
+    env:
+      TZ: Etc/UTC
+    image: ghcr.io/fallenbagel/jellyseerr:latest
+    networks:
+      - name: media_network
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+  tags: jellyseerr

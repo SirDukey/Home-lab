@@ -67,3 +67,7 @@
 - name: CONTAINER | Run FlareSolverr
   ansible.builtin.include_tasks: flaresolverr.yml
   tags: flaresolverr
+
+- name: CONTAINER | Run Jellyseerr
+  ansible.builtin.include_tasks: jellyseerr.yml
+  tags: jellyseerr
