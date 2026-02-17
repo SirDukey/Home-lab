@@ -1,0 +1,32 @@
+---
+- name: CONTAINER | Pull the latest calibre image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/calibre:latest
+    source: pull
+  tags: calibre
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: calibre_config
+    state: present
+  tags: calibre
+
+- name: CONTAINER | Run calibre container
+  community.docker.docker_container:
+    name: calibre
+    image: lscr.io/linuxserver/calibre:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "7080:8080"
+      - "7181:8181"
+      - "7081:8081"
+    volumes:
+      - calibre_config:/config
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - name: media_network
+  tags: calibre

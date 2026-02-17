@@ -71,3 +71,11 @@
 - name: CONTAINER | Run Jellyseerr
   ansible.builtin.include_tasks: jellyseerr.yml
   tags: jellyseerr
+
+- name: CONTAINER | Run calibre
+  ansible.builtin.include_tasks: calibre.yml
+  tags: calibre
+
+- name: CONTAINER | Run calibre-web
+  ansible.builtin.include_tasks: calibre-web.yml
+  tags: calibre

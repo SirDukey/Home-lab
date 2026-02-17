@@ -1,0 +1,38 @@
+---
+- name: CONTAINER | Pull the latest calibre-web image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/calibre-web:latest
+    source: pull
+  tags: calibre
+
+- name: CONTAINER | Ensure web config volume is present
+  community.docker.docker_volume:
+    name: calibre-web_config
+    state: present
+  tags: calibre
+
+- name: CONTAINER | Ensure books volume is present
+  community.docker.docker_volume:
+    name: calibre-web_books
+    state: present
+  tags: calibre
+
+- name: CONTAINER | Run calibre-web container
+  community.docker.docker_container:
+    name: calibre-web
+    image: lscr.io/linuxserver/calibre-web:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "7083:8083"
+    volumes:
+      - calibre-web_config:/config
+      - calibre_config:/books
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+      DOCKER_MODS: "linuxserver/mods:universal-calibre"
+    networks:
+      - name: media_network
+  tags: calibre
