@@ -32,7 +32,7 @@
     volumes:
       - jellyfin_config:/config
       - jellyfin_cache:/cache
-      - /data:/media:ro
+      - /data:/media
     image: jellyfin/jellyfin:{{ jellyfin__version }}
     networks:
       - name: media_network

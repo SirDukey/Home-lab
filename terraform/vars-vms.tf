@@ -11,6 +11,7 @@ variable "vms" {
     storage     = string # Which disk id to use
     onboot      = bool   # Automatically start the VM when the node starts
     state       = string # Can be "running", "started", "stopped". Option "started" will only start the vm on creation and won't fully manage the power state
+    startup     = string # Proxmox startup options. See https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_vm_startup_and_shutdown_order for details
     template    = string # The name of the template to clone
     full_clone  = bool   # true: an independant clone, false: a linked clone where a snapshot of the base vm is made
     hotplug     = string # Hotplug options for the VM. Can be "network", "disk", "usb", "memory", "cpu". Disabled with 0
@@ -28,6 +29,7 @@ variable "vms" {
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
+      startup     = "up=240"
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "disk,network,usb,memory,cpu"
@@ -44,6 +46,7 @@ variable "vms" {
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
+      startup     = ""
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"
@@ -60,6 +63,7 @@ variable "vms" {
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
+      startup     = ""
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"
@@ -76,6 +80,7 @@ variable "vms" {
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
+      startup     = ""
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"
@@ -92,6 +97,7 @@ variable "vms" {
       storage     = "local-zfs"
       onboot      = false
       state       = "started"
+      startup     = ""
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"
@@ -104,10 +110,11 @@ variable "vms" {
       ip          = "192.168.1.62/24"
       cores       = 1
       memory      = 375
-      size        = "180G"
+      size        = "230G"
       storage     = "media"
       onboot      = true
       state       = "started"
+      startup     = ""
       template    = "template-ubuntu-24-04-cloud"
       full_clone  = true
       hotplug     = "network,disk,usb"

@@ -18,6 +18,7 @@ resource "proxmox_vm_qemu" "vm-instance" {
   ciuser        = data.sops_file.tfvars.data["default_user.username"]
   cipassword    = data.sops_file.tfvars.data["default_user.password"]
   sshkeys       = data.sops_file.tfvars.data["default_user.ssh_public_key"]
+  startup       = each.value.startup
   
   vga {
     type   = "virtio"  # serial0 or virtio
