@@ -1,0 +1,35 @@
+---
+- name: CONTAINER | Pull the latest jackett image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/jackett:latest
+    source: pull
+  tags: jackett
+
+- name: CONTAINER | Ensure media-config is Run
+  ansible.builtin.include_tasks: media-config.yml
+  tags: jackett
+
+- name: CONTAINER | Ensure config volume is present
+  community.docker.docker_volume:
+    name: jackett_config
+    state: present
+  tags: jackett
+
+- name: CONTAINER | Run jackett container
+  community.docker.docker_container:
+    name: jackett
+    image: lscr.io/linuxserver/jackett:latest
+    state: started
+    restart_policy: "unless-stopped"
+    ports:
+      - "9117:9117"
+    volumes:
+      - jackett_config:/config
+      - /data/downloads:/downloads
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    networks:
+      - name: media_network
+  tags: jackett

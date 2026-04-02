@@ -79,3 +79,7 @@
 - name: CONTAINER | Run calibre-web
   ansible.builtin.include_tasks: calibre-web.yml
   tags: calibre
+
+- name: CONTAINER | Run Jackett
+  ansible.builtin.include_tasks: jackett.yml
+  tags: jackett
