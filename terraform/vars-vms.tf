@@ -110,7 +110,7 @@ variable "vms" {
       ip          = "192.168.1.62/24"
       cores       = 1
       memory      = 375
-      size        = "230G"
+      size        = "250G"
       storage     = "media"
       onboot      = true
       state       = "started"
