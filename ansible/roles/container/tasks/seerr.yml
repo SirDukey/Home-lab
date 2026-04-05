@@ -1,33 +1,33 @@
 ---
-- name: CONTAINER | Pull jellyseerr image from Docker Hub
+- name: CONTAINER | Pull seerr image from Docker Hub
   docker_image:
-    name: ghcr.io/fallenbagel/jellyseerr:latest
+    name: ghcr.io/seerr-team/seerr:latest
     source: pull
     state: present
-  tags: jellyseerr
+  tags: seerr
 
-- name: CONTAINER | Ensure Jellyseerr config volume is present
+- name: CONTAINER | Ensure seerr config volume is present
   community.docker.docker_volume:
-    name: jellyseerr_config
+    name: seerr_config
     state: present
-  tags: jellyseerr
+  tags: seerr
 
 - name: CONTAINER | Ensure media-config is Run
   ansible.builtin.include_tasks: media-config.yml
-  tags: jellyseerr
+  tags: seerr
 
-- name: CONTAINER | Run Jellyseerr container
+- name: CONTAINER | Run seerr container
   community.docker.docker_container:
-    name: jellyseerr
+    name: seerr
     state: started
     restart_policy: always
     ports:
       - "5055:5055/tcp"
     volumes:
-      - jellyseerr_config:/app/config
+      - seerr_config:/app/config
     env:
       TZ: Etc/UTC
-    image: ghcr.io/fallenbagel/jellyseerr:latest
+    image: ghcr.io/seerr-team/seerr:latest
     networks:
       - name: media_network
     healthcheck:
@@ -36,4 +36,4 @@
       timeout: 3s
       interval: 15s
       retries: 3
-  tags: jellyseerr
+  tags: seerr
